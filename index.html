@@ -165,7 +165,7 @@ header.principal .wrap{position:relative}
 .sidebar button.activo{background:#fff;border-color:var(--azul);color:var(--azul);box-shadow:0 8px 20px rgba(27,63,148,.08)}
 .sidebar button.activo .ic{background:var(--p1)}
 .cursos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.curso{position:relative;display:flex;flex-direction:column;border-radius:20px;padding:22px;min-height:200px;transition:transform .25s,box-shadow .25s;overflow:hidden;isolation:isolate}
+.curso{position:relative;display:flex;flex-direction:column;border-radius:20px;padding:22px 22px 26px;min-height:170px;transition:transform .25s,box-shadow .25s;overflow:hidden;isolation:isolate}
 .curso::after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.45);z-index:-1;transition:transform .4s}
 .curso:hover{transform:translateY(-5px);box-shadow:var(--sombra)}
 .curso:hover::after{transform:scale(1.25)}
@@ -933,21 +933,23 @@ const AREAS = {
 };
 /* h: horas en directo · hc: horas en campus (0 = solo en directo) */
 const CURSOS = [
-  {t:"curso",c:"fund",slug:"alfabetizacion-ia-basico",tool:"alfabetizacion",ico:"i-shield",bg:"p1",n:"Alfabetización en IA · Básico",d:"Lo mínimo para que cualquier persona use la IA con criterio y la empresa cumpla con el AI Act.",h:8,hc:10,dest:1},
-  {t:"curso",c:"fund",slug:"alfabetizacion-ia-completo",tool:"alfabetizacion-completo",ico:"i-scale",bg:"p2",n:"Alfabetización en IA · Completo",d:"Normativa y práctica con Claude y ChatGPT hasta usarlos cada día en el trabajo.",h:20,hc:25},
-  {t:"curso",c:"herr",slug:"claude-para-el-trabajo",tool:"claude",ico:"i-doc",bg:"p3",n:"Claude para el trabajo",d:"Del chat a encargarle trabajos largos: proyectos, conectores, artefactos, skills y Cowork.",h:16,hc:20,dest:1},
-  {t:"curso",c:"herr",slug:"chatgpt-para-el-trabajo",tool:"chatgpt",ico:"i-chat",bg:"p1",n:"ChatGPT para el trabajo",d:"Proyectos y GPTs propios, conectores con las apps de la empresa, investigación y agente.",h:16,hc:20,dest:1},
-  {t:"curso",c:"herr",slug:"administracion-claude",tool:"claude",ico:"i-doc",bg:"p4",n:"Administración de Claude para empresas",d:"Alta de usuarios, permisos, seguridad y control de costes para desplegar Claude en la empresa.",h:8,hc:10},
-  {t:"curso",c:"auto",slug:"automatizaciones-ia",tool:"automatizaciones",ico:"i-flow",bg:"p2",n:"Automatizaciones con IA",d:"Deja de hacer a mano las tareas que se repiten, con Claude en Chrome, Make, n8n y Zapier.",h:16,hc:20,dest:1},
-  {t:"curso",c:"auto",slug:"agentes-con-claude",tool:"agentes",ico:"i-robot",bg:"p5",n:"Agentes con Claude",d:"Diseña y monta agentes que hacen trabajos completos con las herramientas de la empresa.",h:20,hc:25,dest:1},
-  {t:"curso",c:"auto",slug:"claude-code-design",tool:"claude",ico:"i-studio",bg:"p6",n:"Claude Code y Claude Design para no programadores",d:"Crea tus propias herramientas, maquetas y presentaciones sin depender de un programador.",h:24,hc:30,dest:1},
-  {t:"curso",c:"depto",slug:"ia-comercial-marketing",tool:"marketing",ico:"i-mega",bg:"p1",n:"IA para comercial y marketing",d:"Reuniones, propuestas, seguimiento de leads, contenido y análisis de campañas.",h:12,hc:15},
-  {t:"curso",c:"depto",slug:"ia-administracion-finanzas",tool:"finanzas",ico:"i-receipt",bg:"p3",n:"IA para administración y finanzas",d:"Facturas, conciliaciones, informes, tesorería y correos a clientes y proveedores.",h:12,hc:15},
-  {t:"curso",c:"depto",slug:"ia-rrhh",tool:"rrhh",ico:"i-users",bg:"p4",n:"IA para RRHH",d:"Ofertas, cribado sin sesgos, acogida, formación y comunicación interna cumpliendo la ley.",h:12,hc:15},
-  {t:"curso",c:"depto",slug:"ia-direccion",tool:"direccion",ico:"i-boss",bg:"p2",n:"IA para dirección",d:"Dónde invertir en IA, cómo priorizar y medir, con un plan de adopción para tu empresa.",h:8,hc:0},
-  {t:"programa",c:"herr",slug:"programa-ia-trabajo",tool:"programa-trabajo",ico:"i-compass",bg:"g1",n:"Programa IA para el trabajo",d:"Alfabetización completa, Claude o ChatGPT para el trabajo y Automatizaciones con IA.",h:52,hc:65},
-  {t:"programa",c:"auto",slug:"programa-automatizacion-agentes",tool:"programa-agentes",ico:"i-robot",bg:"g2",n:"Programa Automatización y agentes",d:"Automatizaciones con IA, Agentes con Claude y Claude Code y Claude Design.",h:60,hc:75},
-  {t:"master",c:"todas",slug:"master-ia-empresa",tool:"master",ico:"i-rocket",bg:"g2",n:"Máster en IA aplicada a la empresa",d:"Alfabetización, Claude y su administración, automatizaciones, agentes, Claude Code y Design y un curso de tu departamento.",h:116,hc:145,grande:1}
+  {t:"curso",c:"fund",slug:"alfabetizacion-ia-basico",tool:"alfabetizacion",ico:"i-shield",bg:"p1",n:"Alfabetización en IA · Básico",d:"Usar la IA con criterio y cumplir el AI Act.",h:8,hc:10,dest:1},
+  {t:"curso",c:"fund",slug:"alfabetizacion-ia-completo",tool:"alfabetizacion-completo",ico:"i-scale",bg:"p2",n:"Alfabetización en IA · Completo",d:"Normativa y práctica diaria con Claude y ChatGPT.",h:20,hc:25},
+  {t:"curso",c:"herr",slug:"claude-para-el-trabajo",tool:"claude",ico:"i-doc",bg:"p3",n:"Claude para el trabajo",d:"Proyectos, conectores, artefactos y Cowork.",h:16,hc:20,dest:1},
+  {t:"curso",c:"herr",slug:"chatgpt-para-el-trabajo",tool:"chatgpt",ico:"i-chat",bg:"p1",n:"ChatGPT para el trabajo",d:"Proyectos, GPTs propios, conectores y agente.",h:16,hc:20,dest:1},
+  {t:"curso",c:"herr",slug:"copilot-para-el-trabajo",tool:"copilot",ico:"i-copilot",bg:"p2",n:"Copilot para el trabajo",d:"Copilot en Word, Excel, Outlook y Teams.",h:16,hc:20,dest:1},
+  {t:"curso",c:"herr",slug:"gemini-para-el-trabajo",tool:"gemini",ico:"i-gem",bg:"p5",n:"Gemini para el trabajo",d:"Gemini en Gmail, Docs, Sheets y Meet.",h:16,hc:20},
+  {t:"curso",c:"herr",slug:"administracion-claude",tool:"claude",ico:"i-doc",bg:"p4",n:"Administración de Claude para empresas",d:"Usuarios, permisos, seguridad y costes.",h:8,hc:10},
+  {t:"curso",c:"auto",slug:"automatizaciones-ia",tool:"automatizaciones",ico:"i-flow",bg:"p2",n:"Automatizaciones con IA",d:"Automatiza tareas con Make, n8n y Zapier.",h:16,hc:20,dest:1},
+  {t:"curso",c:"auto",slug:"agentes-con-claude",tool:"agentes",ico:"i-robot",bg:"p5",n:"Agentes con Claude",d:"Agentes que hacen trabajos completos por ti.",h:20,hc:25,dest:1},
+  {t:"curso",c:"auto",slug:"claude-code-design",tool:"claude",ico:"i-studio",bg:"p6",n:"Claude Code y Claude Design para no programadores",d:"Crea tus propias herramientas sin programar.",h:24,hc:30,dest:1},
+  {t:"curso",c:"depto",slug:"ia-comercial-marketing",tool:"marketing",ico:"i-mega",bg:"p1",n:"IA para comercial y marketing",d:"Propuestas, leads, contenido y campañas.",h:12,hc:15},
+  {t:"curso",c:"depto",slug:"ia-administracion-finanzas",tool:"finanzas",ico:"i-receipt",bg:"p3",n:"IA para administración y finanzas",d:"Facturas, conciliaciones, informes y tesorería.",h:12,hc:15},
+  {t:"curso",c:"depto",slug:"ia-rrhh",tool:"rrhh",ico:"i-users",bg:"p4",n:"IA para RRHH",d:"Selección, acogida y comunicación interna.",h:12,hc:15},
+  {t:"curso",c:"depto",slug:"ia-direccion",tool:"direccion",ico:"i-boss",bg:"p2",n:"IA para dirección",d:"Dónde invertir en IA y cómo medirlo.",h:8,hc:0},
+  {t:"programa",c:"herr",slug:"programa-ia-trabajo",tool:"programa-trabajo",ico:"i-compass",bg:"g1",n:"Programa IA para el trabajo",d:"Alfabetización, tu herramienta de IA y automatizaciones.",h:52,hc:65},
+  {t:"programa",c:"auto",slug:"programa-automatizacion-agentes",tool:"programa-agentes",ico:"i-robot",bg:"g2",n:"Programa Automatización y agentes",d:"Automatizaciones, agentes y herramientas propias.",h:60,hc:75},
+  {t:"master",c:"todas",slug:"master-ia-empresa",tool:"master",ico:"i-rocket",bg:"g2",n:"Máster en IA aplicada a la empresa",d:"De la alfabetización a crear agentes y herramientas propias, con un curso de tu departamento.",h:116,hc:145,grande:1}
 ];
 CURSOS.forEach(x=>{x.m=x.hc?["En directo",`Campus ${x.hc} h`]:["Solo en directo"];});
 
@@ -966,13 +968,12 @@ const catalogo=document.getElementById('catalogo'), sidebar=document.getElementB
 let tipo='curso', area='todas', todo=false;
 function tarjeta(x){
   const bg=`background:var(--${x.bg})`;
-  const tags=x.m.map(m=>`<span class="tag">${m}</span>`).join('');
   if(x.grande) return `<a href="${url(x)}" class="curso grande" style="${bg}">${logoTile(x.tool,x.ico)}
-      <div style="flex:1"><h4>${x.n}</h4><p>${x.d}</p><div class="tags">${tags}<span class="tag">${x.h} h</span></div></div>
+      <div style="flex:1"><h4>${x.n}</h4><p>${x.d}</p><div class="tags"><span class="tag">${x.h} h</span></div></div>
       <span class="ver"><svg class="i"><use href="#i-arrow"/></svg></span></a>`;
   return `<a href="${url(x)}" class="curso" style="${bg}">
       <div class="top">${logoTile(x.tool,x.ico)}<span class="horas">${x.h} h</span></div>
-      <h4>${x.n}</h4><p>${x.d}</p><div class="tags">${tags}</div>
+      <h4>${x.n}</h4><p>${x.d}</p>
       <span class="ver"><svg class="i"><use href="#i-arrow"/></svg></span></a>`;
 }
 function pintar(){
