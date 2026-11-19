@@ -592,6 +592,90 @@ section{padding:120px 0}
 @media (max-width:1024px){.faq .wrap{grid-template-columns:1fr;gap:32px}.faq-cab{position:static}}
 @media (max-width:640px){section{padding:80px 0}.ruta{padding:14px}.ruta li+li{margin-left:0}.ruta li+li::after{display:none}.cta-final .caja{padding:36px 24px}}
 
+
+/* ================= Pase visual: contraste, degradados y efectos ================= */
+:root{--grad:linear-gradient(120deg,#1B3F94 0%,#2563EB 55%,#3BA8F5 100%);--grad-claro:linear-gradient(90deg,#2563EB,#3BA8F5 60%,#5BC8F5);--titulo:#0E1B45}
+h2{color:var(--titulo)}
+.acento{background:var(--grad-claro);-webkit-background-clip:text;background-clip:text;color:transparent}
+.oscuro .acento{background:linear-gradient(90deg,#5BC8F5,#A8E4FF 60%,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pre{border:1px solid transparent;background:linear-gradient(#fff,#fff) padding-box,var(--grad-claro) border-box;color:var(--intenso);box-shadow:0 6px 18px rgba(37,99,235,.12)}
+.oscuro .pre{background:linear-gradient(rgba(10,18,40,.9),rgba(10,18,40,.9)) padding-box,linear-gradient(90deg,#5BC8F5,#fff) border-box;color:#fff;box-shadow:0 0 24px rgba(91,200,245,.25)}
+.intro{color:#4A5568}
+/* botones con brillo */
+.btn{position:relative;overflow:hidden;isolation:isolate}
+.btn-primario{background:var(--grad);box-shadow:0 12px 30px rgba(37,99,235,.35),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn-primario:hover{background:var(--grad);box-shadow:0 16px 40px rgba(37,99,235,.5),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .7s ease;z-index:-1}
+.btn:hover::after{left:140%}
+.btn-claro{box-shadow:0 10px 30px rgba(91,200,245,.25)}
+.btn-borde-azul{border:1.5px solid transparent;background:linear-gradient(#fff,#fff) padding-box,var(--grad-claro) border-box}
+/* luces de fondo */
+.oferta,.aiact,.empresas{position:relative;overflow:hidden;isolation:isolate}
+.oferta::before,.aiact::before,.empresas::before{content:"";position:absolute;width:620px;height:620px;border-radius:50%;filter:blur(90px);z-index:-1;pointer-events:none;opacity:.55}
+.oferta::before{left:-240px;top:120px;background:radial-gradient(circle,rgba(91,200,245,.45),transparent 70%)}
+.aiact::before{right:-200px;top:-120px;background:radial-gradient(circle,rgba(37,99,235,.30),transparent 70%)}
+.empresas::before{right:-220px;bottom:-200px;background:radial-gradient(circle,rgba(59,168,245,.35),transparent 70%)}
+.oferta::after{content:"";position:absolute;right:-200px;bottom:-160px;width:560px;height:560px;border-radius:50%;filter:blur(90px);z-index:-1;background:radial-gradient(circle,rgba(37,99,235,.22),transparent 70%)}
+.empresas{background:linear-gradient(180deg,#F4F7FC,#EAF0FA)}
+/* franja de herramientas */
+.herr-card{border:1px solid transparent;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(120deg,rgba(37,99,235,.35),rgba(91,200,245,.35)) border-box;box-shadow:0 10px 30px rgba(27,63,148,.08)}
+.herr-card:hover{box-shadow:0 18px 40px rgba(37,99,235,.2)}
+/* catálogo */
+.lado .tabs button[aria-selected="true"]{background:var(--grad);box-shadow:0 10px 24px rgba(37,99,235,.35)}
+.sidebar button{transition:transform .15s,box-shadow .2s,background .2s}
+.sidebar button:hover{transform:translateX(3px);background:#E6EDF9}
+.sidebar button.activo{background:var(--grad);box-shadow:0 14px 30px rgba(37,99,235,.38)}
+.ruta{border:1px solid transparent;background:linear-gradient(#fff,#fff) padding-box,var(--grad-claro) border-box;box-shadow:0 14px 34px rgba(37,99,235,.12)}
+.curso{border:1px solid rgba(255,255,255,.9);box-shadow:0 8px 24px rgba(27,63,148,.08),inset 0 1px 0 #fff}
+.curso:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(37,99,235,.22);border-color:rgba(59,142,245,.45)}
+.curso::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-100%);transition:transform .8s ease;pointer-events:none;z-index:1}
+.curso:hover::before{transform:translateX(100%)}
+.curso .ver{background:var(--grad);box-shadow:0 8px 18px rgba(37,99,235,.35)}
+.curso .tag.h{background:var(--grad)}
+/* modalidades en oscuro */
+.modalidades{background:radial-gradient(900px 520px at 15% 0%,rgba(37,99,235,.35),transparent 70%),radial-gradient(800px 480px at 90% 100%,rgba(91,200,245,.22),transparent 70%),linear-gradient(rgba(5,9,22,.72),rgba(5,9,22,.85)),#050916 url("assets/fondos/galaxia.jpg") center/cover;color:#fff}
+.modalidades h2{color:#fff}
+.mcab,.mlista{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(150,185,255,.18);box-shadow:0 20px 50px rgba(0,0,0,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.mcab h3{background:linear-gradient(90deg,#5BC8F5,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mcab p{color:rgba(255,255,255,.72)}
+.mcab .logo-tile{background:#fff;box-shadow:0 0 0 6px rgba(91,200,245,.12),0 12px 30px rgba(37,99,235,.45)}
+.mlista li{color:rgba(255,255,255,.72)}
+.mlista b{color:#fff}
+.mlista li::before{color:var(--celeste)}
+.mcol{transition:transform .3s}
+.mcol:hover{transform:translateY(-6px)}
+.mcol:hover .mcab,.mcol:hover .mlista{border-color:rgba(91,200,245,.55);box-shadow:0 24px 60px rgba(37,99,235,.35)}
+/* AI Act */
+.cert-caja{background:radial-gradient(circle at 20% 15%,rgba(255,255,255,.25),transparent 45%),linear-gradient(135deg,#0E1B45,#1B3F94 45%,#2563EB 75%,#5BC8F5);overflow:hidden}
+.cert-caja::after{content:"";position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(180deg,#000,transparent 80%);pointer-events:none}
+.cert-wrap{z-index:1}
+.lista-check li::before{background:var(--grad);box-shadow:0 4px 10px rgba(37,99,235,.3)}
+/* FUNDAE en contraste */
+.fundae-sec{background:#fff;padding:40px 0 110px}
+.fbanda{background:radial-gradient(600px 300px at 100% 0%,rgba(91,200,245,.35),transparent 70%),linear-gradient(120deg,#0E1B45,#1B3F94 55%,#2563EB);border:0;color:#fff;box-shadow:0 30px 70px rgba(27,63,148,.35)}
+.fbanda::before{background:linear-gradient(180deg,#F4B740,#5BC8F5)}
+.fbanda h3{color:#fff}
+.fbanda p{color:rgba(255,255,255,.8)}
+.fbanda .flogo{background:#fff;border-radius:16px;padding:12px 16px;height:74px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.fbanda .btn-primario{background:#fff;color:var(--azul);box-shadow:0 12px 30px rgba(0,0,0,.25)}
+/* FAQ */
+.acordeon details{transition:border-color .2s,box-shadow .2s,background .2s}
+.acordeon details:hover{border-color:rgba(37,99,235,.35)}
+.acordeon details[open]{border-color:transparent;background:linear-gradient(#fff,#fff) padding-box,var(--grad-claro) border-box;border:1px solid transparent;box-shadow:0 18px 40px rgba(37,99,235,.14)}
+.acordeon summary::after{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--tinte);font-size:20px}
+.acordeon details[open] summary::after{background:var(--grad);color:#fff}
+.faq-contacto{background:linear-gradient(135deg,#EEF3FC,#E3F3FB);border:1px solid rgba(59,142,245,.2)}
+/* CTA final */
+.cta-final .caja{background:radial-gradient(700px 400px at 85% 50%,rgba(91,200,245,.35),transparent 65%),radial-gradient(500px 300px at 10% 0%,rgba(37,99,235,.45),transparent 70%),linear-gradient(rgba(5,9,22,.55),rgba(5,9,22,.7)),#050916 url("assets/fondos/galaxia.jpg") center/cover;box-shadow:0 40px 90px rgba(14,27,69,.45);border:1px solid rgba(150,185,255,.2)}
+.cta-final .caja::before{content:"";position:absolute;inset:-2px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--ang,0deg),transparent 0 70%,rgba(91,200,245,.9) 80%,transparent 90%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:girar-borde 6s linear infinite;pointer-events:none}
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes girar-borde{to{--ang:360deg}}
+/* pie */
+footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),transparent 70%),#050916}
+/* aparición escalonada */
+.mod3 .mcol:nth-child(2),.mod3 .mcol:nth-child(2) *{transition-delay:.08s}
+.mod3 .mcol:nth-child(3){transition-delay:.16s}
+
 /* ---------- Responsive ---------- */
 @media (max-width:1100px){
   .cursos{grid-template-columns:repeat(2,1fr)}
@@ -847,7 +931,7 @@ section{padding:120px 0}
 </section>
 
 <!-- ============ MODALIDADES ============ -->
-<section class="modalidades" id="modalidades">
+<section class="modalidades oscuro" id="modalidades">
   <div class="wrap">
     <div class="cab-sec reveal">
       <div class="pre">Modalidades</div>
