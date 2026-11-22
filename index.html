@@ -834,6 +834,19 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
 @media (max-width:900px){.menu>li.campus>a{justify-content:center;margin-top:10px}}
 @media (prefers-reduced-motion:reduce){.btn:hover,.btn:active{transform:none}}
 
+
+/* ilustraciones 3D */
+.mf-media{overflow:visible}
+.mf-media>img:not(.mf-3d){border-radius:26px 26px 0 0}
+.mf{overflow:visible}
+.mf-media::after{border-radius:26px 26px 0 0}
+.mf-3d{position:absolute!important;right:14px;bottom:-34px;width:96px!important;height:auto!important;object-fit:contain!important;z-index:3;filter:drop-shadow(0 14px 18px rgba(0,0,0,.45));transition:transform .5s cubic-bezier(.2,.7,.2,1)!important;animation:flotar 6s ease-in-out infinite}
+.mf:nth-child(2) .mf-3d{animation-delay:-2s}.mf:nth-child(3) .mf-3d{animation-delay:-4s}
+.mf:hover .mf-3d{transform:scale(1.1) rotate(-6deg)!important}
+.curso .medalla{width:26px;height:26px;object-fit:contain;filter:drop-shadow(0 3px 4px rgba(27,63,148,.3))}
+.ruta li.conmed::before{display:none}
+.ruta li.conmed{padding-left:4px}
+.ruta li img{width:26px;height:26px;object-fit:contain}
 /* ---------- Responsive ---------- */
 @media (max-width:1100px){
   .cursos{grid-template-columns:repeat(2,1fr)}
@@ -1153,7 +1166,7 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
     </div>
     <div class="modfotos">
       <article class="mf reveal">
-        <div class="mf-media"><img src="assets/fotos/online.jpg" alt="Alumna conectada a una clase en directo por videollamada" loading="lazy"><span class="mf-badge">En directo</span></div>
+        <div class="mf-media"><img class="mf-3d" src="assets/3d/video.png" alt=""><img src="assets/fotos/online.jpg" alt="Alumna conectada a una clase en directo por videollamada" loading="lazy"><span class="mf-badge">En directo</span></div>
         <div class="mf-txt">
           <span class="mf-et">Particulares y pymes</span>
           <h3>Online en directo</h3>
@@ -1161,7 +1174,7 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
         </div>
       </article>
       <article class="mf mf-dest reveal">
-        <div class="mf-media"><img src="assets/fotos/incompany-chatgpt.jpg" alt="Formación de ChatGPT in company en las instalaciones de una empresa" loading="lazy"><span class="mf-badge">Para empresas</span></div>
+        <div class="mf-media"><img class="mf-3d" src="assets/3d/edificio.png" alt=""><img src="assets/fotos/incompany-chatgpt.jpg" alt="Formación de ChatGPT in company en las instalaciones de una empresa" loading="lazy"><span class="mf-badge">Para empresas</span></div>
         <div class="mf-txt">
           <span class="mf-et">Online o presencial</span>
           <h3>In company</h3>
@@ -1169,7 +1182,7 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
         </div>
       </article>
       <article class="mf reveal">
-        <div class="mf-media"><img src="assets/fotos/campus.jpg" alt="Pantalla de acceso a WestLabs Campus" loading="lazy"></div>
+        <div class="mf-media"><img class="mf-3d" src="assets/3d/portatil.png" alt=""><img src="assets/fotos/campus.jpg" alt="Pantalla de acceso a WestLabs Campus" loading="lazy"></div>
         <div class="mf-txt">
           <span class="mf-et">A tu ritmo</span>
           <h3>Campus</h3>
@@ -1382,7 +1395,7 @@ const catalogo=document.getElementById('catalogo'), sidebar=document.getElementB
 let tipo='curso', herr='claude';
 function tarjeta(x){
   const mods=[x.dir&&"En directo",x.ic&&"In company",x.hc&&"Campus"].filter(Boolean).map(m=>`<span class="tag">${m}</span>`).join('');
-  const medidor=x.nivel?`<span class="medidor" aria-label="Nivel ${x.nivel} de 3">${[1,2,3].map(i=>`<i class="${i<=x.nivel?'on':''}"></i>`).join('')}</span>`:'';
+  const medidor=x.nivel?`<img class="medalla" src="assets/3d/medalla-${x.nivel}.png" alt="Nivel ${x.nivel} de 3">`:'';
   return `<a href="${url(x)}" class="curso" style="background:var(--${x.bg})">
       <div class="cab">${logosTile(x)}<div class="tit"><span class="et">${x.et}${medidor}</span><h4>${x.n}</h4></div></div>
       <p class="que">${x.d}</p>
@@ -1398,7 +1411,7 @@ function pintar(){
   let ruta='';
   if(tipo==='curso'){
     const pasos=lista.filter(x=>x.nivel||x.herr==='todas');
-    ruta=`<div class="ruta"><span class="ruta-t">Tu itinerario con ${HERR[herr].nombre}</span><ol>${pasos.map(x=>`<li><b>${x.nivel?NIVEL[x.nivel-1]:'Alfabetización'}</b><span>${x.h} h</span></li>`).join('')}</ol></div>`;
+    ruta=`<div class="ruta"><span class="ruta-t">Tu itinerario con ${HERR[herr].nombre}</span><ol>${pasos.map(x=>`<li class="${x.nivel?'conmed':''}">${x.nivel?`<img src="assets/3d/medalla-${x.nivel}.png" alt="">`:''}<b>${x.nivel?NIVEL[x.nivel-1]:'Alfabetización'}</b><span>${x.h} h</span></li>`).join('')}</ol></div>`;
   }
   catalogo.innerHTML=ruta+(lista.map(tarjeta).join('')||'<p class="vacio">Pronto habrá cursos con esta herramienta.</p>');
 }
