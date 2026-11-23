@@ -1378,12 +1378,7 @@ function pintar(){
     const ic=k==='general'?'<svg class="i"><use href="#i-grid"/></svg>':`<img src="assets/herramientas/${HERR[k].logo}.${k==='claude'?'svg':'png'}" alt="">`;
     return `<button data-h="${k}" class="${herr===k?'activo':''}"><span class="ic">${ic}</span>${HERR[k].n}<span class="n">${n}</span></button>`;}).join('');
   const lista=delTipo.filter(x=>x.herr===herr);
-  let ruta='';
-  if(herr!=='general'){
-    const pasos=[CURSOS.find(x=>x.n==='Alfabetización en IA'),...lista.filter(x=>x.nivel)];
-    ruta=`<div class="ruta"><span class="ruta-t">Tu itinerario con ${HERR[herr].nombre}</span><ol>${pasos.map(x=>`<li class="${x.nivel?'conmed':''}">${x.nivel?`<img src="assets/3d/medalla-${x.nivel}.png" alt="">`:''}<b>${x.nivel?NIVEL[x.nivel-1]:'Alfabetización'}</b><span>${x.h} h</span></li>`).join('')}</ol></div>`;
-  }
-  catalogo.innerHTML=ruta+(lista.map(tarjeta).join('')||'<p class="vacio">Pronto habrá cursos con esta herramienta.</p>');
+  catalogo.innerHTML=(lista.map(tarjeta).join('')||'<p class="vacio">Pronto habrá cursos con esta herramienta.</p>');
 }
 function elegir(t,h){
   if(t){tipo=t;document.querySelectorAll('.tabs button').forEach(o=>o.setAttribute('aria-selected',o.dataset.tipo===t));}
