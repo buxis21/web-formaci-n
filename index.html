@@ -1361,8 +1361,7 @@ p{text-wrap:pretty}
         <address>
           <span>Av. Blondel, 25</span><span>25001 Lleida</span>
           <a href="mailto:gerard@westlabs.es">gerard@westlabs.es</a>
-          <a href="tel:+34711790775">711 790 775</a>
-          <a href="https://wa.me/34636875779?text=Hola%20Gerard%2C%20me%20interesa%20la%20formaci%C3%B3n%20en%20IA%20de%20Westlabs" target="_blank" rel="noopener">WhatsApp: 636 875 779</a>
+          <a href="tel:+34636875779">636 875 779 (Gerard, también WhatsApp)</a>
         </address>
         <div class="sellos-foot"><span>Bonificable FUNDAE</span><span>Formación · Consultoría · Implementación</span></div>
       </div>
@@ -1517,7 +1516,7 @@ document.getElementById('anio').textContent=new Date().getFullYear();
 
 /* Convocatorias: se leen de la hoja de Google Sheets publicada como CSV.
    Si CONVOCATORIAS_CSV está vacío o no carga, se queda la lista escrita en la página. */
-const CONVOCATORIAS_CSV = '';
+const CONVOCATORIAS_CSV = 'https://docs.google.com/spreadsheets/d/1O33oTrorKG0-tuYD0zZz9dqVjytWtofNGPol-mFnsFo/gviz/tq?tqx=out:csv&sheet=Convocatorias';
 (function(){
   if(!CONVOCATORIAS_CSV) return;
   const LOGO={general:null,claude:'claude.svg',chatgpt:'chatgpt.png',microsoft:'copilot.png',gemini:'gemini.png'};
