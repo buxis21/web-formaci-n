@@ -886,6 +886,9 @@ p{text-wrap:pretty}
 .wa-flot svg{width:24px;height:24px}
 .wa-flot:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 18px 36px -8px rgba(18,140,126,.75)}
 @media (max-width:640px){.wa-flot span{display:none}.wa-flot{padding:14px}}
+.ico-3d{width:56px;height:56px;flex:none;display:grid;place-items:center}
+.ico-3d img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(27,63,148,.25));transition:transform .4s}
+.curso:hover .ico-3d img{transform:scale(1.1) rotate(-5deg)}
 /* ---------- Responsive ---------- */
 @media (max-width:1100px){
   .cursos{grid-template-columns:repeat(2,1fr)}
@@ -1373,17 +1376,17 @@ const TODAS = ["claude","chatgpt","copilot","gemini"];
 /* Modalidades: dir = online en directo · pre = presencial o in company · cam = campus */
 const CURSOS = [
   /* ---------- Formación general ---------- */
-  {t:"general",ico:"i-shield",bg:"p1",et:"Para toda la plantilla",n:"Alfabetización en IA",h:8,
+  {t:"general",ico:"i-shield",bg:"p1",et:"Para toda la plantilla",n:"Alfabetización en IA",img3d:"alfabetizacion",h:8,
    p:["Qué es la IA y cómo usarla con criterio","AI Act y RGPD en sencillo","Certificado del art. 4"],dir:1,pre:1,cam:1,dest:1},
   {t:"general",ico:"i-pen",bg:"p3",et:"Para toda la plantilla",n:"Prompting eficaz",h:4,
    p:["Cómo pedirle las cosas a la IA","Respuestas fiables y reutilizables","Plantillas para tu trabajo"],dir:1,pre:1,cam:1,dest:1},
-  {t:"general",ico:"i-chart",bg:"p2",et:"Taller práctico",n:"Investigación y análisis con IA",h:4,
+  {t:"general",ico:"i-chart",bg:"p2",et:"Taller práctico",n:"Investigación y análisis con IA",img3d:"investigacion",h:4,
    p:["Buscar y contrastar fuentes","Resumir y comparar información","Informes claros"],dir:1,pre:1},
-  {t:"general",ico:"i-doc",bg:"p5",et:"Taller práctico",n:"Documentos y presentaciones con IA",h:4,
+  {t:"general",ico:"i-doc",bg:"p5",et:"Taller práctico",n:"Documentos y presentaciones con IA",img3d:"documentos",h:4,
    p:["Informes y propuestas","Presentaciones en menos tiempo","Con el estilo de tu empresa"],dir:1,pre:1},
-  {t:"general",ico:"i-boss",bg:"p4",et:"Para dirección",n:"IA para dirección",h:8,
+  {t:"general",ico:"i-boss",bg:"p4",et:"Para dirección",n:"IA para dirección",img3d:"direccion",h:8,
    p:["Dónde aplicar la IA","Priorizar y medir el retorno","Plan de adopción"],pre:1},
-  {t:"general",ico:"i-scale",bg:"p6",et:"Para legal y compliance",n:"IA y cumplimiento normativo",h:8,
+  {t:"general",ico:"i-scale",bg:"p6",et:"Para legal y compliance",n:"IA y cumplimiento normativo",img3d:"cumplimiento",h:8,
    p:["Obligaciones del AI Act","Datos y propiedad intelectual","Política de uso interna"],dir:1,pre:1},
   /* ---------- Por herramienta: el nivel 3 es el curso completo (incluye 1 y 2) ---------- */
   {t:"herr",herr:"claude",nivel:1,n:"Claude Esencial",p:["Prompting y configuración","Proyectos y memoria","Conectores con tus herramientas"],dest:1},
@@ -1429,7 +1432,7 @@ let tipo='general', herr='claude';
 function tarjeta(x){
   const mods=[x.dir&&"En directo",x.pre&&"Presencial",x.cam&&"Campus"].filter(Boolean).map(m=>`<span class="tag">${m}</span>`).join('');
   const medalla=x.nivel?`<img class="medalla" src="assets/3d/medalla-${x.nivel}.png" alt="">`:'';
-  const icono=x.t==="general"?`<span class="logo-tile ico-gen"><svg><use href="#${x.ico}"/></svg></span>`:logosTile(x);
+  const icono=x.t==="general"?(x.img3d?`<span class="ico-3d"><img src="assets/3d/${x.img3d}.png" alt=""></span>`:`<span class="logo-tile ico-gen"><svg><use href="#${x.ico}"/></svg></span>`):logosTile(x);
   return `<a href="${url(x)}" class="curso${x.completo?' completo':''}" style="background:var(--${x.bg})">
       ${x.completo?'<span class="sello-completo">Curso completo</span>':''}
       <div class="cab">${icono}<div class="tit"><span class="et">${x.et}${medalla}</span><h4>${x.n}</h4></div></div>
