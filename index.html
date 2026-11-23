@@ -1119,10 +1119,10 @@ p{text-wrap:pretty}
       <figure class="conv-foto"><img src="assets/fotos/grupo-abierto.jpg" alt="Alumnos practicando con sus portátiles durante una formación" loading="lazy"><figcaption>Clase práctica: cada alumno con su portátil</figcaption></figure>
       <div class="conv-cab"><span>Próximas convocatorias</span><b>Primer trimestre de 2027</b></div>
       <ul class="conv-lista">
-        <li><span class="logos"><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span></span><div><b>Alfabetización en IA</b><span>8 h · 4 sesiones de 2 h</span></div><em>Fechas por confirmar</em></li>
-        <li><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span><div><b>Claude Esencial</b><span>12 h · 6 sesiones de 2 h</span></div><em>Fechas por confirmar</em></li>
-        <li><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span><div><b>ChatGPT Esencial</b><span>12 h · 6 sesiones de 2 h</span></div><em>Fechas por confirmar</em></li>
-        <li><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span><div><b>Microsoft 365 Copilot Esencial</b><span>12 h · 6 sesiones de 2 h</span></div><em>Fechas por confirmar</em></li>
+        <li><span class="logos"><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span></span><div><b>Alfabetización en IA</b><span>Sesiones de 2 h</span></div><em>Fechas por confirmar</em></li>
+        <li><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span><div><b>Claude Esencial</b><span>Sesiones de 2 h</span></div><em>Fechas por confirmar</em></li>
+        <li><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span><div><b>Fundamentos de ChatGPT</b><span>Sesiones de 2 h</span></div><em>Fechas por confirmar</em></li>
+        <li><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span><div><b>Microsoft 365 Copilot desde cero</b><span>Sesiones de 2 h</span></div><em>Fechas por confirmar</em></li>
       </ul>
       <a href="contacto.html" class="btn btn-primario">Avísame cuando abran <svg class="i fl"><use href="#i-arrow"/></svg></a>
     </div>
@@ -1260,7 +1260,7 @@ p{text-wrap:pretty}
       <div class="faq-contacto"><b>¿No encuentras tu respuesta?</b><span>Escríbenos a <a href="mailto:gerard@westlabs.es">gerard@westlabs.es</a> o llámanos al <a href="tel:+34711790775">711 790 775</a>.</span></div>
     </div>
     <div class="acordeon reveal" id="faq-lista">
-      <details><summary>¿Cómo se organizan los cursos?</summary><div class="cuerpo">En la pestaña General están Alfabetización en IA, el punto de partida para todo el mundo, e IA para dirección. Después eliges tu herramienta (Claude, ChatGPT, Microsoft 365 Copilot o Gemini) y sigues sus tres niveles acumulativos: Esencial, Avanzado y Experto.</div></details>
+      <details><summary>¿Cómo se organizan los cursos?</summary><div class="cuerpo">En la pestaña General están Alfabetización en IA, el punto de partida para todo el mundo, IA para dirección e IA y cumplimiento normativo. Después eliges tu herramienta (Claude, ChatGPT, Microsoft 365 Copilot o Gemini) y tienes tres cursos acumulativos: desde lo básico hasta crear tus propios agentes.</div></details>
       <details><summary>¿Necesito conocimientos técnicos?</summary><div class="cuerpo">No. Alfabetización en IA y el nivel 1 no tienen requisitos. Para el nivel 2 hay que haber hecho el nivel 1, y para el nivel 3, el nivel 2.</div></details>
       <details><summary>¿Con qué herramientas trabajamos?</summary><div class="cuerpo">Con Claude, ChatGPT, Microsoft 365 Copilot y Gemini. Elige la que ya use tu empresa.</div></details>
       <details><summary>¿Cuáles son las modalidades?</summary><div class="cuerpo"><ul>
@@ -1341,9 +1341,14 @@ const HERR = {
   microsoft:{n:"Microsoft", logo:"copilot", nombre:"Microsoft 365 Copilot"},
   gemini:   {n:"Gemini",    logo:"gemini",  nombre:"Gemini"}
 };
-/* Nombre de cada nivel: deja claro hasta dónde se llega con la herramienta */
-const NIVEL = ["Esencial","Avanzado","Experto"];
-const QUE = {  /* qué se ve en cada nivel, con el nombre propio de cada herramienta */
+/* Nombre propio de cada curso: el mismo nivel, pero con un nombre distinto en cada herramienta */
+const NOMBRES = {
+  claude:   ["Claude Esencial","Claude Avanzado: skills y automatizaciones","Agentes con Claude"],
+  chatgpt:  ["Fundamentos de ChatGPT","ChatGPT Pro: GPTs y tareas programadas","Agentes con ChatGPT"],
+  microsoft:["Microsoft 365 Copilot desde cero","Copilot en Word, Excel, PowerPoint y Outlook","Agentes en Microsoft 365 Copilot"],
+  gemini:   ["Introducción a Gemini","Gemini: Gems y automatizaciones","Agentes con Gemini"]
+};
+const QUE = {  /* qué se ve en cada nivel */
   claude:   ["Prompting, configuración y memoria, proyectos y conectores","Skills, Claude en Excel, Word y correo, y automatizaciones en el navegador","Contexto avanzado, artefactos y miniaplicaciones, agentes y un proyecto propio"],
   chatgpt:  ["Prompting, configuración y memoria, proyectos y conectores","GPTs propios, tareas programadas y la IA en tus documentos y correo","Contexto avanzado, Canvas y miniaplicaciones, agentes y un proyecto propio"],
   microsoft:["Copilot Chat, prompting, Notebooks y conectores (funciona sin licencia)","Copilot dentro de Word, Excel, PowerPoint y Outlook, y automatizaciones","Contexto avanzado, agentes en Microsoft 365 Copilot y un proyecto propio"],
@@ -1353,11 +1358,12 @@ const slug = t => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replac
 const TODAS = ["claude","chatgpt","copilot","gemini"];
 const CURSOS = [];
 CURSOS.push({t:"curso",herr:"general",tools:TODAS,ico:"i-shield",bg:"p1",n:"Alfabetización en IA",et:"Para empezar",d:"Qué es la IA, AI Act y RGPD, y las cuatro herramientas para elegir con criterio",h:8,hc:10,dir:1,ic:1,dest:1});
+CURSOS.push({t:"curso",herr:"general",tool:"cumplimiento",ico:"i-scale",bg:"p6",n:"IA y cumplimiento normativo",et:"Para legal y compliance",d:"AI Act, RGPD, propiedad intelectual y la política de uso de la IA en la empresa",h:8,hc:0,dir:1,ic:1});
 const BG=["p3","p2","p5","p4"];
 Object.keys(HERR).filter(k=>k!=='general').forEach(k=>{
   const H=HERR[k].nombre;
   [0,1,2].forEach(i=>CURSOS.push({t:"curso",herr:k,tool:HERR[k].logo,ico:"i-chat",bg:BG[i],nivel:i+1,
-    n:`${H} ${NIVEL[i]}`,et:`Nivel ${i+1} de 3`,d:QUE[k][i],h:[12,16,20][i],hc:[20,25,0][i],dir:1,ic:1,dest:i===0&&k!=="otros"}));
+    n:NOMBRES[k][i],et:`Nivel ${i+1} de 3`,d:QUE[k][i],h:[12,16,20][i],hc:[20,25,0][i],dir:1,ic:1,dest:i===0&&k!=="gemini"}));
 });
 CURSOS.push({t:"curso",herr:"general",tool:"direccion",ico:"i-boss",bg:"p2",n:"IA para dirección",et:"Para dirección",d:"Por dónde empezar, coste y retorno, y la política de uso interna",h:8,hc:0,dir:0,ic:1});
 CURSOS.forEach(x=>x.slug=slug(x.n));
@@ -1380,12 +1386,12 @@ document.querySelectorAll('.constelacion [data-tool]').forEach(el=>{el.querySele
 const catalogo=document.getElementById('catalogo'), sidebar=document.getElementById('sidebar');
 let tipo='curso', herr='general';
 function tarjeta(x){
-  const mods=[x.dir&&"En directo",x.ic&&"In company",x.hc&&"Campus"].filter(Boolean).map(m=>`<span class="tag">${m}</span>`).join('');
+  const mods=[x.dir&&"En directo",x.ic&&"Presencial",x.hc&&"Campus"].filter(Boolean).map(m=>`<span class="tag">${m}</span>`).join('');
   const medidor=x.nivel?`<img class="medalla" src="assets/3d/medalla-${x.nivel}.png" alt="Nivel ${x.nivel} de 3">`:'';
   return `<a href="${url(x)}" class="curso" style="background:var(--${x.bg})">
       <div class="cab">${logosTile(x)}<div class="tit"><span class="et">${x.et}${medidor}</span><h4>${x.n}</h4></div></div>
       <p class="que">${x.d}</p>
-      <div class="tags"><span class="tag h">${x.h} h</span>${mods}</div>
+      <div class="tags">${mods}</div>
       <span class="ver"><svg class="i"><use href="#i-arrow"/></svg></span></a>`;
 }
 function pintar(){
