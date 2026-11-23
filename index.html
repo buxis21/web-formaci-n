@@ -865,6 +865,22 @@ h1,h2,h3{text-wrap:balance}
 p{text-wrap:pretty}
 @media (max-width:1024px){.wrap{padding:0 28px}}
 @media (max-width:640px){.wrap{padding:0 18px}.dos-col .intro,.conv-grid .intro,.mf-txt,.acordeon .cuerpo{text-align:left}}
+
+/* tarjetas: puntos, curso completo e iconos generales */
+.curso .puntos{list-style:none;display:grid;gap:6px;margin:2px 0 4px}
+.curso .puntos li{position:relative;padding-left:20px;font-size:14px;color:#33415F;line-height:1.4}
+.curso .puntos li::before{content:"";position:absolute;left:2px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--grad-claro)}
+.curso .tag.inc{background:rgba(244,183,64,.18);color:#8A5A00}
+.curso.completo{overflow:visible;background:radial-gradient(400px 200px at 100% 0%,rgba(91,200,245,.35),transparent 70%),linear-gradient(150deg,#0E1B45,#1B3F94 55%,#2563EB)!important;border-color:rgba(91,200,245,.5);box-shadow:0 20px 50px rgba(27,63,148,.35)}
+.curso.completo h4{color:#fff}.curso.completo .et{color:var(--celeste)}
+.curso.completo .puntos li{color:rgba(255,255,255,.85)}
+.curso.completo .tag{background:rgba(255,255,255,.12);color:#fff}
+.curso.completo .tag.h{background:#fff;color:var(--azul)}
+.curso.completo .tag.inc{background:rgba(244,183,64,.25);color:#FFE2A3}
+.curso.completo::after{background:rgba(255,255,255,.08)}
+.sello-completo{position:absolute;top:-11px;left:24px;z-index:2;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;font-weight:600;padding:6px 12px;border-radius:999px;background:linear-gradient(135deg,#F4B740,#E39A1F);color:#3A2600;box-shadow:0 8px 18px rgba(244,183,64,.4)}
+.ico-gen{background:linear-gradient(135deg,#EEF4FF,#DCEBFF)!important}
+.ico-gen svg{width:56%;height:56%}
 /* ---------- Responsive ---------- */
 @media (max-width:1100px){
   .cursos{grid-template-columns:repeat(2,1fr)}
@@ -1263,7 +1279,7 @@ p{text-wrap:pretty}
       <div class="faq-contacto"><b>¿No encuentras tu respuesta?</b><span>Escríbenos a <a href="mailto:gerard@westlabs.es">gerard@westlabs.es</a> o llámanos al <a href="tel:+34711790775">711 790 775</a>.</span></div>
     </div>
     <div class="acordeon reveal" id="faq-lista">
-      <details><summary>¿Cómo se organizan los cursos?</summary><div class="cuerpo">En dos bloques:<ul><li><b>Formación general:</b> cursos que sirven con cualquier herramienta, como Alfabetización en IA, Prompting eficaz o IA y cumplimiento normativo.</li><li><b>Por herramienta:</b> eliges Claude, ChatGPT, Microsoft 365 Copilot o Gemini y sigues tres cursos acumulativos, desde lo básico hasta crear tus propios agentes.</li></ul></div></details>
+      <details><summary>¿Cómo se organizan los cursos?</summary><div class="cuerpo">En dos bloques:<ul><li><b>Formación general:</b> cursos que sirven con cualquier herramienta, como Alfabetización en IA, Prompting eficaz o IA y cumplimiento normativo.</li><li><b>Por herramienta:</b> eliges Claude, ChatGPT, Microsoft 365 Copilot o Gemini. El nivel 1 es para empezar, el nivel 2 profundiza y el nivel 3 es el curso completo: incluye los dos anteriores y llega hasta crear tus propios agentes.</li></ul></div></details>
       <details><summary>¿Necesito conocimientos técnicos?</summary><div class="cuerpo">No. Los cursos de formación general y el primer nivel de cada herramienta no tienen requisitos. Para el nivel 2 conviene haber hecho el nivel 1, y para el nivel 3, el nivel 2.</div></details>
       <details><summary>¿Con qué herramientas trabajamos?</summary><div class="cuerpo">Con Claude, ChatGPT, Microsoft 365 Copilot y Gemini. Elige la que ya use tu empresa.</div></details>
       <details><summary>¿Cuáles son las modalidades?</summary><div class="cuerpo"><ul>
@@ -1348,36 +1364,40 @@ const TODAS = ["claude","chatgpt","copilot","gemini"];
 /* Modalidades: dir = online en directo · pre = presencial o in company · cam = campus */
 const CURSOS = [
   /* ---------- Formación general ---------- */
-  {t:"general",tools:TODAS,ico:"i-shield",bg:"p1",et:"Para toda la plantilla",n:"Alfabetización en IA",
-   d:"El punto de partida: qué es la IA, cómo usarla con criterio y qué exigen el AI Act y el RGPD. Incluye el certificado del art. 4.",dir:1,pre:1,cam:1,dest:1},
-  {t:"general",tools:TODAS,ico:"i-pen",bg:"p3",et:"Para toda la plantilla",n:"Prompting eficaz",
-   d:"La técnica para pedirle las cosas a cualquier IA y obtener respuestas fiables, con plantillas listas para tu trabajo.",dir:1,pre:1,cam:1,dest:1},
-  {t:"general",tools:TODAS,ico:"i-chart",bg:"p2",et:"Taller práctico",n:"Investigación y análisis con IA",
-   d:"Busca, contrasta y resume información con las funciones de investigación de la IA y conviértela en informes claros.",dir:1,pre:1},
-  {t:"general",tools:TODAS,ico:"i-doc",bg:"p5",et:"Taller práctico",n:"Documentos y presentaciones con IA",
-   d:"Redacta informes y propuestas y prepara presentaciones en menos tiempo, manteniendo el estilo de tu empresa.",dir:1,pre:1},
-  {t:"general",tool:"direccion",ico:"i-boss",bg:"p4",et:"Para dirección",n:"IA para dirección",
-   d:"Dónde aplicar la IA en tu empresa, cómo priorizar los proyectos y medir el retorno, con un plan de adopción para los próximos meses.",pre:1},
-  {t:"general",tool:"cumplimiento",ico:"i-scale",bg:"p6",et:"Para legal y compliance",n:"IA y cumplimiento normativo",
-   d:"Las obligaciones del AI Act, la protección de datos y la propiedad intelectual, y cómo redactar la política de uso de la IA.",dir:1,pre:1},
-  /* ---------- Por herramienta (niveles 1, 2 y 3 acumulativos) ---------- */
-  {t:"herr",herr:"claude",nivel:1,n:"Claude Esencial",d:"Pide las cosas bien, configura Claude a tu manera y organiza tu trabajo en proyectos conectados a tus documentos y herramientas.",dest:1},
-  {t:"herr",herr:"claude",nivel:2,n:"Claude Avanzado",d:"Crea skills para las tareas que repites, usa Claude dentro de Excel, Word y el correo, y deja tareas funcionando solas en el navegador."},
-  {t:"herr",herr:"claude",nivel:3,n:"Agentes con Claude",d:"Diseña agentes que hacen trabajos completos con las herramientas de tu empresa y monta uno propio sobre un proceso real."},
-  {t:"herr",herr:"chatgpt",nivel:1,n:"Fundamentos de ChatGPT",d:"Escribe buenos prompts, configura la memoria y trabaja con proyectos y conectores para usar ChatGPT con seguridad cada día.",dest:1},
-  {t:"herr",herr:"chatgpt",nivel:2,n:"ChatGPT en profundidad",d:"Crea GPTs a medida para tu equipo, programa tareas que se hacen solas y lleva ChatGPT a tus documentos y a tu correo."},
-  {t:"herr",herr:"chatgpt",nivel:3,n:"Agentes con ChatGPT",d:"Usa el agente de ChatGPT para trabajos de varios pasos, construye miniaplicaciones con Canvas y termina con un proyecto propio."},
-  {t:"herr",herr:"microsoft",nivel:1,n:"Microsoft 365 Copilot desde cero",d:"Saca partido a Copilot Chat, incluso sin licencia: buenos prompts, Notebooks y conectores con los documentos de tu empresa.",dest:1},
-  {t:"herr",herr:"microsoft",nivel:2,n:"Copilot en tus apps de Microsoft 365",d:"Usa Copilot dentro de Word, Excel, PowerPoint y Outlook para redactar, analizar datos, preparar presentaciones y gestionar el correo."},
-  {t:"herr",herr:"microsoft",nivel:3,n:"Agentes en Microsoft 365 Copilot",d:"Crea agentes que trabajan con la información de Microsoft 365 y aplícalos a un proceso real de tu empresa."},
-  {t:"herr",herr:"gemini",nivel:1,n:"Introducción a Gemini",d:"Empieza con Gemini en Google Workspace: buenos prompts, proyectos y conexión con tus documentos de Drive."},
-  {t:"herr",herr:"gemini",nivel:2,n:"Gemini práctico",d:"Crea Gems para tus tareas habituales y usa Gemini en Gmail, Docs y Sheets para quitarte trabajo repetitivo."},
-  {t:"herr",herr:"gemini",nivel:3,n:"Agentes con Gemini",d:"Construye miniaplicaciones y agentes con Gemini y aplícalos a un proceso real con un proyecto propio."}
+  {t:"general",ico:"i-shield",bg:"p1",et:"Para toda la plantilla",n:"Alfabetización en IA",h:8,
+   p:["Qué es la IA y cómo usarla con criterio","AI Act y RGPD en sencillo","Certificado del art. 4"],dir:1,pre:1,cam:1,dest:1},
+  {t:"general",ico:"i-pen",bg:"p3",et:"Para toda la plantilla",n:"Prompting eficaz",h:4,
+   p:["Cómo pedirle las cosas a la IA","Respuestas fiables y reutilizables","Plantillas para tu trabajo"],dir:1,pre:1,cam:1,dest:1},
+  {t:"general",ico:"i-chart",bg:"p2",et:"Taller práctico",n:"Investigación y análisis con IA",h:4,
+   p:["Buscar y contrastar fuentes","Resumir y comparar información","Informes claros"],dir:1,pre:1},
+  {t:"general",ico:"i-doc",bg:"p5",et:"Taller práctico",n:"Documentos y presentaciones con IA",h:4,
+   p:["Informes y propuestas","Presentaciones en menos tiempo","Con el estilo de tu empresa"],dir:1,pre:1},
+  {t:"general",ico:"i-boss",bg:"p4",et:"Para dirección",n:"IA para dirección",h:8,
+   p:["Dónde aplicar la IA","Priorizar y medir el retorno","Plan de adopción"],pre:1},
+  {t:"general",ico:"i-scale",bg:"p6",et:"Para legal y compliance",n:"IA y cumplimiento normativo",h:8,
+   p:["Obligaciones del AI Act","Datos y propiedad intelectual","Política de uso interna"],dir:1,pre:1},
+  /* ---------- Por herramienta: el nivel 3 es el curso completo (incluye 1 y 2) ---------- */
+  {t:"herr",herr:"claude",nivel:1,n:"Claude Esencial",p:["Prompting y configuración","Proyectos y memoria","Conectores con tus herramientas"],dest:1},
+  {t:"herr",herr:"claude",nivel:2,n:"Claude Avanzado",p:["Skills para tareas repetidas","Claude en Excel, Word y correo","Automatizaciones en el navegador"]},
+  {t:"herr",herr:"claude",nivel:3,n:"Claude Completo",p:["Todo lo de los niveles 1 y 2","Artefactos y miniaplicaciones","Agentes y proyecto propio"]},
+  {t:"herr",herr:"chatgpt",nivel:1,n:"Fundamentos de ChatGPT",p:["Prompting y configuración","Proyectos y memoria","Conectores con tus herramientas"],dest:1},
+  {t:"herr",herr:"chatgpt",nivel:2,n:"ChatGPT en profundidad",p:["GPTs a medida","Tareas programadas","ChatGPT en documentos y correo"]},
+  {t:"herr",herr:"chatgpt",nivel:3,n:"ChatGPT de cero a experto",p:["Todo lo de los niveles 1 y 2","Canvas y miniaplicaciones","Agentes y proyecto propio"]},
+  {t:"herr",herr:"microsoft",nivel:1,n:"Microsoft 365 Copilot desde cero",p:["Copilot Chat, también sin licencia","Prompting y Notebooks","Documentos de tu empresa"],dest:1},
+  {t:"herr",herr:"microsoft",nivel:2,n:"Copilot en tus apps de Microsoft 365",p:["Word y PowerPoint","Excel y análisis de datos","Outlook y Teams"]},
+  {t:"herr",herr:"microsoft",nivel:3,n:"Microsoft 365 Copilot completo",p:["Todo lo de los niveles 1 y 2","Agentes en Microsoft 365 Copilot","Proyecto propio con seguimiento"]},
+  {t:"herr",herr:"microsoft",extra:1,tool:"copilot-studio",ico:"i-robot",bg:"p6",et:"Complemento",n:"Copilot Studio",h:12,
+   p:["Crea tu primer agente sin programar","Con SharePoint y tus archivos","Publicado en Teams"],dir:1,pre:1,dest:1},
+  {t:"herr",herr:"gemini",nivel:1,n:"Introducción a Gemini",p:["Prompting y configuración","Gemini en Google Workspace","Conexión con Drive"]},
+  {t:"herr",herr:"gemini",nivel:2,n:"Gemini práctico",p:["Gems para tareas repetidas","Gmail, Docs y Sheets","Automatizaciones"]},
+  {t:"herr",herr:"gemini",nivel:3,n:"Gemini completo",p:["Todo lo de los niveles 1 y 2","Miniaplicaciones","Agentes y proyecto propio"]}
 ];
 const BGN=["p3","p2","p5"];
 CURSOS.forEach(x=>{
   x.slug=slug(x.n);
-  if(x.t==="herr"){Object.assign(x,{tool:HERR[x.herr].logo,ico:"i-chat",bg:BGN[x.nivel-1],et:`Nivel ${x.nivel} de 3`,dir:1,pre:1,cam:x.nivel<3?1:0});}
+  if(x.t==="herr"&&x.nivel){Object.assign(x,{tool:HERR[x.herr].logo,ico:"i-chat",bg:BGN[x.nivel-1],
+    et:["Nivel 1 · Para empezar","Nivel 2 · Requiere nivel 1","Nivel 3 · Curso completo"][x.nivel-1],
+    h:[12,16,48][x.nivel-1],incluye:x.nivel===3?"Incluye niveles 1 y 2":"",dir:1,pre:1,cam:x.nivel<3?1:0,completo:x.nivel===3});}
 });
 
 function logosTile(x){
@@ -1400,10 +1420,12 @@ let tipo='general', herr='claude';
 function tarjeta(x){
   const mods=[x.dir&&"En directo",x.pre&&"Presencial",x.cam&&"Campus"].filter(Boolean).map(m=>`<span class="tag">${m}</span>`).join('');
   const medalla=x.nivel?`<img class="medalla" src="assets/3d/medalla-${x.nivel}.png" alt="">`:'';
-  return `<a href="${url(x)}" class="curso" style="background:var(--${x.bg})">
-      <div class="cab">${logosTile(x)}<div class="tit"><span class="et">${x.et}${medalla}</span><h4>${x.n}</h4></div></div>
-      <p class="que">${x.d}</p>
-      <div class="tags">${mods}</div>
+  const icono=x.t==="general"?`<span class="logo-tile ico-gen"><svg><use href="#${x.ico}"/></svg></span>`:logosTile(x);
+  return `<a href="${url(x)}" class="curso${x.completo?' completo':''}" style="background:var(--${x.bg})">
+      ${x.completo?'<span class="sello-completo">Curso completo</span>':''}
+      <div class="cab">${icono}<div class="tit"><span class="et">${x.et}${medalla}</span><h4>${x.n}</h4></div></div>
+      <ul class="puntos">${x.p.map(t=>`<li>${t}</li>`).join('')}</ul>
+      <div class="tags"><span class="tag h">${x.h} h</span>${x.incluye?`<span class="tag inc">${x.incluye}</span>`:''}${mods}</div>
       <span class="ver"><svg class="i"><use href="#i-arrow"/></svg></span></a>`;
 }
 function pintar(){
