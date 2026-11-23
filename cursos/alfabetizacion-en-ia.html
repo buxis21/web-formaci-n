@@ -155,7 +155,11 @@
         <div class="ins-panel" role="tabpanel" id="panel-emp" aria-labelledby="tab-emp">
           <h2>Hablemos de la formación de tu equipo</h2>
           <p class="ayuda">Te preparamos una propuesta con fechas, modalidad y gestión de FUNDAE.</p>
-          <form class="form" data-form="empresas" data-endpoint="" novalidate>
+          <form class="form" data-form="empresas" data-endpoint="https://api.web3forms.com/submit" novalidate>
+            <input type="hidden" name="access_key" value="ab432877-6901-4527-b6b2-86e117e9f28f">
+            <input type="hidden" name="subject" value="Propuesta para empresa · Alfabetización en IA">
+            <input type="hidden" name="from_name" value="Web Westlabs AI School">
+            <input type="checkbox" name="botcheck" class="sr" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="campo"><label for="e-nombre">Nombre</label><input id="e-nombre" name="nombre" autocomplete="given-name" required></div>
             <div class="campo"><label for="e-apellidos">Apellidos</label><input id="e-apellidos" name="apellidos" autocomplete="family-name" required></div>
             <div class="campo full"><label for="e-email">Email de empresa</label><input id="e-email" name="email" type="email" autocomplete="email" placeholder="nombre@tuempresa.com" data-corporativo required></div>
@@ -171,7 +175,7 @@
                 <label class="op"><input type="radio" name="fundae" value="No"><span>No hace falta</span></label>
               </div></div>
             <div class="campo full"><label for="e-com">Comentarios</label><textarea id="e-com" name="comentarios" placeholder="Fechas, idioma, áreas del equipo…"></textarea></div>
-            <label class="legal full"><input type="checkbox" name="privacidad" required><span>He leído y acepto la <a href="../privacidad.html">política de privacidad</a>.</span></label>
+            <label class="legal full"><input type="checkbox" name="privacidad" value="Aceptada" required><span>He leído y acepto la <a href="../privacidad.html">política de privacidad</a>.</span></label>
             <button type="submit" class="btn btn-primario full">Solicita propuesta <svg class="i fl"><use href="#i-arrow"/></svg></button>
           </form>
           <div class="form-ok" role="status"><div class="ok">✓</div><h3>Gracias, lo tenemos</h3><p>Te escribimos para conocer a tu equipo y prepararte la propuesta.</p></div>
@@ -181,7 +185,11 @@
           <h2>Apúntate al curso</h2>
           <p class="ayuda">Hazlo a tu ritmo en el campus o en directo con un grupo reducido.</p>
           <div class="precio" id="precio-part"><b>119 €</b><span>IVA incluido<br>10 h en campus · 12 meses de acceso</span></div>
-          <form class="form" data-form="particulares" data-endpoint="" novalidate>
+          <form class="form" data-form="particulares" data-endpoint="https://api.web3forms.com/submit" novalidate>
+            <input type="hidden" name="access_key" value="ab432877-6901-4527-b6b2-86e117e9f28f">
+            <input type="hidden" name="subject" value="Matrícula de particular · Alfabetización en IA">
+            <input type="hidden" name="from_name" value="Web Westlabs AI School">
+            <input type="checkbox" name="botcheck" class="sr" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="campo full"><span class="grupo-t" id="p-mod-t">Modalidad</span>
               <div class="opciones" role="radiogroup" aria-labelledby="p-mod-t">
                 <label class="op"><input type="radio" name="modalidad" value="Campus" checked data-precio-op="119 €" data-precio-nota="IVA incluido<br>10 h en campus · 12 meses de acceso"><span>Campus, a tu ritmo<small>Empiezas cuando quieras · cuenta gratuita de Claude, ChatGPT y Gemini</small></span></label>
@@ -191,7 +199,7 @@
             <div class="campo"><label for="p-apellidos">Apellidos</label><input id="p-apellidos" name="apellidos" autocomplete="family-name" required></div>
             <div class="campo"><label for="p-email">Email</label><input id="p-email" name="email" type="email" autocomplete="email" required></div>
             <div class="campo"><label for="p-tel">Teléfono</label><input id="p-tel" name="telefono" type="tel" autocomplete="tel" required></div>
-            <label class="legal full"><input type="checkbox" name="privacidad" required><span>He leído y acepto la <a href="../privacidad.html">política de privacidad</a>.</span></label>
+            <label class="legal full"><input type="checkbox" name="privacidad" value="Aceptada" required><span>He leído y acepto la <a href="../privacidad.html">política de privacidad</a>.</span></label>
             <button type="submit" class="btn btn-primario full">Matricúlate <svg class="i fl"><use href="#i-arrow"/></svg></button>
           </form>
           <div class="form-ok" role="status"><div class="ok">✓</div><h3>¡Ya casi está!</h3><p>Te escribimos para completar la matrícula y darte acceso.</p></div>

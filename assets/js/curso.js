@@ -36,7 +36,7 @@ $$('[role="tablist"]').forEach(lista=>{
 $$('[data-abre]').forEach(a=>a.addEventListener('click',()=>{const t=document.getElementById(a.dataset.abre);if(t)t.click();}));
 
 /* Formularios: validación y envío.
-   Para conectarlo al CRM, pon la URL del endpoint en data-endpoint del <form>. */
+   Se envían a Web3Forms (data-endpoint del <form>), que manda un correo con los datos. */
 const LIBRES=/@(gmail|googlemail|hotmail|outlook|live|msn|yahoo|ymail|icloud|me|mac|aol|gmx|protonmail|proton|yandex|mail|telefonica|movistar)\./i;
 $$('form[data-form]').forEach(f=>{
   const mail=$('input[data-corporativo]',f);
@@ -45,12 +45,19 @@ $$('form[data-form]').forEach(f=>{
     e.preventDefault();
     if(!f.reportValidity()) return;
     const datos=Object.fromEntries(new FormData(f));
+    if(datos.botcheck) return;            /* trampa para bots: un humano no la marca */
+    delete datos.botcheck;
     datos.curso=document.body.dataset.curso||document.title; datos.formulario=f.dataset.form;
+    if(datos.nombre) datos.name=`${datos.nombre} ${datos.apellidos||''}`.trim();
     const btn=$('button[type="submit"]',f); btn.disabled=true;
     try{
-      if(f.dataset.endpoint) await fetch(f.dataset.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(datos)});
+      if(f.dataset.endpoint){
+        const r=await fetch(f.dataset.endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(datos)});
+        const j=await r.json().catch(()=>({}));
+        if(!r.ok||j.success===false) throw new Error(j.message||r.status);
+      }
       f.closest('.ins-panel').classList.add('enviado');
-    }catch(err){btn.disabled=false;alert('No hemos podido enviar el formulario. Escríbenos a gerard@westlabs.es');}
+    }catch(err){btn.disabled=false;alert('No hemos podido enviar el formulario. Inténtalo de nuevo o escríbenos a gerard@westlabs.es');}
   });
 });
 /* Precio de particulares según la modalidad elegida */
