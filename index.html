@@ -378,6 +378,7 @@ footer address{font-style:normal;display:grid;gap:6px}
 .sellos-foot span{font-size:12px;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 12px}
 .foot-bajo{border-top:1px solid rgba(255,255,255,.12);margin-top:56px;padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px}
 .foot-bajo nav{display:flex;gap:20px;flex-wrap:wrap}
+footer .foot-grid{grid-template-columns:1.6fr 1fr 1fr}
 
 
 /* ---------- Logos múltiples en tarjetas ---------- */
@@ -1308,19 +1309,14 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
         </address>
         <div class="sellos-foot"><span>Bonificable FUNDAE</span><span>Formación · Consultoría · Implementación</span></div>
       </div>
-      <div><h5>Cursos</h5><ul id="foot-cursos"></ul></div>
-      <div><h5>Especializados</h5><ul>
-        <li><a href="#oferta">IA para comercial y marketing</a></li>
-        <li><a href="#oferta">IA para administración y finanzas</a></li>
-        <li><a href="#oferta">IA para RRHH</a></li>
-        <li><a href="#oferta">Copilot Studio I y II</a></li>
-        <li><a href="#oferta">Claude Code para no programadores</a></li>
-        <li><a href="#oferta">IA para dirección</a></ul></div>
+      <div><h5>La escuela</h5><ul>
+        <li><a href="#convocatorias">Convocatorias abiertas</a></li>
+        <li><a href="https://campus.westlabs.es" target="_blank" rel="noopener">Campus</a></li>
+        <li><a href="#ai-act">Certificado AI Act</a></li>
+        <li><a href="#fundae">FUNDAE</a></li></ul></div>
       <div><h5>Westlabs</h5><ul>
         <li><a href="empresas.html">Formación para empresas</a></li>
-        <li><a href="#convocatorias">Convocatorias abiertas</a></li>
-        <li><a href="#fundae">FUNDAE</a></li>
-        <li><a href="https://campus.westlabs.es" target="_blank" rel="noopener">Campus</a></li>
+        <li><a href="https://westlabs.es" target="_blank" rel="noopener">Consultoría e implementación</a></li>
         <li><a href="contacto.html">Contacto</a></li>
         <li><a href="https://www.linkedin.com/company/westlabss" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
     </div>
@@ -1429,7 +1425,8 @@ pintar();
 const dest=CURSOS.filter(x=>x.dest);
 const megaCursos=document.getElementById('mega-cursos');
 if(megaCursos)megaCursos.innerHTML=dest.map(x=>`<li><a href="${url(x)}">${logoTile(x.tool,x.ico)}${x.n}</a></li>`).join('');
-document.getElementById('foot-cursos').innerHTML=dest.map(x=>`<li><a href="${url(x)}">${x.n}</a></li>`).join('')+'<li><a href="#oferta">Ver todos los cursos</a></li>';
+const footCursos=document.getElementById('foot-cursos');
+if(footCursos)footCursos.innerHTML=dest.map(x=>`<li><a href="${url(x)}">${x.n}</a></li>`).join('')+'<li><a href="#oferta">Ver todos los cursos</a></li>';
 
 /* Menú */
 const body=document.body, ham=document.querySelector('.hamburguesa');
