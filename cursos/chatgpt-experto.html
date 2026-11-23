@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Curso ChatGPT Experto (20 h) · Westlabs</title>
+<meta name="description" content="Curso de ChatGPT Experto (20 h): contexto avanzado, Canvas y mini aplicaciones, agentes y un proyecto propio. Online en directo, in company o en campus. Certificado verificable. Bonificable por FUNDAE.">
+<link rel="icon" href="../assets/logo/icono-westlabs.png">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/curso.css">
+</head>
+<!-- Página generada con generador/generar.py a partir de generador/datos.py. No la edites a mano. -->
+<body data-curso="ChatGPT Experto">
+<!-- ============ ICONOS (sprite) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="wlg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#3BA8F5"/></linearGradient>
+  </defs>
+  <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a7.5 7.5 0 0 1-11 6.6L4 19.5l1.4-4.6A7.5 7.5 0 1 1 20 11.5z"/><path d="M12.5 8.2l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="url(#wlg)"/></symbol>
+  <symbol id="i-copilot" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="2"/><path d="M16.75 13.5l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z" fill="url(#wlg)"/></symbol>
+  <symbol id="i-chatlite" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="3"/><path d="M8 21l4-4"/><path d="M7.5 9h9M7.5 12.5h5"/></symbol>
+  <symbol id="i-gem" viewBox="0 0 24 24" fill="url(#wlg)"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 16.5h4"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></symbol>
+  <symbol id="i-studio" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 9l-2 3 2 3M16 9l2 3-2 3M13 8l-2 8"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.3 8.2l4.4 7.6M17.7 8.2l-4.4 7.6"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
+  <symbol id="i-robot" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3.5"/><path d="M12 4v4M9 13.5v1M15 13.5v1M2 13v3M22 13v3"/><circle cx="12" cy="3.5" r="1.2" fill="url(#wlg)"/></symbol>
+  <symbol id="i-mega" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1 1 0 0 0 1 1h3l6 4V5L7 9H4a1 1 0 0 0-1 1z"/><path d="M17 8.5a5 5 0 0 1 0 7M19.5 6a8.5 8.5 0 0 1 0 12"/></symbol>
+  <symbol id="i-hands" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l4-4 4 2 3-2 7 4"/><path d="M7 8l-4 4 6 6c.8.8 2 .8 2.8 0L17 13"/><path d="M11 15l1.5 1.5M13 13l1.5 1.5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14a6.5 6.5 0 0 1 3.5 6"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><rect x="5" y="11" width="3" height="6" rx="1"/><rect x="10.5" y="7" width="3" height="10" rx="1"/><rect x="16" y="4" width="3" height="13" rx="1"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M3 15h18M9 3v18"/></symbol>
+  <symbol id="i-dash" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 16l3-4 3 2 4-6"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0zM19 7l-3 6a3 3 0 0 0 6 0z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol>
+  <symbol id="i-boss" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/><path d="M12 13l-1.5 3 1.5 4 1.5-4z"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2"/><path d="M9 15l-3-3c1.5-4 5-9 13-9 0 8-5 11.5-9 13z"/><circle cx="15" cy="9" r="1.8"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="13" height="12" rx="3"/><path d="M15.5 10.5l6-3.5v10l-6-3.5"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h3a1 1 0 0 1 1 1v11M2 21h20"/><path d="M8 7h4M8 11h4M8 15h4"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/><circle cx="12" cy="12" r="6.5"/></symbol>
+  <symbol id="i-euro" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 6.5A7 7 0 1 0 17.5 17.5"/><path d="M4 10h9M4 14h9"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.5 4.5L20 16M20 20v-4h-4"/></symbol>
+  <symbol id="i-tools" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0 5 5L21 13l-8 8-3-3 8-8M3 21l6-6M9.3 9.3L4 4"/><path d="M14.7 6.3L17.5 3.5 20.5 6.5 17.7 9.3"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="url(#wlg)"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13.2 3.7a3.7 3.7 0 0 1 5.2 5.2L10 17.3a1.8 1.8 0 0 1-2.6-2.6L15 7"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11V4.5a1.5 1.5 0 0 1 3 0V11M14 11V6.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L3 14.5a1.6 1.6 0 0 1 2.6-1.8L8 15"/></symbol>
+  <symbol id="i-form" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h4"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7l8.5 6 8.5-6"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 19h20"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="url(#wlg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-laptop-w" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 19h20"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<div class="progreso" aria-hidden="true"></div>
+<a class="skip" href="#contenido">Ir al contenido</a>
+
+<!-- ============ CABECERA ============ -->
+<header class="principal" id="cabecera">
+  <div class="wrap">
+    <a href="../index.html" class="logo" aria-label="Westlabs AI School, inicio"><img src="../assets/logo/westlabs-ai-school-blanco.png" alt="Westlabs AI School"></a>
+    <button class="hamburguesa" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span></button>
+    <ul class="menu" id="menu">
+      <li class="con-mega">
+        <button aria-expanded="false">Formaciones <i class="caret"></i></button>
+        <div class="mega">
+          <div>
+            <h5>Cursos por herramienta</h5>
+            <ul>
+              <li><a href="claude-esencial.html"><span class="logo-tile"><img src="../assets/herramientas/claude.svg" alt=""></span>Claude</a></li>
+              <li><a href="chatgpt-esencial.html"><span class="logo-tile"><img src="../assets/herramientas/chatgpt.png" alt=""></span>ChatGPT</a></li>
+              <li><a href="microsoft-365-copilot-esencial.html"><span class="logo-tile"><img src="../assets/herramientas/copilot.png" alt=""></span>Microsoft 365 Copilot</a></li>
+              <li><a href="gemini-esencial.html"><span class="logo-tile"><img src="../assets/herramientas/gemini.png" alt=""></span>Gemini</a></li>
+            </ul>
+            <h5 style="margin-top:22px">Especializados</h5>
+            <ul>
+              <li><a href="../index.html#oferta"><span class="logo-tile"><svg><use href="#i-users"/></svg></span>IA por área: comercial, administración y RRHH</a></li>
+              <li><a href="copilot-studio-i-crea-tu-primer-agente.html"><span class="logo-tile"><img src="../assets/herramientas/copilot-studio.png" alt=""></span>Copilot Studio</a></li>
+              <li><a href="claude-code-para-no-programadores.html"><span class="logo-tile"><img src="../assets/herramientas/claude.svg" alt=""></span>Claude Code para no programadores</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5>Cursos destacados</h5>
+            <ul class="dos">
+              <li><a href="alfabetizacion-en-ia.html"><span class="logo-tile"><svg><use href="#i-shield"/></svg></span>Alfabetización en IA</a></li>
+              <li><a href="claude-esencial.html"><span class="logo-tile"><img src="../assets/herramientas/claude.svg" alt=""></span>Claude Esencial</a></li>
+              <li><a href="chatgpt-esencial.html"><span class="logo-tile"><img src="../assets/herramientas/chatgpt.png" alt=""></span>ChatGPT Esencial</a></li>
+              <li><a href="microsoft-365-copilot-esencial.html"><span class="logo-tile"><img src="../assets/herramientas/copilot.png" alt=""></span>Microsoft 365 Copilot Esencial</a></li>
+              <li><a href="claude-code-para-no-programadores.html"><span class="logo-tile"><img src="../assets/herramientas/claude.svg" alt=""></span>Claude Code para no programadores</a></li>
+              <li><a href="copilot-studio-i-crea-tu-primer-agente.html"><span class="logo-tile"><img src="../assets/herramientas/copilot-studio.png" alt=""></span>Copilot Studio I · Crea tu primer agente</a></li>
+            </ul>
+            <a href="../index.html#oferta" class="ver-todo">Ver todos los cursos <svg class="i"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="destacado">
+            <div>
+              <span class="logo-tile"><svg><use href="#i-building"/></svg></span>
+              <strong>¿Formación para tu equipo?</strong>
+              <p>Diseñamos un plan a medida, con vuestros casos y bonificable por FUNDAE.</p>
+            </div>
+            <a href="../empresas.html" class="btn btn-claro">Diseña tu plan <svg class="i fl"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </li>
+      <li><a href="../empresas.html">Empresas</a></li>
+      <li class="campus"><a href="https://campus.westlabs.es" target="_blank" rel="noopener"><svg class="i"><use href="#i-laptop-w"/></svg>Campus</a></li>
+      <li class="cta"><a href="../contacto.html">Contacto</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="contenido">
+
+<!-- ============ HERO + INSCRIPCIÓN ============ -->
+<section class="hero hero-curso oscuro" id="top">
+  <canvas class="cielo" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <nav class="migas" aria-label="Estás en"><a href="../index.html">Inicio</a><span>/</span><a href="../index.html#oferta">Cursos</a><span>/</span>ChatGPT Experto</nav>
+    <div class="grid">
+      <div>
+        <div class="pre">Curso · Nivel 3 de 3</div>
+        <h1>ChatGPT Experto</h1>
+        <span class="sub">Agentes con ChatGPT</span>
+        <p class="intro"><b>Monta tus propias herramientas y un agente que hace un proceso de principio a fin.</b> Entiendes la IA por dentro, trabajas con contexto avanzado, creas mini aplicaciones y juntas todas las piezas en un agente. Acabas con un agente propio funcionando en un proceso real, con cuatro sesiones de seguimiento.</p>
+        <div class="chips"><span class="chip-h dest"><svg class="i"><use href="#i-check"/></svg>20 h</span><span class="chip-h"><svg class="i"><use href="#i-check"/></svg>Requisito: Nivel 2</span><span class="chip-h"><svg class="i"><use href="#i-check"/></svg>Certificado verificable</span><span class="chip-h"><svg class="i"><use href="#i-check"/></svg>Bonificable FUNDAE</span></div>
+        <div class="herr-hero"><small>Herramienta</small><span class="logos"><span class="logo-tile"><img src="../assets/herramientas/chatgpt.png" alt="ChatGPT"></span></span></div>
+      </div>
+      <div class="inscripcion" id="inscripcion">
+        <div class="ins-tabs" role="tablist" aria-label="¿Para quién es la formación?">
+          <button role="tab" id="tab-emp" aria-controls="panel-emp" aria-selected="true"><svg class="i"><use href="#i-building"/></svg>Empresas</button>
+          <button role="tab" id="tab-part" aria-controls="panel-part" aria-selected="false" tabindex="-1"><svg class="i"><use href="#i-users"/></svg>Particulares</button>
+        </div>
+        <div class="ins-panel" role="tabpanel" id="panel-emp" aria-labelledby="tab-emp">
+          <h2>Hablemos de la formación de tu equipo</h2>
+          <p class="ayuda">Te preparamos una propuesta con fechas, modalidad y gestión de FUNDAE.</p>
+          <form class="form" data-form="empresas" data-endpoint="https://api.web3forms.com/submit" novalidate>
+            <input type="hidden" name="access_key" value="ab432877-6901-4527-b6b2-86e117e9f28f">
+            <input type="hidden" name="subject" value="Propuesta para empresa · ChatGPT Experto">
+            <input type="hidden" name="from_name" value="Web Westlabs AI School">
+            <input type="checkbox" name="botcheck" class="sr" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="campo"><label for="e-nombre">Nombre</label><input id="e-nombre" name="nombre" autocomplete="given-name" required></div>
+            <div class="campo"><label for="e-apellidos">Apellidos</label><input id="e-apellidos" name="apellidos" autocomplete="family-name" required></div>
+            <div class="campo full"><label for="e-email">Email</label><input id="e-email" name="email" type="email" autocomplete="email" required></div>
+            <div class="campo"><label for="e-tel">Teléfono</label><input id="e-tel" name="telefono" type="tel" autocomplete="tel" required></div>
+            <div class="campo"><label for="e-empresa">Empresa</label><input id="e-empresa" name="empresa" autocomplete="organization" required></div>
+            <div class="campo"><label for="e-personas">Número de personas</label>
+              <select id="e-personas" name="personas" required><option value="">Elige</option><option>1 a 5</option><option>6 a 10</option><option>11 a 25</option><option>26 a 50</option><option>Más de 50</option></select></div>
+            <div class="campo"><label for="e-modalidad">Modalidad</label>
+              <select id="e-modalidad" name="modalidad" required><option value="">Elige</option><option>Online en directo</option><option>In company online</option><option>In company presencial</option><option>Aún no lo sé</option></select></div>
+            <div class="campo full"><span class="grupo-t" id="e-fundae-t">¿Queréis que gestionemos la FUNDAE?</span>
+              <div class="opciones dos" role="radiogroup" aria-labelledby="e-fundae-t">
+                <label class="op"><input type="radio" name="fundae" value="Sí" required><span>Sí, gestionadla</span></label>
+                <label class="op"><input type="radio" name="fundae" value="No"><span>No hace falta</span></label>
+              </div></div>
+            <div class="campo full"><label for="e-com">Comentarios</label><textarea id="e-com" name="comentarios" placeholder="Fechas, idioma, áreas del equipo…"></textarea></div>
+            <label class="legal full"><input type="checkbox" name="privacidad" value="Aceptada" required><span>He leído y acepto la <a href="../privacidad.html">política de privacidad</a>.</span></label>
+            <p class="form-error full" role="alert" hidden></p>
+            <button type="submit" class="btn btn-primario full">Solicita propuesta <svg class="i fl"><use href="#i-arrow"/></svg></button>
+          </form>
+          <div class="form-ok" role="status"><div class="ok">✓</div><h3>Gracias, lo tenemos</h3><p>Te escribimos para conocer a tu equipo y prepararte la propuesta.</p></div>
+        </div>
+        <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
+          <h2>Apúntate al curso</h2>
+          <p class="ayuda">En directo, con un grupo reducido de varias empresas.</p>
+          <div class="precio" id="precio-part"><b>Próximamente</b><span>Te avisamos cuando abramos grupo<br>fechas y precio por confirmar</span></div>
+          <form class="form" data-form="particulares" data-endpoint="https://api.web3forms.com/submit" novalidate>
+            <input type="hidden" name="access_key" value="ab432877-6901-4527-b6b2-86e117e9f28f">
+            <input type="hidden" name="subject" value="Matrícula de particular · ChatGPT Experto">
+            <input type="hidden" name="from_name" value="Web Westlabs AI School">
+            <input type="checkbox" name="botcheck" class="sr" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="campo full"><span class="grupo-t" id="p-mod-t">Modalidad</span>
+              <div class="opciones" role="radiogroup" aria-labelledby="p-mod-t">
+                <label class="op"><input type="radio" name="modalidad" value="Online en directo" checked data-precio-op="Próximamente" data-precio-nota="Te avisamos cuando abramos grupo&lt;br&gt;fechas y precio por confirmar"><span>Online en directo<small>10 sesiones de 2 h · fechas por confirmar</small></span></label>
+              </div></div>
+            <div class="campo"><label for="p-nombre">Nombre</label><input id="p-nombre" name="nombre" autocomplete="given-name" required></div>
+            <div class="campo"><label for="p-apellidos">Apellidos</label><input id="p-apellidos" name="apellidos" autocomplete="family-name" required></div>
+            <div class="campo"><label for="p-email">Email</label><input id="p-email" name="email" type="email" autocomplete="email" required></div>
+            <div class="campo"><label for="p-tel">Teléfono</label><input id="p-tel" name="telefono" type="tel" autocomplete="tel" required></div>
+            <label class="legal full"><input type="checkbox" name="privacidad" value="Aceptada" required><span>He leído y acepto la <a href="../privacidad.html">política de privacidad</a>.</span></label>
+            <p class="form-error full" role="alert" hidden></p>
+            <button type="submit" class="btn btn-primario full">Avísame de las fechas <svg class="i fl"><use href="#i-arrow"/></svg></button>
+          </form>
+          <div class="form-ok" role="status"><div class="ok">✓</div><h3>¡Ya casi está!</h3><p>Te avisamos en cuanto abramos fechas.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg class="ola" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80V40C240 0 480 0 720 30s480 40 720 0v50z" fill="#fff"/></svg>
+</section>
+
+<!-- ============ NAVEGACIÓN DEL CURSO ============ -->
+<nav class="anclas" aria-label="Secciones del curso">
+  <div class="wrap">
+    <a href="#por-que">Por qué este curso</a>
+    <a href="#modalidades">Fechas y modalidades</a>
+    <a href="#temario">Temario</a>
+    <a href="#certificado">Certificado</a>
+    <a href="#fundae">FUNDAE</a>
+    <a href="#faqs">Preguntas</a>
+    <a href="#inscripcion" class="apunta">¡Apúntate!</a>
+  </div>
+</nav>
+
+<!-- ============ INFORMACIÓN DEL CURSO ============ -->
+<section class="info-curso" aria-label="Información del curso">
+  <div class="wrap">
+    <div class="datos reveal">
+      <div class="dato"><span class="logo-tile"><svg><use href="#i-video"/></svg></span><h3>Duración</h3><p>20 horas<small>10 sesiones de 2 h</small></p></div>
+      <div class="dato"><span class="logo-tile"><svg><use href="#i-laptop"/></svg></span><h3>Modalidades</h3><p>Directo y in company</p></div>
+      <div class="dato"><span class="logo-tile"><svg><use href="#i-grid"/></svg></span><h3>Herramienta</h3><p>ChatGPT</p></div>
+      <div class="dato"><span class="logo-tile"><svg><use href="#i-compass"/></svg></span><h3>Requisitos</h3><p>Nivel 2<small>ChatGPT Avanzado o experiencia equivalente</small></p></div>
+      <div class="dato"><span class="logo-tile"><svg><use href="#i-target"/></svg></span><h3>Próxima convocatoria</h3><p>Fechas por confirmar<small>In company: cuando os vaya bien</small></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POR QUÉ ============ -->
+<section class="porque-curso" id="por-que">
+  <div class="wrap">
+    <div class="dos-col">
+      <div class="reveal">
+        <div class="pre">Por qué este curso</div>
+        <h2>Tu propio agente <span class="acento">en un proceso real</span></h2>
+        <p class="intro">El último nivel: lo que en Westlabs montamos como proyecto para empresas, aquí aprendes a montarlo tú, con seguimiento hasta que funciona.</p>
+        <ul class="lista-check">
+          <li><span><b>La IA por dentro:</b> modelos, contexto y fiabilidad.</span></li>
+          <li><span><b>Canvas y mini aplicaciones:</b> pequeñas herramientas para tu trabajo.</span></li>
+          <li><span><b>Agentes:</b> instrucciones, conectores y automatizaciones juntos, con el modo agente de ChatGPT.</span></li>
+          <li><span><b>Proyecto propio con 4 seguimientos</b> y presentación final.</span></li>
+        </ul>
+        <div class="sales-con"><b>Sales con</b><p>Un agente propio funcionando en un proceso real.</p></div>
+      </div>
+      <div class="foto-porque reveal">
+        <figure><img src="../assets/fotos/incompany-chatgpt.jpg" alt="Formación de ChatGPT con el equipo de una empresa" loading="lazy"></figure>
+        <div class="flotante-dato"><span class="logo-tile"><svg><use href="#i-robot"/></svg></span><div>Agente propio<small>En un proceso real</small></div></div>
+        <div class="flotante-dato b"><span class="logo-tile"><svg><use href="#i-target"/></svg></span><div>4 seguimientos<small>Hasta que funciona</small></div></div>
+      </div>
+    </div>
+    <div class="para-quien reveal">
+      <div class="pq"><span class="logo-tile"><svg><use href="#i-robot"/></svg></span><div><b>Si quieres montar un agente</b><span>Que haga un proceso de tu trabajo de principio a fin.</span></div></div>
+      <div class="pq"><span class="logo-tile"><svg><use href="#i-tools"/></svg></span><div><b>Si quieres tus propias herramientas</b><span>Mini aplicaciones hechas a tu medida.</span></div></div>
+      <div class="pq"><span class="logo-tile"><svg><use href="#i-users"/></svg></span><div><b>Si vas a compartirlo con el equipo</b><span>Y tiene que funcionar sin depender de ti.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODALIDADES ============ -->
+<section class="modalidades oscuro" id="modalidades">
+  <div class="wrap">
+    <div class="cab-sec reveal">
+      <div class="pre">Fechas y modalidades</div>
+      <h2>Elige cómo <span class="acento">quieres hacerlo</span></h2>
+      <p class="intro">El mismo temario y el mismo certificado en dos formatos, según cuántas personas sois y cómo preferís aprender.</p>
+    </div>
+    <div class="modfotos mods-curso n2">
+      <article class="mf reveal">
+        <div class="mf-media"><img class="mf-3d" src="../assets/3d/video.png" alt=""><img src="../assets/fotos/online.jpg" alt="Alumna conectada a una clase en directo por videollamada" loading="lazy"><span class="mf-badge">Particulares y empresas</span></div>
+        <div class="mf-txt">
+          <span class="mf-et">Online en directo</span>
+          <h3>Grupo abierto</h3>
+          <p class="mf-desc">Clases por videollamada con alumnos de varias empresas. Ideal si eres una persona o sois pocas.</p>
+          <dl class="ficha">
+            <div><dt>Duración</dt><dd>20 h · 10 sesiones de 2 h</dd></div>
+            <div><dt>Fechas</dt><dd>Fijas · por confirmar</dd></div>
+            <div><dt>Grupo</dt><dd>Reducido, de varias empresas</dd></div>
+            <div><dt>Casos</dt><dd>Los tuyos, corregidos en clase</dd></div>
+            <div><dt>Precio</dt><dd>Por persona · por confirmar</dd></div>
+          </dl>
+          <a href="#inscripcion" class="btn btn-claro btn-sm" data-abre="tab-part">Avísame de las fechas <svg class="i fl"><use href="#i-arrow"/></svg></a>
+        </div>
+      </article>
+      <article class="mf mf-dest reveal">
+        <div class="mf-media"><img class="mf-3d" src="../assets/3d/edificio.png" alt=""><img src="../assets/fotos/incompany-chatgpt.jpg" alt="Formación in company en las instalaciones de una empresa" loading="lazy"><span class="mf-badge">Empresas</span></div>
+        <div class="mf-txt">
+          <span class="mf-et">Online o presencial</span>
+          <h3>Solo tu equipo</h3>
+          <p class="mf-desc">Un grupo cerrado para tu empresa, por videollamada o en vuestras oficinas, con vuestros casos.</p>
+          <dl class="ficha">
+            <div><dt>Duración</dt><dd>20 h · sesiones de 2 h online o 5 jornadas de 4 h presenciales</dd></div>
+            <div><dt>Fechas</dt><dd>Las que os vayan bien</dd></div>
+            <div><dt>Grupo</dt><dd>Solo personas de tu empresa</dd></div>
+            <div><dt>Casos</dt><dd>Preparados en una consultoría previa</dd></div>
+            <div><dt>Precio</dt><dd>Por grupo, en la propuesta</dd></div>
+          </dl>
+          <a href="#inscripcion" class="btn btn-claro btn-sm" data-abre="tab-emp">Solicita propuesta <svg class="i fl"><use href="#i-arrow"/></svg></a>
+        </div>
+      </article>
+    </div>
+    <p class="mods-nota reveal"><svg class="i"><use href="#i-check"/></svg>Todas las modalidades son bonificables por FUNDAE para empresas y dan el mismo certificado.</p>
+  </div>
+</section>
+
+<!-- ============ TEMARIO ============ -->
+<section class="temario" id="temario">
+  <div class="wrap tem-grid">
+    <div class="tem-lado reveal">
+      <div class="pre">Temario</div>
+      <h2>Qué vas a ver <span class="acento">módulo a módulo</span></h2>
+      <p class="intro">Cada módulo combina explicación y práctica con tus casos. Las horas son las de la modalidad en directo o in company.</p>
+
+      <div class="tem-sale"><span class="logo-tile"><svg><use href="#i-shield"/></svg></span><div><b>Te llevas</b><p>Un agente propio funcionando en un proceso real.</p></div></div>
+    </div>
+
+    <div>
+      <div role="tabpanel" id="pt-dir" aria-labelledby="tt-dir">
+        <div class="tem-cab">
+          <p class="tem-total"><b>7 módulos · 20 horas</b> · requisito: Nivel 2</p>
+          <div class="faq-acciones"><button type="button" data-acordeon="tem-dir" data-accion="abrir">Expandir todo</button><button type="button" data-acordeon="tem-dir" data-accion="cerrar">Contraer todo</button></div>
+        </div>
+        <div class="acordeon" id="tem-dir">
+          <details open><summary><span class="num">1</span><span class="t">La IA por dentro<small>Modelos, contexto y fiabilidad</small></span><span class="hrs">2 h</span></summary><div class="cuerpo"><ul>
+            <li>Qué modelo usar para cada tarea</li>
+            <li>Cómo gestiona el contexto y dónde se equivoca</li>
+            <li>Cómo comprobar que un resultado es fiable</li></ul></div></details>
+          <details><summary><span class="num">2</span><span class="t">Instrucciones y contexto avanzados<small>Para resultados que no dependen de la suerte</small></span><span class="hrs">2 h</span></summary><div class="cuerpo"><ul>
+            <li>Instrucciones largas y bien estructuradas</li>
+            <li>Documentos de referencia y ejemplos</li></ul></div></details>
+          <details><summary><span class="num">3</span><span class="t">Artefactos y mini aplicaciones<small>Canvas y mini aplicaciones</small></span><span class="hrs">2 h</span></summary><div class="cuerpo"><ul>
+            <li>Pequeñas herramientas a partir de un Excel o una plantilla</li>
+            <li>Compartirlas con quien las necesita</li></ul></div></details>
+          <details><summary><span class="num">4</span><span class="t">Agentes: todas las piezas juntas<small>El modo agente de ChatGPT</small></span><span class="hrs">2 h</span></summary><div class="cuerpo"><ul>
+            <li>Qué es un agente y cuándo tiene sentido</li>
+            <li>Instrucciones, conectores y automatizaciones trabajando juntos</li></ul></div></details>
+          <details><summary><span class="num">5</span><span class="t">Compartir con el equipo<small>Que no dependa de una sola persona</small></span><span class="hrs">2 h</span></summary><div class="cuerpo"><ul>
+            <li>Documentar lo que has montado</li>
+            <li>Permisos, revisiones y mantenimiento</li></ul></div></details>
+          <details><summary><span class="num">6</span><span class="t">Proyecto propio con 4 seguimientos<small>Un proceso real de tu trabajo</small></span><span class="hrs">8 h</span></summary><div class="cuerpo"><ul>
+            <li>Eliges un proceso de tu trabajo</li>
+            <li>Cuatro sesiones de seguimiento de 2 h</li>
+            <li>Lo dejas funcionando en el día a día</li></ul></div></details>
+          <details><summary><span class="num">7</span><span class="t">Presentación final y certificado<small>Enseñas tu agente</small></span><span class="hrs">2 h</span></summary><div class="cuerpo"><ul>
+            <li>Presentas tu agente al grupo</li>
+            <li>Mejoras y próximos pasos</li></ul></div></details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CERTIFICADO ============ -->
+<section class="aiact" id="certificado">
+  <div class="wrap dos-col">
+    <div class="cert-caja reveal">
+      <div class="cert-wrap" role="img" aria-label="Ejemplo de certificado del curso ChatGPT Experto">
+        <div class="paper back"></div>
+        <div class="paper mid"></div>
+        <div class="paper front"><div class="frame">
+          <img class="cl" src="../assets/logo/westlabs-ai-school.png" alt="">
+          <div class="ct">FORMACIÓN EN IA</div>
+          <div class="ch">Certificado de formación</div>
+          <div class="cs">Se certifica que</div>
+          <div class="cn">Nombre del participante</div>
+          <div class="cd">ha completado el curso <b>ChatGPT Experto (20 h)</b>.</div>
+          <div class="cfoot">
+            <div class="csig"><i>Verificable</i>Código QR</div>
+            <div class="csig r"><i>Westlabs</i>Entidad formadora</div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="pre">Certificado</div>
+      <h2>Un certificado que <span class="acento">puedes demostrar</span></h2>
+      <p class="intro">Un certificado con tu nombre, el curso, las horas y los contenidos, que puedes enseñar a tu empresa o a tus clientes.</p>
+      <ul class="lista-check">
+        <li><span><b>Nominativo y verificable:</b> lleva un QR que abre una página de Westlabs con tu nombre, el curso, las horas y la fecha.</span></li>
+        <li><span>El <b>bloque de IA segura y legal</b> del artículo 4 va en los cursos de entrada; si ya lo has hecho con nosotros, no se repite.</span></li>
+        <li><span>El modelo de certificado y el programa están <b>protocolizados ante notario</b>.</span></li>
+        <li><span>Es el mismo programa que damos a equipos de empresa.</span></li>
+      </ul>
+      <a href="#inscripcion" class="btn btn-primario">Consigue tu certificado <svg class="i fl"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FUNDAE ============ -->
+<section class="fundae-sec" id="fundae">
+  <div class="wrap">
+    <div class="fbanda reveal">
+      <img class="flogo" src="../assets/logos/fundae.png" alt="Fundación Estatal para la Formación en el Empleo">
+      <div>
+        <h3>Curso bonificable a través de FUNDAE</h3>
+        <p>Somos entidad organizadora: si tu empresa tiene crédito de formación, nos encargamos de toda la gestión, sin intermediarios.</p>
+      </div>
+      <a href="#inscripcion" class="btn btn-primario" data-abre="tab-emp">Consulta cómo bonificar <svg class="i fl"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faqs">
+  <div class="wrap">
+    <div class="faq-cab reveal">
+      <div class="pre">Dudas</div>
+      <h2>Preguntas <span class="acento">frecuentes</span></h2>
+      <p class="intro">Lo que más nos preguntan sobre ChatGPT Experto.</p>
+      <div class="faq-acciones"><button type="button" data-acordeon="faq-lista" data-accion="abrir">Expandir todo</button><button type="button" data-acordeon="faq-lista" data-accion="cerrar">Contraer todo</button></div>
+      <div class="faq-contacto"><b>¿No encuentras tu respuesta?</b><span>Escríbenos a <a href="mailto:gerard@westlabs.es">gerard@westlabs.es</a> o llámanos al <a href="tel:+34711790775">711 790 775</a>.</span></div>
+    </div>
+    <div class="acordeon reveal" id="faq-lista">
+      <details><summary>¿Qué habré aprendido al acabar el curso?</summary><div class="cuerpo">Trabajas estos temas: la IA por dentro, instrucciones y contexto avanzados, artefactos y mini aplicaciones, agentes: todas las piezas juntas y compartir con el equipo, siempre con práctica sobre tus casos. Al acabar te llevas un agente propio funcionando en un proceso real.</div></details>
+      <details><summary>¿Necesito conocimientos técnicos?</summary><div class="cuerpo">No hace falta saber programar. Sí te pedimos haber hecho antes ChatGPT Avanzado o tener una experiencia equivalente, porque partimos de lo que se ve ahí.</div></details>
+      <details><summary>¿Qué herramienta o licencia necesito?</summary><div class="cuerpo">Necesitas ChatGPT Plus, Team o Enterprise.</div></details>
+      <details><summary>¿Cómo se verifica el certificado?</summary><div class="cuerpo">Cada certificado lleva un código QR que abre una página de Westlabs con el nombre, el curso, las horas y la fecha. El modelo de certificado y el programa están protocolizados ante notario.</div></details>
+      <details><summary>¿Cómo me apunto?</summary><div class="cuerpo"><ul><li><b>Particulares:</b> en el formulario de arriba, pestaña Particulares. Te avisamos cuando abramos el próximo grupo en directo.</li><li><b>Empresas:</b> en la pestaña Empresas. Te preparamos una propuesta con fechas, modalidad y la gestión de FUNDAE.</li></ul></div></details>
+      <details><summary>¿Cuánto tiempo tengo que dedicarle?</summary><div class="cuerpo">Son 20 horas: 10 sesiones de 2 h online o 5 jornadas de 4 h presenciales.</div></details>
+      <details><summary>¿Qué diferencia hay entre el grupo abierto y la formación para mi empresa?</summary><div class="cuerpo">En el grupo abierto te apuntas a unas fechas fijas con alumnos de otras empresas: va bien si eres una persona o sois pocas. La formación para tu empresa es un grupo solo vuestro, online o presencial, en las fechas que elijáis y con casos de vuestro trabajo preparados antes.</div></details>
+      <details><summary>¿Qué hago después?</summary><div class="cuerpo">Puedes seguir con ChatGPT para comercial y marketing o con ChatGPT para administración y finanzas. Los tienes al final de esta página.</div></details>
+      <details><summary>¿Puedo bonificar el curso por FUNDAE?</summary><div class="cuerpo">Sí, si lo paga tu empresa y tiene crédito de formación. Somos entidad organizadora y hacemos toda la gestión. Los autónomos sin trabajadores no pueden bonificar.</div></details>
+      <details><summary>¿En qué idiomas se imparte?</summary><div class="cuerpo">En castellano, catalán o inglés.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIGUIENTE PASO ============ -->
+<section class="oferta siguiente" aria-labelledby="sig-t">
+  <div class="wrap">
+    <div class="cab-sec reveal">
+      <div class="pre">Siguiente paso</div>
+      <h2 id="sig-t">Sigue <span class="acento">aprendiendo</span></h2>
+      <p class="intro">Cursos que encajan después de este, con la misma herramienta o en tu área.</p>
+    </div>
+    <div class="cursos n4">
+      <a href="chatgpt-para-comercial-y-marketing.html" class="curso reveal" style="background:var(--p1)"><div class="cab"><span class="logo-tile"><img src="../assets/herramientas/chatgpt.png" alt=""></span><div class="tit"><span class="et">Por área</span><h4>ChatGPT para comercial y marketing</h4></div></div><p class="que">Reuniones, propuestas, leads, contenido y campañas</p><div class="tags"><span class="tag h">16 h</span><span class="tag">En directo</span><span class="tag">In company</span><span class="tag">Campus</span></div><span class="ver"><svg class="i"><use href="#i-arrow"/></svg></span></a>
+      <a href="chatgpt-para-administracion-y-finanzas.html" class="curso reveal" style="background:var(--p3)"><div class="cab"><span class="logo-tile"><img src="../assets/herramientas/chatgpt.png" alt=""></span><div class="tit"><span class="et">Por área</span><h4>ChatGPT para administración y finanzas</h4></div></div><p class="que">Facturas, conciliaciones, informes y previsiones</p><div class="tags"><span class="tag h">16 h</span><span class="tag">En directo</span><span class="tag">In company</span><span class="tag">Campus</span></div><span class="ver"><svg class="i"><use href="#i-arrow"/></svg></span></a>
+      <a href="chatgpt-para-rrhh.html" class="curso reveal" style="background:var(--p4)"><div class="cab"><span class="logo-tile"><img src="../assets/herramientas/chatgpt.png" alt=""></span><div class="tit"><span class="et">Por área</span><h4>ChatGPT para RRHH</h4></div></div><p class="que">Selección sin sesgos, acogida, formación y comunicación interna</p><div class="tags"><span class="tag h">16 h</span><span class="tag">En directo</span><span class="tag">In company</span><span class="tag">Campus</span></div><span class="ver"><svg class="i"><use href="#i-arrow"/></svg></span></a>
+      <a href="chatgpt-al-dia.html" class="curso reveal" style="background:var(--p6)"><div class="cab"><span class="logo-tile"><img src="../assets/herramientas/chatgpt.png" alt=""></span><div class="tit"><span class="et">Cada año</span><h4>ChatGPT al día</h4></div></div><p class="que">Novedades del año, lo que no se ha asentado y un taller con tu caso</p><div class="tags"><span class="tag h">8 h</span><span class="tag">En directo</span><span class="tag">In company</span><span class="tag">Campus</span></div><span class="ver"><svg class="i"><use href="#i-arrow"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="cta-final">
+  <div class="wrap">
+    <div class="caja oscuro reveal">
+      <div>
+        <h2>Monta tu propio agente <span class="acento">con ChatGPT</span></h2>
+        <p class="intro">Un agente propio funcionando en un proceso real.</p>
+      </div>
+      <div class="botones">
+        <a href="#inscripcion" class="btn btn-claro" data-abre="tab-emp">Solicita propuesta <svg class="i fl"><use href="#i-arrow"/></svg></a>
+        <a href="#inscripcion" class="btn btn-borde" data-abre="tab-part">Apúntate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="../index.html" class="logo"><img src="../assets/logo/westlabs-ai-school-blanco.png" alt="Westlabs AI School"></a>
+        <address>
+          <span>Av. Blondel, 25</span><span>25001 Lleida</span>
+          <a href="mailto:gerard@westlabs.es">gerard@westlabs.es</a>
+          <a href="tel:+34711790775">711 790 775</a>
+        </address>
+        <div class="sellos-foot"><span>Bonificable FUNDAE</span><span>Formación · Consultoría · Implementación</span></div>
+      </div>
+      <div><h5>La escuela</h5><ul>
+        <li><a href="../index.html#convocatorias">Convocatorias abiertas</a></li>
+        <li><a href="https://campus.westlabs.es" target="_blank" rel="noopener">Campus</a></li>
+        <li><a href="../index.html#ai-act">Certificado AI Act</a></li>
+        <li><a href="../index.html#fundae">FUNDAE</a></li></ul></div>
+      <div><h5>Westlabs</h5><ul>
+        <li><a href="../empresas.html">Formación para empresas</a></li>
+        <li><a href="https://westlabs.es" target="_blank" rel="noopener">Consultoría e implementación</a></li>
+        <li><a href="../contacto.html">Contacto</a></li>
+        <li><a href="https://www.linkedin.com/company/westlabss" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="foot-bajo">
+      <span>© <span id="anio">2026</span> Westlabs</span>
+      <nav aria-label="Legal"><a href="../aviso-legal.html">Aviso legal</a><a href="../privacidad.html">Política de privacidad</a><a href="../cookies.html">Política de cookies</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/curso.js"></script>
+</body>
+</html>

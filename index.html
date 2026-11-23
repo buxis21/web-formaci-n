@@ -1357,7 +1357,7 @@ const BG=["p3","p2","p5","p4"];
 Object.keys(HERR).forEach(k=>{
   const H=HERR[k].nombre;
   [0,1,2].forEach(i=>CURSOS.push({t:"curso",herr:k,tool:HERR[k].logo,ico:"i-chat",bg:BG[i],nivel:i+1,
-    n:`${H} ${NIVEL[i]}`,et:`Nivel ${i+1} de 3`,d:QUE[k][i],h:[12,16,20][i],hc:[20,25,0][i],dir:1,ic:1,dest:i===0&&k!=="otros"}));
+    n:`${H} ${NIVEL[i]}`,et:`Nivel ${i+1} de 3`,d:QUE[k][i],h:[12,16,20][i],hc:(k==="claude"?[25,25,40][i]:0),dir:1,ic:1,dest:i===0&&k!=="otros"}));
   CURSOS.push({t:"curso",herr:k,tool:HERR[k].logo,ico:"i-refresh",bg:"p6",n:`${H} al día`,et:"Cada año",d:"Novedades del año, lo que no se ha asentado y un taller con tu caso",h:8,hc:10,dir:1,ic:1});
 });
 Object.keys(HERR).forEach(k=>{

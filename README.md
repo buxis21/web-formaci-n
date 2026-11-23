@@ -7,7 +7,9 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 | Archivo o carpeta | Qué es |
 |---|---|
 | `index.html` | Portada con el catálogo de cursos |
-| `cursos/` | Una página por curso (por ahora, `alfabetizacion-en-ia.html`) |
+| `cursos/` | Las 36 fichas de curso. **Se generan solas**, no se editan a mano (ver «Fichas de curso») |
+| `generador/` | Datos de los cursos (`datos.py`), plantilla de la ficha (`generar.py`) y partes comunes (`parciales/`) |
+| `MAPA-WEB.md` | Mapa de todas las páginas y sus conexiones (se genera solo) |
 | `aviso-legal.html`, `privacidad.html`, `cookies.html` | Páginas legales |
 | `assets/css/base.css` | Estilos comunes de toda la web |
 | `assets/css/curso.css` | Estilos de las fichas de curso |
@@ -52,14 +54,26 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 - Antes de activar los enlaces reales, prueba el pago con el **modo de prueba** de Stripe.
 - Pendiente: confirmar con Santi si los precios llevan el 21 % de IVA.
 
-## Crear una ficha de curso nueva
+## Fichas de curso
 
-1. Copia `cursos/alfabetizacion-en-ia.html` con el nombre del curso (el nombre del archivo sale del nombre del curso, en minúsculas y con guiones, por ejemplo `claude-esencial.html`).
-2. Cambia los textos: título, datos del curso, temario, modalidades, precio y preguntas frecuentes.
-3. Cambia el asunto de los dos formularios (`subject`) y `data-curso` en `<body>`.
-4. Si el curso tiene precio para particulares, pon su enlace de Stripe.
+Las 36 fichas de `cursos/` salen de una plantilla única y de un archivo de datos, así todas tienen el mismo diseño y se cambian a la vez.
 
-El contenido de cada curso sale del documento «Westlabs: catálogo de cursos de IA y fichas para la web».
+- **Cambiar un texto, unas horas, un temario o un precio:** edítalo en `generador/datos.py`.
+- **Cambiar la estructura de la ficha** (qué secciones lleva y en qué orden): `generador/generar.py`.
+- **Cambiar la cabecera, el pie o los iconos:** `generador/parciales/`.
+- **Cambiar el diseño:** `assets/css/curso.css`.
+
+Después de cualquier cambio en `generador/`, vuelve a crear las fichas:
+
+```
+python3 generador/generar.py
+```
+
+Esto sobrescribe todas las fichas de `cursos/` y actualiza `MAPA-WEB.md`. No edites a mano los HTML de `cursos/`: el cambio se perdería al generar.
+
+Para añadir un curso nuevo, añade un bloque `add(...)` en `generador/datos.py` (copia uno parecido) y genera. Si debe salir en la portada, añádelo también a la lista `CURSOS` del `<script>` de `index.html`, con el mismo nombre.
+
+El contenido sale del documento «Westlabs · Cursos de teleformación» (noviembre 2026).
 
 ## Cómo hablamos de los cursos
 
@@ -77,9 +91,15 @@ Del catálogo, para que todas las páginas digan lo mismo:
 
 - [ ] Crear la rama `main` y conectar Netlify
 - [ ] Probar un envío real de los formularios en la web publicada
-- [ ] Enlace de pago de Stripe para Ready (119 €) en el botón «Matricúlate»
+- [ ] Enlaces de pago de Stripe para Ready (119 €), Build (349 €) y Agents (469 €), y cómo cobrar las ampliaciones (230 €, 350 €, 120 €)
+- [ ] Precio por persona de la modalidad online en directo (ahora sale «por confirmar»)
+- [ ] Fechas de las convocatorias en directo (ahora «primer trimestre de 2027» o «por confirmar»)
+- [ ] Confirmar los nombres de los niveles: en la web van como Esencial, Avanzado y Experto, con el nombre del catálogo como subtítulo
+- [ ] Decidir si las fichas de Gemini se publican ya (están creadas; el catálogo dice que se publican cuando haya demanda)
+- [ ] Revisar los temarios adaptados a cada herramienta (sobre todo Microsoft y Gemini, que cambian a menudo)
 - [ ] Revisión de las páginas legales por el abogado
 - [ ] Tipografía AllRoundGothic en `assets/fonts/` (ahora los títulos salen en Poppins)
 - [ ] Páginas `contacto.html` y `empresas.html`
 - [ ] Confirmar enlaces: campus.westlabs.es, westlabs.es, LinkedIn y el email y teléfono de contacto
-- [ ] Fichas del resto de cursos
+- [ ] Entrada «Cursos para particulares» en el menú (lo pide el catálogo)
+- [ ] Confirmar con Santi si los precios llevan el 21 % de IVA
