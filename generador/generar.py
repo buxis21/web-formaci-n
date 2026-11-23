@@ -70,7 +70,7 @@ def hero(c):
     return f'''<section class="hero hero-curso oscuro" id="top">
   <canvas class="cielo" aria-hidden="true"></canvas>
   <div class="wrap">
-    <nav class="migas" aria-label="Estás en"><a href="../index.html">Inicio</a><span>/</span><a href="../index.html#oferta">Cursos</a><span>/</span>{e(c['n'])}</nav>
+    <nav class="migas" aria-label="Estás en"><a href="../">Inicio</a><span>/</span><a href="../#oferta">Cursos</a><span>/</span>{e(c['n'])}</nav>
     <div class="grid">
       <div>
         <div class="pre">{e(c['et'])}</div>
@@ -591,7 +591,7 @@ def cta(c):
     a, b = c['cta']
     dual = c['dir'] or c.get('campus')
     botones = (f'<a href="#inscripcion" class="btn btn-claro" data-abre="tab-emp">Solicita propuesta {ARROW}</a>\n        <a href="#inscripcion" class="btn btn-borde" data-abre="tab-part">{"Matricúlate" if c.get("campus") else "Apúntate"}</a>'
-               if dual else f'<a href="#inscripcion" class="btn btn-claro">Solicita propuesta {ARROW}</a>\n        <a href="../index.html#oferta" class="btn btn-borde">Ver más cursos</a>')
+               if dual else f'<a href="#inscripcion" class="btn btn-claro">Solicita propuesta {ARROW}</a>\n        <a href="../#oferta" class="btn btn-borde">Ver más cursos</a>')
     return f'''<section class="cta-final">
   <div class="wrap">
     <div class="caja oscuro reveal">
