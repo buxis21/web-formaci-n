@@ -995,13 +995,13 @@ p{text-wrap:pretty}
         <button aria-expanded="false">Formaciones <i class="caret"></i></button>
         <div class="mega">
           <div>
-            <h5>Cursos por herramienta</h5>
+            <h5>Cursos</h5>
             <ul>
-              <li><a href="#oferta" data-ir="curso" data-herr="general"><span class="logo-tile"><svg><use href="#i-grid"/></svg></span>General: Alfabetización e IA para dirección</a></li>
-              <li><a href="#oferta" data-ir="curso" data-herr="claude"><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span>Claude</a></li>
-              <li><a href="#oferta" data-ir="curso" data-herr="chatgpt"><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span>ChatGPT</a></li>
-              <li><a href="#oferta" data-ir="curso" data-herr="microsoft"><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span>Microsoft 365 Copilot</a></li>
-              <li><a href="#oferta" data-ir="curso" data-herr="gemini"><span class="logo-tile"><img src="assets/herramientas/gemini.png" alt=""></span>Gemini</a></li>
+              <li><a href="#oferta" data-ir="general"><span class="logo-tile"><svg><use href="#i-grid"/></svg></span>Formación general</a></li>
+              <li><a href="#oferta" data-ir="herr" data-herr="claude"><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span>Claude</a></li>
+              <li><a href="#oferta" data-ir="herr" data-herr="chatgpt"><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span>ChatGPT</a></li>
+              <li><a href="#oferta" data-ir="herr" data-herr="microsoft"><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span>Microsoft 365 Copilot</a></li>
+              <li><a href="#oferta" data-ir="herr" data-herr="gemini"><span class="logo-tile"><img src="assets/herramientas/gemini.png" alt=""></span>Gemini</a></li>
             </ul>
           </div>
           <div>
@@ -1089,10 +1089,13 @@ p{text-wrap:pretty}
     <div class="cab-sec reveal">
       <div class="pre">Nuestros cursos</div>
       <h2>Oferta <span class="acento">formativa</span></h2>
-      <p class="intro">Empieza por la formación general o elige tu herramienta. Los niveles 1, 2 y 3 son acumulativos: al acabar uno, puedes seguir con el siguiente.</p>
     </div>
     <div class="catalogo-grid">
       <div class="lado">
+        <div class="tabs" role="tablist" aria-label="Tipo de formación">
+          <button role="tab" aria-selected="true" data-tipo="general">Formación general</button>
+          <button role="tab" aria-selected="false" data-tipo="herr">Por herramienta</button>
+        </div>
         <aside class="sidebar" id="sidebar" aria-label="Herramientas"></aside>
       </div>
       <div>
@@ -1260,8 +1263,8 @@ p{text-wrap:pretty}
       <div class="faq-contacto"><b>¿No encuentras tu respuesta?</b><span>Escríbenos a <a href="mailto:gerard@westlabs.es">gerard@westlabs.es</a> o llámanos al <a href="tel:+34711790775">711 790 775</a>.</span></div>
     </div>
     <div class="acordeon reveal" id="faq-lista">
-      <details><summary>¿Cómo se organizan los cursos?</summary><div class="cuerpo">En la pestaña General están Alfabetización en IA, el punto de partida para todo el mundo, IA para dirección e IA y cumplimiento normativo. Después eliges tu herramienta (Claude, ChatGPT, Microsoft 365 Copilot o Gemini) y tienes tres cursos acumulativos: desde lo básico hasta crear tus propios agentes.</div></details>
-      <details><summary>¿Necesito conocimientos técnicos?</summary><div class="cuerpo">No. Alfabetización en IA y el nivel 1 no tienen requisitos. Para el nivel 2 hay que haber hecho el nivel 1, y para el nivel 3, el nivel 2.</div></details>
+      <details><summary>¿Cómo se organizan los cursos?</summary><div class="cuerpo">En dos bloques:<ul><li><b>Formación general:</b> cursos que sirven con cualquier herramienta, como Alfabetización en IA, Prompting eficaz o IA y cumplimiento normativo.</li><li><b>Por herramienta:</b> eliges Claude, ChatGPT, Microsoft 365 Copilot o Gemini y sigues tres cursos acumulativos, desde lo básico hasta crear tus propios agentes.</li></ul></div></details>
+      <details><summary>¿Necesito conocimientos técnicos?</summary><div class="cuerpo">No. Los cursos de formación general y el primer nivel de cada herramienta no tienen requisitos. Para el nivel 2 conviene haber hecho el nivel 1, y para el nivel 3, el nivel 2.</div></details>
       <details><summary>¿Con qué herramientas trabajamos?</summary><div class="cuerpo">Con Claude, ChatGPT, Microsoft 365 Copilot y Gemini. Elige la que ya use tu empresa.</div></details>
       <details><summary>¿Cuáles son las modalidades?</summary><div class="cuerpo"><ul>
         <li><b>Online en directo:</b> fechas fijas y grupos reducidos, con sesiones de 2 h.</li>
@@ -1335,38 +1338,47 @@ p{text-wrap:pretty}
    tool: logo en assets/herramientas/ (.svg o .png; si no existe, sale el icono "ico") · dest: sale en menú y pie
    ============================================================ */
 const HERR = {
-  general:  {n:"General",   logo:"",        nombre:"General"},
-  claude:   {n:"Claude",    logo:"claude",  nombre:"Claude"},
-  chatgpt:  {n:"ChatGPT",   logo:"chatgpt", nombre:"ChatGPT"},
-  microsoft:{n:"Microsoft", logo:"copilot", nombre:"Microsoft 365 Copilot"},
-  gemini:   {n:"Gemini",    logo:"gemini",  nombre:"Gemini"}
-};
-/* Nombre propio de cada curso: el mismo nivel, pero con un nombre distinto en cada herramienta */
-const NOMBRES = {
-  claude:   ["Claude Esencial","Claude Avanzado: skills y automatizaciones","Agentes con Claude"],
-  chatgpt:  ["Fundamentos de ChatGPT","ChatGPT Pro: GPTs y tareas programadas","Agentes con ChatGPT"],
-  microsoft:["Microsoft 365 Copilot desde cero","Copilot en Word, Excel, PowerPoint y Outlook","Agentes en Microsoft 365 Copilot"],
-  gemini:   ["Introducción a Gemini","Gemini: Gems y automatizaciones","Agentes con Gemini"]
-};
-const QUE = {  /* qué se ve en cada nivel */
-  claude:   ["Prompting, configuración y memoria, proyectos y conectores","Skills, Claude en Excel, Word y correo, y automatizaciones en el navegador","Contexto avanzado, artefactos y miniaplicaciones, agentes y un proyecto propio"],
-  chatgpt:  ["Prompting, configuración y memoria, proyectos y conectores","GPTs propios, tareas programadas y la IA en tus documentos y correo","Contexto avanzado, Canvas y miniaplicaciones, agentes y un proyecto propio"],
-  microsoft:["Copilot Chat, prompting, Notebooks y conectores (funciona sin licencia)","Copilot dentro de Word, Excel, PowerPoint y Outlook, y automatizaciones","Contexto avanzado, agentes en Microsoft 365 Copilot y un proyecto propio"],
-  gemini:   ["Prompting, Gemini en Google Workspace, proyectos y conectores","Gems, Gemini en Gmail, Docs y Sheets, y automatizaciones","Contexto avanzado, miniaplicaciones, agentes y un proyecto propio"]
+  claude:   {n:"Claude",    logo:"claude"},
+  chatgpt:  {n:"ChatGPT",   logo:"chatgpt"},
+  microsoft:{n:"Microsoft", logo:"copilot"},
+  gemini:   {n:"Gemini",    logo:"gemini"}
 };
 const slug = t => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const TODAS = ["claude","chatgpt","copilot","gemini"];
-const CURSOS = [];
-CURSOS.push({t:"curso",herr:"general",tools:TODAS,ico:"i-shield",bg:"p1",n:"Alfabetización en IA",et:"Para empezar",d:"Qué es la IA, AI Act y RGPD, y las cuatro herramientas para elegir con criterio",h:8,hc:10,dir:1,ic:1,dest:1});
-CURSOS.push({t:"curso",herr:"general",tool:"cumplimiento",ico:"i-scale",bg:"p6",n:"IA y cumplimiento normativo",et:"Para legal y compliance",d:"AI Act, RGPD, propiedad intelectual y la política de uso de la IA en la empresa",h:8,hc:0,dir:1,ic:1});
-const BG=["p3","p2","p5","p4"];
-Object.keys(HERR).filter(k=>k!=='general').forEach(k=>{
-  const H=HERR[k].nombre;
-  [0,1,2].forEach(i=>CURSOS.push({t:"curso",herr:k,tool:HERR[k].logo,ico:"i-chat",bg:BG[i],nivel:i+1,
-    n:NOMBRES[k][i],et:`Nivel ${i+1} de 3`,d:QUE[k][i],h:[12,16,20][i],hc:[20,25,0][i],dir:1,ic:1,dest:i===0&&k!=="gemini"}));
+/* Modalidades: dir = online en directo · pre = presencial o in company · cam = campus */
+const CURSOS = [
+  /* ---------- Formación general ---------- */
+  {t:"general",tools:TODAS,ico:"i-shield",bg:"p1",et:"Para toda la plantilla",n:"Alfabetización en IA",
+   d:"El punto de partida: qué es la IA, cómo usarla con criterio y qué exigen el AI Act y el RGPD. Incluye el certificado del art. 4.",dir:1,pre:1,cam:1,dest:1},
+  {t:"general",tools:TODAS,ico:"i-pen",bg:"p3",et:"Para toda la plantilla",n:"Prompting eficaz",
+   d:"La técnica para pedirle las cosas a cualquier IA y obtener respuestas fiables, con plantillas listas para tu trabajo.",dir:1,pre:1,cam:1,dest:1},
+  {t:"general",tools:TODAS,ico:"i-chart",bg:"p2",et:"Taller práctico",n:"Investigación y análisis con IA",
+   d:"Busca, contrasta y resume información con las funciones de investigación de la IA y conviértela en informes claros.",dir:1,pre:1},
+  {t:"general",tools:TODAS,ico:"i-doc",bg:"p5",et:"Taller práctico",n:"Documentos y presentaciones con IA",
+   d:"Redacta informes y propuestas y prepara presentaciones en menos tiempo, manteniendo el estilo de tu empresa.",dir:1,pre:1},
+  {t:"general",tool:"direccion",ico:"i-boss",bg:"p4",et:"Para dirección",n:"IA para dirección",
+   d:"Dónde aplicar la IA en tu empresa, cómo priorizar los proyectos y medir el retorno, con un plan de adopción para los próximos meses.",pre:1},
+  {t:"general",tool:"cumplimiento",ico:"i-scale",bg:"p6",et:"Para legal y compliance",n:"IA y cumplimiento normativo",
+   d:"Las obligaciones del AI Act, la protección de datos y la propiedad intelectual, y cómo redactar la política de uso de la IA.",dir:1,pre:1},
+  /* ---------- Por herramienta (niveles 1, 2 y 3 acumulativos) ---------- */
+  {t:"herr",herr:"claude",nivel:1,n:"Claude Esencial",d:"Pide las cosas bien, configura Claude a tu manera y organiza tu trabajo en proyectos conectados a tus documentos y herramientas.",dest:1},
+  {t:"herr",herr:"claude",nivel:2,n:"Claude Avanzado",d:"Crea skills para las tareas que repites, usa Claude dentro de Excel, Word y el correo, y deja tareas funcionando solas en el navegador."},
+  {t:"herr",herr:"claude",nivel:3,n:"Agentes con Claude",d:"Diseña agentes que hacen trabajos completos con las herramientas de tu empresa y monta uno propio sobre un proceso real."},
+  {t:"herr",herr:"chatgpt",nivel:1,n:"Fundamentos de ChatGPT",d:"Escribe buenos prompts, configura la memoria y trabaja con proyectos y conectores para usar ChatGPT con seguridad cada día.",dest:1},
+  {t:"herr",herr:"chatgpt",nivel:2,n:"ChatGPT en profundidad",d:"Crea GPTs a medida para tu equipo, programa tareas que se hacen solas y lleva ChatGPT a tus documentos y a tu correo."},
+  {t:"herr",herr:"chatgpt",nivel:3,n:"Agentes con ChatGPT",d:"Usa el agente de ChatGPT para trabajos de varios pasos, construye miniaplicaciones con Canvas y termina con un proyecto propio."},
+  {t:"herr",herr:"microsoft",nivel:1,n:"Microsoft 365 Copilot desde cero",d:"Saca partido a Copilot Chat, incluso sin licencia: buenos prompts, Notebooks y conectores con los documentos de tu empresa.",dest:1},
+  {t:"herr",herr:"microsoft",nivel:2,n:"Copilot en tus apps de Microsoft 365",d:"Usa Copilot dentro de Word, Excel, PowerPoint y Outlook para redactar, analizar datos, preparar presentaciones y gestionar el correo."},
+  {t:"herr",herr:"microsoft",nivel:3,n:"Agentes en Microsoft 365 Copilot",d:"Crea agentes que trabajan con la información de Microsoft 365 y aplícalos a un proceso real de tu empresa."},
+  {t:"herr",herr:"gemini",nivel:1,n:"Introducción a Gemini",d:"Empieza con Gemini en Google Workspace: buenos prompts, proyectos y conexión con tus documentos de Drive."},
+  {t:"herr",herr:"gemini",nivel:2,n:"Gemini práctico",d:"Crea Gems para tus tareas habituales y usa Gemini en Gmail, Docs y Sheets para quitarte trabajo repetitivo."},
+  {t:"herr",herr:"gemini",nivel:3,n:"Agentes con Gemini",d:"Construye miniaplicaciones y agentes con Gemini y aplícalos a un proceso real con un proyecto propio."}
+];
+const BGN=["p3","p2","p5"];
+CURSOS.forEach(x=>{
+  x.slug=slug(x.n);
+  if(x.t==="herr"){Object.assign(x,{tool:HERR[x.herr].logo,ico:"i-chat",bg:BGN[x.nivel-1],et:`Nivel ${x.nivel} de 3`,dir:1,pre:1,cam:x.nivel<3?1:0});}
 });
-CURSOS.push({t:"curso",herr:"general",tool:"direccion",ico:"i-boss",bg:"p2",n:"IA para dirección",et:"Para dirección",d:"Por dónde empezar, coste y retorno, y la política de uso interna",h:8,hc:0,dir:0,ic:1});
-CURSOS.forEach(x=>x.slug=slug(x.n));
 
 function logosTile(x){
   if(!x.tools) return logoTile(x.tool,x.ico);
@@ -1384,31 +1396,30 @@ function logoFallo(img){
 document.querySelectorAll('.constelacion [data-tool]').forEach(el=>{el.querySelector('.logo-tile').outerHTML=logoTile(el.dataset.tool,el.dataset.ico);});
 
 const catalogo=document.getElementById('catalogo'), sidebar=document.getElementById('sidebar');
-let tipo='curso', herr='general';
+let tipo='general', herr='claude';
 function tarjeta(x){
-  const mods=[x.dir&&"En directo",x.ic&&"Presencial",x.hc&&"Campus"].filter(Boolean).map(m=>`<span class="tag">${m}</span>`).join('');
-  const medidor=x.nivel?`<img class="medalla" src="assets/3d/medalla-${x.nivel}.png" alt="Nivel ${x.nivel} de 3">`:'';
+  const mods=[x.dir&&"En directo",x.pre&&"Presencial",x.cam&&"Campus"].filter(Boolean).map(m=>`<span class="tag">${m}</span>`).join('');
+  const medalla=x.nivel?`<img class="medalla" src="assets/3d/medalla-${x.nivel}.png" alt="">`:'';
   return `<a href="${url(x)}" class="curso" style="background:var(--${x.bg})">
-      <div class="cab">${logosTile(x)}<div class="tit"><span class="et">${x.et}${medidor}</span><h4>${x.n}</h4></div></div>
+      <div class="cab">${logosTile(x)}<div class="tit"><span class="et">${x.et}${medalla}</span><h4>${x.n}</h4></div></div>
       <p class="que">${x.d}</p>
       <div class="tags">${mods}</div>
       <span class="ver"><svg class="i"><use href="#i-arrow"/></svg></span></a>`;
 }
 function pintar(){
-  const delTipo=CURSOS.filter(x=>x.t===tipo);
+  sidebar.style.display=tipo==='herr'?'':'none';
   sidebar.innerHTML=Object.keys(HERR).map(k=>{
-    const n=delTipo.filter(x=>x.herr===k).length;
-    const ic=k==='general'?'<svg class="i"><use href="#i-grid"/></svg>':`<img src="assets/herramientas/${HERR[k].logo}.${k==='claude'?'svg':'png'}" alt="">`;
-    return `<button data-h="${k}" class="${herr===k?'activo':''}"><span class="ic">${ic}</span>${HERR[k].n}<span class="n">${n}</span></button>`;}).join('');
-  const lista=delTipo.filter(x=>x.herr===herr);
-  catalogo.innerHTML=(lista.map(tarjeta).join('')||'<p class="vacio">Pronto habrá cursos con esta herramienta.</p>');
+    const ic=`<img src="assets/herramientas/${HERR[k].logo}.${k==='claude'?'svg':'png'}" alt="">`;
+    return `<button data-h="${k}" class="${herr===k?'activo':''}"><span class="ic">${ic}</span>${HERR[k].n}</button>`;}).join('');
+  const lista=CURSOS.filter(x=>x.t===tipo&&(tipo==='general'||x.herr===herr));
+  catalogo.innerHTML=lista.map(tarjeta).join('');
 }
 function elegir(t,h){
-  if(t){tipo=t;document.querySelectorAll('.tabs button').forEach(o=>o.setAttribute('aria-selected',o.dataset.tipo===t));}
+  if(t){tipo=t;document.querySelectorAll('.lado .tabs button').forEach(o=>o.setAttribute('aria-selected',o.dataset.tipo===t));}
   if(h) herr=h;
   pintar();
 }
-document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>elegir(b.dataset.tipo)));
+document.querySelectorAll('.lado .tabs button').forEach(b=>b.addEventListener('click',()=>elegir(b.dataset.tipo)));
 sidebar.addEventListener('click',e=>{const b=e.target.closest('button');if(b)elegir(null,b.dataset.h);});
 document.querySelectorAll('[data-ir]').forEach(a=>a.addEventListener('click',()=>{elegir(a.dataset.ir,a.dataset.herr);document.body.classList.remove('menu-abierto');}));
 pintar();
