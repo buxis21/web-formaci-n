@@ -19,6 +19,7 @@ CONVOCATORIA = 'Desde el 11 de enero de 2027'
 # ---------------------------------------------------------------- herramientas
 HERR = {
     'claude': dict(
+        m_apps='Skills y Claude en tus apps', m_autom='Automatizaciones y Claude en Chrome', m_mini='Artefactos y mini aplicaciones',
         nombre='Claude', logo='claude.svg', foto='incompany-claude.jpg', foto_alt='Formación de Claude con el equipo de una empresa',
         reutil='skills', reutil_larga='skills: instrucciones que Claude reutiliza siempre que las necesita',
         apps='Claude en Excel, Word y correo', autom='tareas programadas y automatizaciones en el navegador',
@@ -28,6 +29,7 @@ HERR = {
         cuenta2='Claude Pro, Team o Enterprise',
         nombres=['Claude Esencial', 'Claude Avanzado', 'Claude Completo']),
     'chatgpt': dict(
+        m_apps='GPTs y ChatGPT en tus apps', m_autom='Tareas programadas y ChatGPT en el navegador', m_mini='Canvas y mini aplicaciones',
         nombre='ChatGPT', logo='chatgpt.png', foto='incompany-chatgpt.jpg', foto_alt='Formación de ChatGPT con el equipo de una empresa',
         reutil='GPTs a medida', reutil_larga='GPTs a medida: asistentes con tus instrucciones y tus documentos',
         apps='ChatGPT con tus documentos y tu correo', autom='tareas programadas',
@@ -37,6 +39,7 @@ HERR = {
         cuenta2='ChatGPT Plus, Team o Enterprise',
         nombres=['Fundamentos de ChatGPT', 'ChatGPT en profundidad', 'ChatGPT de cero a experto']),
     'microsoft': dict(
+        m_apps='Prompts guardados y Copilot en tus apps', m_autom='Automatizaciones con Microsoft 365', m_mini='Documentos y páginas con Copilot',
         nombre='Microsoft 365 Copilot', logo='copilot.png', foto='aula-practica.jpg', foto_alt='Alumnos practicando con ordenadores durante una formación',
         reutil='prompts guardados', reutil_larga='prompts guardados para no repetir instrucciones',
         apps='Copilot en Word, Excel, PowerPoint, Outlook y Teams', autom='automatizaciones con Microsoft 365',
@@ -46,6 +49,7 @@ HERR = {
         cuenta2='la licencia de Microsoft 365 Copilot. Desde el 15 de abril de 2026, sin ella no hay Copilot dentro de Word, Excel, PowerPoint ni OneNote',
         nombres=['Microsoft 365 Copilot desde cero', 'Copilot en tus apps de Microsoft 365', 'Microsoft 365 Copilot completo']),
     'gemini': dict(
+        m_apps='Gems y Gemini en tus apps', m_autom='Automatizaciones con Google Workspace', m_mini='Canvas y mini aplicaciones',
         nombre='Gemini', logo='gemini.png', foto='grupo-abierto.jpg', foto_alt='Alumnos practicando con sus portátiles durante una formación',
         reutil='Gems', reutil_larga='Gems: asistentes con tus instrucciones para las tareas que repites',
         apps='Gemini en Gmail, Docs y Sheets', autom='automatizaciones con Google Workspace',
@@ -90,37 +94,51 @@ def mod_legal():
 
 cap = lambda t: t[0].upper() + t[1:]
 
+# Estructura de los tres niveles (documento «Formación in-company», apartado 1.2):
+# Nivel 1 = Ready (8 h) · Nivel 2 = Build (incluye Ready, 17 h por persona) · Nivel 3 = Agents (incluye Build, 22,5 h por persona).
+# Los talleres son de 1,5 h por persona (en empresa, 3 grupos por área de 1,5 h). La sesión de cierre va al final del nivel contratado.
 def temario_n1(k):
     H = HERR[k]
-    return [mod_intro(),
-            M(f'Conocemos {H["nombre"]}', 'Ecosistema, configuración y memoria', 2,
-              [cap(H['ecosistema']), 'Configurarla para tu trabajo: instrucciones personalizadas y memoria', 'Qué versión y qué cuenta necesitas']),
-            mod_legal(),
+    return [M('Introducción a la IA', 'AI first y prompting', 2,
+              ['Qué es la IA generativa, cómo funciona y dónde se equivoca', 'Mentalidad AI first: qué tareas puedes pasarle',
+               'Prompting: cómo pedirle las cosas para que responda bien'], comun=True, llevas='Una forma de pedir que funciona.'),
+            M(f'Conocemos {H["nombre"]}', 'Ecosistema y configuración', 2,
+              [f'El ecosistema completo: {H["ecosistema"]}', 'Configuración, preferencias, estilos y memoria',
+               'De menos a más: chat, investigación y trabajo con tus archivos'], llevas='La herramienta configurada.'),
+            M('IA segura y legal', 'AI Act (art. 4) y RGPD', 2,
+              ['El AI Act en sencillo y el artículo 4', 'RGPD y semáforo de datos: qué puedes compartir y qué no',
+               'Configuración segura y cómo revisar lo que sale'], comun=True, llevas='La alfabetización del art. 4 cumplida.'),
             M('Cómo la usamos', 'Proyectos y conectores', 2,
-              ['Proyectos: tu contexto y tus documentos siempre a mano', 'Conectores con tu correo, tus archivos y tu calendario',
-               'El caso de ejemplo: preparar una oferta a partir del correo de un cliente']),
-            M('Práctica con tu caso', 'Dos sesiones con tus tareas', 4,
-              ['Eliges tareas reales de tu trabajo', 'Las resolvemos con la herramienta, paso a paso', 'Dejas un proyecto con tu caso funcionando'])]
+              ['Un proyecto con tus archivos e instrucciones', 'Conectores con tu correo, tu calendario y tus documentos',
+               'Dos o tres casos reales de tu trabajo dentro'], llevas='Un proyecto con tus casos funcionando.')]
 
-def temario_n2(k):
+def temario_n2(k, cierre=True):
     H = HERR[k]
-    return [M('Instrucciones reutilizables', cap(H['reutil']), 2, [cap(H['reutil_larga']), 'Cuándo merece la pena crear una', 'Crear la primera con tu caso']),
-            M('La IA dentro de tus apps', H['apps'], 2, [H['apps'], 'Trabajar sobre tus propios archivos sin copiar y pegar']),
-            M('Automatizaciones y la IA en el navegador', 'Que las tareas se hagan solas', 2,
-              [cap(H['autom']), 'La IA en el navegador: buscar, comparar y rellenar', 'Qué automatizar y qué no']),
-            M('Práctica 1: tus tareas repetidas', 'Con tus instrucciones reutilizables', 4, ['Detectas las tareas que repites cada semana', 'Creas tus instrucciones reutilizables para ellas']),
-            M('Práctica 2: una tarea automatizada', 'De principio a fin', 4, ['Eliges una tarea de tu trabajo', 'La dejas automatizada y la pruebas con casos reales']),
-            M('Cierre y certificado', 'Repaso y próximos pasos', 2, ['Presentas lo que has montado', 'Plan para seguir usándolo en tu día a día'])]
+    mods = [M(H['m_apps'], 'Instrucciones reutilizables y la IA en tus aplicaciones', 2,
+              [f'Las tareas que repites pasan a ser {H["reutil"]}', H['apps']], llevas=f'Tus {H["reutil"]} creadas.'),
+            M(H['m_autom'], 'Que las tareas se hagan solas', 2,
+              [cap(H['autom']), 'Por ejemplo, un informe que se prepara solo cada lunes', 'La IA trabajando en webs por ti'], llevas='Una tarea programada funcionando.'),
+            M('Taller práctico 1', 'Tus tareas repetidas, con tu caso', 1.5,
+              ['En grupo por área (administración, comercial, técnicos…)', f'Cada persona convierte sus tareas repetidas en {H["reutil"]}'], llevas='Las instrucciones de tu puesto.'),
+            M('Taller práctico 2', 'Una tarea automatizada', 1.5,
+              ['Cada área deja una tarea automatizada funcionando', 'Con un proceso real de su trabajo'], llevas='Una automatización en tu área.')]
+    if cierre:
+        mods.append(M('Sesión de cierre', 'Todo el grupo junto', 2,
+              ['Cada área enseña lo que ha montado', 'Repasamos las horas ahorradas y fijamos el plan de los próximos meses', 'Entrega de certificados'], llevas='Un plan para los próximos meses.'))
+    return mods
 
 def temario_n3(k):
     H = HERR[k]
-    return [M('La IA por dentro', 'Modelos, contexto y fiabilidad', 2, ['Qué modelo usar para cada tarea', 'Cómo gestiona el contexto y dónde se equivoca', 'Cómo comprobar que un resultado es fiable']),
-            M('Instrucciones y contexto avanzados', 'Resultados que no dependen de la suerte', 2, ['Instrucciones largas y bien estructuradas', 'Documentos de referencia y ejemplos']),
-            M('Artefactos y miniaplicaciones', cap(H['mini']), 2, ['Pequeñas herramientas a partir de un Excel o una plantilla', 'Compartirlas con quien las necesita']),
-            M('Agentes: todas las piezas juntas', cap(H['agentes']), 2, ['Qué es un agente y cuándo tiene sentido', 'Instrucciones, conectores y automatizaciones trabajando juntos']),
-            M('Compartir con el equipo', 'Que no dependa de una sola persona', 2, ['Documentar lo que has montado', 'Permisos, revisiones y mantenimiento']),
-            M('Proyecto propio con 4 seguimientos', 'Un proceso real de tu trabajo', 8, ['Eliges un proceso de tu trabajo', 'Cuatro sesiones de seguimiento de 2 h', 'Lo dejas funcionando en el día a día']),
-            M('Presentación final y certificado', 'Enseñas tu agente', 2, ['Presentas tu agente al grupo', 'Mejoras y próximos pasos'])]
+    return [M(H['m_mini'], 'Pequeñas herramientas para el equipo', 2,
+              ['Documentos y visuales al momento', 'Pequeñas herramientas: una calculadora de ofertas, un formulario de incidencias o un panel a partir de un Excel',
+               'Cómo compartirlas con el equipo'], llevas='Una mini app para tu equipo.'),
+            M('Agentes avanzados', 'Todas las piezas juntas', 2,
+              ['El proyecto del nivel 1 evoluciona a agente', f'Instrucciones completas, {H["reutil"]}, conectores y tareas programadas trabajando juntos',
+               'Un agente que hace un trabajo de principio a fin'], llevas='Tu agente diseñado.'),
+            M('Taller práctico 3', 'Tu agente en marcha', 1.5,
+              ['Cada área convierte su proyecto en un agente', 'Lo pone a trabajar con nosotros al lado'], llevas='El agente en uso en tu área.'),
+            M('Sesión de cierre', 'Todo el grupo junto', 2,
+              ['Cada área enseña lo que ha montado', 'Repasamos las horas ahorradas y fijamos el plan de los próximos meses', 'Entrega de certificados'], llevas='Un plan para los próximos meses.')]
 
 def con_grupo(mods, grupo):
     out = [dict(m) for m in mods]; out[0]['grupo'] = grupo; return out
@@ -315,27 +333,28 @@ add(n='IA y cumplimiento normativo', t='general', herr='general', et='Formación
     sig=['ia-para-direccion', 'alfabetizacion-en-ia', 'prompting-eficaz', 'claude-esencial'])
 
 # ======================= POR HERRAMIENTA =======================
-HORAS_NIVEL = [12, 28, 48]   # el nivel 2 incluye el 1; el nivel 3 es el curso completo
+HORAS_NIVEL = [8, 17, 22.5]   # horas por persona: Ready, Build (incluye Ready) y Agents (incluye Build)
 for k in ORDEN_HERR:
     H = HERR[k]; N = H['nombre']; NOM = H['nombres']; es_c = (k == 'claude')
-    t1, t2, t3 = temario_n1(k), temario_n2(k), temario_n3(k)
+    t1, t2, t2sc, t3 = temario_n1(k), temario_n2(k), temario_n2(k, cierre=False), temario_n3(k)
     camp = 'build' if es_c else None
     # Nivel 1
-    add(n=NOM[0], t='herr', herr=k, nivel=1, et=f'{N} · Nivel 1 · Para empezar', ficha_et='Nivel 1 · Para empezar',
-        sub=f'Empieza a usar {N} en tu trabajo', h=12, hc=(25 if es_c else 'pronto'), campus=camp, art4=True, ico='i-chat', bg='p3',
+    add(n=NOM[0], t='herr', herr=k, nivel=1, et=f'{N} · Nivel 1 · Para empezar', ficha_et='Nivel 1 · Ready · Para empezar',
+        dur_dir='8 h · 4 sesiones de 2 h', dur_ic='2 días de 4 h presenciales o 4 sesiones de 2 h online',
+        sub=f'Empieza a usar {N} en tu trabajo', h=8, hc=(25 if es_c else 'pronto'), campus=camp, art4=True, ico='i-chat', bg='p3',
         p={'claude': ['Prompting y configuración', 'Proyectos y memoria', 'Conectores con tus herramientas'],
            'chatgpt': ['Prompting y configuración', 'Proyectos y memoria', 'Conectores con tus herramientas'],
            'microsoft': ['Copilot Chat, también sin licencia', 'Prompting y Notebooks', 'Documentos de tu empresa'],
            'gemini': ['Prompting y configuración', 'Gemini en Google Workspace', 'Conexión con Drive']}[k],
         lead=f'Empieza a usar {N} en tu trabajo, bien configurado y con tus casos.',
-        intro='Aprendes a pedirle las cosas, lo configuras con tu forma de trabajar, organizas tus proyectos y lo conectas a tu correo y tus documentos. Acabas con un proyecto tuyo funcionando.',
+        intro='Cuatro módulos de 2 h: introducción a la IA y prompting, la herramienta configurada, IA segura y legal, y proyectos con conectores. Acabas con un proyecto con tus casos funcionando y el certificado del artículo 4.',
         h2_porque=(f'{N} configurado', 'para tu trabajo'),
         porque=f'Un curso práctico para pasar de hacerle preguntas sueltas a {N} a tenerlo configurado y trabajando con tus documentos.',
         lista=['<b>Prompting:</b> cómo pedirle las cosas para que responda bien a la primera.',
                f'<b>Configuración y memoria:</b> {N} adaptado a tu forma de trabajar.',
                '<b>Proyectos y conectores:</b> tu contexto, tus archivos, tu correo y tu calendario.',
                '<b>IA segura y legal:</b> el artículo 4 del Reglamento Europeo de IA y el RGPD.'],
-        sale='La herramienta configurada y un proyecto con tu caso funcionando.',
+        sale='La herramienta configurada, un proyecto con tus casos funcionando y la alfabetización del art. 4 cumplida.',
         pq=[('i-compass', f'Si empiezas con {N}', 'O lo usas de vez en cuando y quieres sacarle partido.'),
             ('i-building', f'Si tu empresa trabaja con {N}', 'Y el equipo tiene que usarlo bien y con seguridad.'),
             ('i-shield', 'Si necesitas acreditarlo', 'Incluye el bloque de IA segura y legal del artículo 4.')],
@@ -343,51 +362,53 @@ for k in ORDEN_HERR:
         cuenta=f'Necesitas {H["cuenta1"]}.', temario=t1, cta=(f'Empieza a trabajar con {N}', 'desde el primer día'),
         sig=[slug(NOM[1]), slug(NOM[2])] + (['copilot-studio'] if k == 'microsoft' else []) + ['prompting-eficaz', 'documentos-y-presentaciones-con-ia'])
     # Nivel 2 (incluye el 1)
-    add(n=NOM[1], t='herr', herr=k, nivel=2, et=f'{N} · Nivel 2 · Incluye nivel 1', ficha_et='Nivel 2 · Incluye nivel 1',
-        sub=f'Que {N} te haga tareas enteras', h=28, hc=(25 if es_c else 'pronto'), campus=camp, art4=True, ico='i-chat', bg='p2',
+    add(n=NOM[1], t='herr', herr=k, nivel=2, et=f'{N} · Nivel 2 · Incluye nivel 1', ficha_et='Nivel 2 · Build · Incluye nivel 1',
+        dur_dir='17 h por persona · teoría en sesiones de 2 h y talleres de 1,5 h', dur_ic='6 días: 17 h por persona (23 h de formador, talleres en 3 grupos por área)',
+        sub=f'Que {N} te haga tareas enteras', h=17, hc=(25 if es_c else 'pronto'), campus=camp, art4=True, ico='i-chat', bg='p2',
         p={'claude': ['Todo lo del nivel 1', 'Skills y Claude en Excel, Word y correo', 'Automatizaciones en el navegador'],
            'chatgpt': ['Todo lo del nivel 1', 'GPTs a medida y tareas programadas', 'ChatGPT en documentos y correo'],
            'microsoft': ['Todo lo del nivel 1', 'Copilot en Word, Excel y PowerPoint', 'Outlook y Teams'],
            'gemini': ['Todo lo del nivel 1', 'Gems para tareas repetidas', 'Gmail, Docs, Sheets y automatizaciones']}[k],
         lead=f'Todo lo del nivel 1 y, además, que {N} te haga tareas enteras.',
-        intro=f'Empiezas por la base (prompting, configuración, proyectos y conectores) y sigues con tus {H["reutil"]}, la IA dentro de tus apps y las tareas que se hacen solas. Acabas con tus instrucciones reutilizables y una tarea automatizada.',
+        intro=f'Todo el nivel 1 y, además, {H["m_apps"].lower()}, {H["m_autom"].lower()}, dos talleres prácticos por área con vuestros casos y una sesión de cierre. Acabas con tus {H["reutil"]} y una tarea automatizada funcionando.',
         h2_porque=('De pedirle cosas', 'a que trabaje por ti'),
         porque=f'Si ya sabes que vas a usar {N} cada día, este curso junta los niveles 1 y 2: la base bien hecha y, encima, las funciones que te ahorran horas.',
         lista=['<b>Todo lo del nivel 1:</b> prompting, configuración, proyectos, conectores e IA segura y legal.',
                f'<b>Instrucciones reutilizables:</b> {H["reutil_larga"]}.',
                f'<b>La IA dentro de tus apps:</b> {H["apps"]}.',
-               f'<b>Automatizaciones:</b> {H["autom"]}.'],
-        sale='La herramienta configurada, tus instrucciones reutilizables y una tarea que se hace sola.',
+               f'<b>Automatizaciones:</b> {H["autom"]}.',
+               '<b>Dos talleres prácticos</b> por área con vuestros casos y una sesión de cierre.'],
+        sale='Tus instrucciones reutilizables, una tarea automatizada funcionando y un plan para los próximos meses.',
         pq=[('i-refresh', 'Si repites las mismas tareas', 'Correos, informes o documentos que haces cada semana.'),
             ('i-bolt', 'Si quieres automatizar', 'Sin programar y con las herramientas que ya tienes.'),
             ('i-building', 'Si tu equipo va a usarlo a diario', 'Y quiere la base y el siguiente paso de una vez.')],
         chip_foto=[('i-bolt', 'Tareas que se hacen solas', 'Automatizaciones'), ('i-doc', cap(H['reutil']), 'Instrucciones reutilizables')],
         cuenta=f'Para el nivel 1 te vale {H["cuenta1"].split(":")[0] if ":" in H["cuenta1"] else H["cuenta1"]}; para la parte del nivel 2 necesitas {H["cuenta2"]}.',
-        temario=con_grupo(t1, f'Nivel 1 · {NOM[0]} · 12 h') + con_grupo(t2, 'Nivel 2 · 16 h'),
+        temario=con_grupo(t1, f'Nivel 1 · Ready · {NOM[0]} · 8 h') + con_grupo(t2, 'Nivel 2 · Build · 9 h'),
         cta=(f'Que {N} haga', 'tareas enteras'),
         sig=[slug(NOM[2])] + (['copilot-studio'] if k == 'microsoft' else []) + ['documentos-y-presentaciones-con-ia', 'investigacion-y-analisis-con-ia', 'prompting-eficaz'])
     # Nivel 3 (curso completo)
-    add(n=NOM[2], t='herr', herr=k, nivel=3, completo=True, et=f'{N} · Nivel 3 · Curso completo', ficha_et='Nivel 3 · Curso completo',
-        sub='De cero a tu propio agente funcionando', h=48, art4=True, ico='i-robot', bg='p5',
-        p={'claude': ['Todo lo de los niveles 1 y 2', 'Artefactos y miniaplicaciones', 'Agentes y proyecto propio'],
-           'chatgpt': ['Todo lo de los niveles 1 y 2', 'Canvas y miniaplicaciones', 'Agentes y proyecto propio'],
-           'microsoft': ['Todo lo de los niveles 1 y 2', 'Agentes en Microsoft 365 Copilot', 'Proyecto propio con seguimiento'],
-           'gemini': ['Todo lo de los niveles 1 y 2', 'Miniaplicaciones', 'Agentes y proyecto propio']}[k],
+    add(n=NOM[2], t='herr', herr=k, nivel=3, completo=True, et=f'{N} · Nivel 3 · Curso completo', ficha_et='Nivel 3 · Agents · Curso completo',
+        dur_dir='22,5 h por persona · teoría en sesiones de 2 h y talleres de 1,5 h', dur_ic='8 días + 1 h con dirección: 22,5 h por persona (31,5 h de formador)',
+        sub='De cero a tu propio agente funcionando', h=22.5, art4=True, ico='i-robot', bg='p5',
+        p={'claude': ['Todo lo de los niveles 1 y 2', 'Artefactos y mini aplicaciones', 'Agentes y tres talleres prácticos'],
+           'chatgpt': ['Todo lo de los niveles 1 y 2', 'Canvas y mini aplicaciones', 'Agentes y tres talleres prácticos'],
+           'microsoft': ['Todo lo de los niveles 1 y 2', 'Documentos y páginas con Copilot', 'Agentes y tres talleres prácticos'],
+           'gemini': ['Todo lo de los niveles 1 y 2', 'Canvas y mini aplicaciones', 'Agentes y tres talleres prácticos']}[k],
         lead=f'El curso completo de {N}: de la base a tu propio agente funcionando.',
-        intro=f'Incluye los niveles 1 y 2 y, además, la IA por dentro, contexto avanzado, {H["mini"]} y agentes. Acabas con un agente propio funcionando en un proceso real, con cuatro sesiones de seguimiento.',
+        intro=f'Incluye los niveles 1 y 2 y, además, {H["m_mini"].lower()}, agentes avanzados y un tercer taller en el que cada área pone su agente a trabajar. En empresa, se añade una sesión de 1 h con dirección para fijar los siguientes pasos.',
         h2_porque=('Todo el recorrido', 'en un solo curso'),
-        porque='Lo que en Westlabs montamos como proyecto para empresas, aquí aprendes a montarlo tú, desde la base y con seguimiento hasta que funciona.',
+        porque='El nivel más completo: la base bien hecha, las automatizaciones y, encima, un agente que hace un trabajo de principio a fin en cada área.',
         lista=['<b>Niveles 1 y 2:</b> configuración, proyectos, conectores, instrucciones reutilizables y automatizaciones.',
-               '<b>La IA por dentro:</b> modelos, contexto y fiabilidad.',
                f'<b>{cap(H["mini"])} y agentes:</b> todas las piezas juntas, con {H["agentes"]}.',
-               '<b>Proyecto propio con 4 seguimientos</b> y presentación final.'],
+               '<b>Tres talleres prácticos</b> por área y una sesión de cierre. En empresa, también una sesión con dirección.'],
         sale='Un agente propio funcionando en un proceso real de tu trabajo.',
         pq=[('i-robot', 'Si quieres montar un agente', 'Que haga un proceso de tu trabajo de principio a fin.'),
             ('i-tools', 'Si quieres tus propias herramientas', 'Miniaplicaciones hechas a tu medida.'),
             ('i-rocket', f'Si quieres dominar {N}', 'De cero a experto en un solo curso.')],
-        chip_foto=[('i-robot', 'Agente propio', 'En un proceso real'), ('i-target', '4 seguimientos', 'Hasta que funciona')],
+        chip_foto=[('i-robot', 'Agente propio', 'En un proceso real'), ('i-target', '3 talleres', 'Con vuestros casos')],
         cuenta=f'Necesitas {H["cuenta2"]}.',
-        temario=con_grupo(t1, f'Nivel 1 · {NOM[0]} · 12 h') + con_grupo(t2, 'Nivel 2 · 16 h') + con_grupo(t3, 'Nivel 3 · 20 h'),
+        temario=con_grupo(t1, f'Nivel 1 · Ready · {NOM[0]} · 8 h') + con_grupo(t2sc, f'Nivel 2 · Build · {NOM[1]} · 7 h') + con_grupo(t3, 'Nivel 3 · Agents · 7,5 h'),
         cta=('Monta tu propio agente', f'con {N}'),
         sig=(['copilot-studio'] if k == 'microsoft' else []) + ['ia-para-direccion', 'ia-y-cumplimiento-normativo', 'investigacion-y-analisis-con-ia', 'documentos-y-presentaciones-con-ia'])
 

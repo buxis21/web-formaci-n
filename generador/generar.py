@@ -251,7 +251,7 @@ def modalidades(c):
           <h3>Grupo abierto</h3>
           <p class="mf-desc">Clases por videollamada con alumnos de varias empresas. Ideal si eres una persona o sois pocas.</p>
           <dl class="ficha">
-            <div><dt>Duración</dt><dd>{horas(c['h'])} · {ses} sesiones de 2 h</dd></div>
+            <div><dt>Duración</dt><dd>{c.get('dur_dir') or horas(c['h']) + ' · ' + str(ses) + ' sesiones de 2 h'}</dd></div>
             <div><dt>Fechas</dt><dd>{'Fijas · ' + CONVOCATORIA.lower() if anunciada else 'Fijas · por confirmar'}</dd></div>
             <div><dt>Grupo</dt><dd>Reducido, de varias empresas</dd></div>
             <div><dt>Casos</dt><dd>Los tuyos, corregidos en clase</dd></div>
@@ -268,7 +268,7 @@ def modalidades(c):
           <h3>Solo tu equipo</h3>
           <p class="mf-desc">Un grupo cerrado para tu empresa, por videollamada o en vuestras oficinas, con vuestros casos.</p>
           <dl class="ficha">
-            <div><dt>Duración</dt><dd>{horas(c['h'])} · sesiones de 2 h online o {jor_txt}</dd></div>
+            <div><dt>Duración</dt><dd>{c.get('dur_ic') or horas(c['h']) + ' · sesiones de 2 h online o ' + jor_txt}</dd></div>
             <div><dt>Fechas</dt><dd>Las que os vayan bien</dd></div>
             <div><dt>Grupo</dt><dd>Solo personas de tu empresa</dd></div>
             <div><dt>Casos</dt><dd>Preparados en una consultoría previa</dd></div>

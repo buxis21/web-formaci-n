@@ -95,7 +95,10 @@ Esto sobrescribe todas las fichas de `cursos/` y actualiza `MAPA-WEB.md`. No edi
 ### Cursos del catálogo
 
 - **Formación general:** Alfabetización en IA, Prompting eficaz, Investigación y análisis con IA, Documentos y presentaciones con IA, IA para dirección, IA y cumplimiento normativo.
-- **Por herramienta** (niveles acumulativos; el nivel 3 es el curso completo):
+- **Por herramienta**: los tres niveles siguen la estructura del documento «Formación in-company» (Ready, Build y Agents). Cada nivel incluye el anterior:
+  - Nivel 1 · Ready · 8 h: Introducción a la IA, Conocemos la herramienta, IA segura y legal, Cómo la usamos.
+  - Nivel 2 · Build · 17 h por persona: + instrucciones reutilizables y la IA en tus apps, automatizaciones, 2 talleres por área de 1,5 h y sesión de cierre.
+  - Nivel 3 · Agents · 22,5 h por persona: + artefactos y mini aplicaciones, agentes avanzados, taller 3 y sesión de cierre (en empresa, también 1 h con dirección).
   - Claude: Claude Esencial, Claude Avanzado, Claude Completo.
   - ChatGPT: Fundamentos de ChatGPT, ChatGPT en profundidad, ChatGPT de cero a experto.
   - Microsoft: Microsoft 365 Copilot desde cero, Copilot en tus apps de Microsoft 365, Microsoft 365 Copilot completo, y Copilot Studio como complemento.
@@ -122,7 +125,7 @@ Del catálogo, para que todas las páginas digan lo mismo:
 - [ ] Probar un envío real de los formularios en la web publicada
 - [ ] Enlaces de pago de Stripe para Ready (119 €) y Build (349 €) en el botón «Matricúlate»
 - [ ] Precio por persona de la modalidad online en directo (ahora sale «por confirmar»)
-- [ ] Revisar los temarios de las fichas: los de los cursos nuevos (Prompting eficaz, Investigación y análisis, Documentos y presentaciones, IA y cumplimiento normativo) y las horas de los niveles acumulados no están en el catálogo en PDF
+- [ ] Revisar los temarios de los cursos nuevos de formación general (Prompting eficaz, Investigación y análisis, Documentos y presentaciones, IA y cumplimiento normativo): no están en el catálogo en PDF
 - [ ] Campus de ChatGPT, Microsoft y Gemini (niveles 1 y 2): la portada los marca con campus; las fichas dicen «próximamente»
 - [ ] Revisión de las páginas legales por el abogado
 - [ ] Tipografía AllRoundGothic en `assets/fonts/` (ahora los títulos salen en Poppins)
