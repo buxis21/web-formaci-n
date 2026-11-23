@@ -245,3 +245,6 @@ footer .foot-grid{grid-template-columns:1.6fr 1fr 1fr}
 @media (max-width:1024px){.tem-grid{grid-template-columns:1fr;gap:36px}.tem-lado{position:static}.para-quien{grid-template-columns:1fr}}
 @media (max-width:640px){.ficha div{grid-template-columns:1fr;gap:2px}.mods-nota{align-items:flex-start;text-align:left}.temario .acordeon details,.faq .acordeon details{padding:0 16px}footer .foot-grid{grid-template-columns:1fr}}
 .acordeon summary::after{flex:none}
+.form-error{margin:0;padding:10px 14px;border-radius:12px;background:#FDECEC;border:1px solid #F3C2C2;color:#A82828;font-size:13.5px;line-height:1.45}
+.form-error[hidden]{display:none}
+.form button[disabled]{opacity:.75;cursor:progress}

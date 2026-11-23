@@ -162,7 +162,7 @@
             <input type="checkbox" name="botcheck" class="sr" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="campo"><label for="e-nombre">Nombre</label><input id="e-nombre" name="nombre" autocomplete="given-name" required></div>
             <div class="campo"><label for="e-apellidos">Apellidos</label><input id="e-apellidos" name="apellidos" autocomplete="family-name" required></div>
-            <div class="campo full"><label for="e-email">Email de empresa</label><input id="e-email" name="email" type="email" autocomplete="email" placeholder="nombre@tuempresa.com" data-corporativo required></div>
+            <div class="campo full"><label for="e-email">Email</label><input id="e-email" name="email" type="email" autocomplete="email" required></div>
             <div class="campo"><label for="e-tel">Teléfono</label><input id="e-tel" name="telefono" type="tel" autocomplete="tel" required></div>
             <div class="campo"><label for="e-empresa">Empresa</label><input id="e-empresa" name="empresa" autocomplete="organization" required></div>
             <div class="campo"><label for="e-personas">Número de personas</label>
@@ -176,6 +176,7 @@
               </div></div>
             <div class="campo full"><label for="e-com">Comentarios</label><textarea id="e-com" name="comentarios" placeholder="Fechas, idioma, áreas del equipo…"></textarea></div>
             <label class="legal full"><input type="checkbox" name="privacidad" value="Aceptada" required><span>He leído y acepto la <a href="../privacidad.html">política de privacidad</a>.</span></label>
+            <p class="form-error full" role="alert" hidden></p>
             <button type="submit" class="btn btn-primario full">Solicita propuesta <svg class="i fl"><use href="#i-arrow"/></svg></button>
           </form>
           <div class="form-ok" role="status"><div class="ok">✓</div><h3>Gracias, lo tenemos</h3><p>Te escribimos para conocer a tu equipo y prepararte la propuesta.</p></div>
@@ -200,6 +201,7 @@
             <div class="campo"><label for="p-email">Email</label><input id="p-email" name="email" type="email" autocomplete="email" required></div>
             <div class="campo"><label for="p-tel">Teléfono</label><input id="p-tel" name="telefono" type="tel" autocomplete="tel" required></div>
             <label class="legal full"><input type="checkbox" name="privacidad" value="Aceptada" required><span>He leído y acepto la <a href="../privacidad.html">política de privacidad</a>.</span></label>
+            <p class="form-error full" role="alert" hidden></p>
             <button type="submit" class="btn btn-primario full">Matricúlate <svg class="i fl"><use href="#i-arrow"/></svg></button>
           </form>
           <div class="form-ok" role="status"><div class="ok">✓</div><h3>¡Ya casi está!</h3><p>Te escribimos para completar la matrícula y darte acceso.</p></div>

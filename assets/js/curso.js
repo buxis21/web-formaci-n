@@ -35,29 +35,34 @@ $$('[role="tablist"]').forEach(lista=>{
 /* Enlaces que abren una pestaña concreta: data-abre="id-del-tab" */
 $$('[data-abre]').forEach(a=>a.addEventListener('click',()=>{const t=document.getElementById(a.dataset.abre);if(t)t.click();}));
 
-/* Formularios: validación y envío.
-   Se envían a Web3Forms (data-endpoint del <form>), que manda un correo con los datos. */
-const LIBRES=/@(gmail|googlemail|hotmail|outlook|live|msn|yahoo|ymail|icloud|me|mac|aol|gmx|protonmail|proton|yandex|mail|telefonica|movistar)\./i;
+/* Formularios: se envían a Web3Forms (data-endpoint del <form>), que manda un correo con los datos.
+   Mientras envía, el botón dice «Enviando…»; si falla, sale un aviso dentro del formulario. */
 $$('form[data-form]').forEach(f=>{
-  const mail=$('input[data-corporativo]',f);
-  if(mail) mail.addEventListener('input',()=>mail.setCustomValidity(LIBRES.test(mail.value)?'Usa el email de tu empresa':''));
+  const btn=$('button[type="submit"]',f), aviso=$('.form-error',f), textoBtn=btn.innerHTML;
+  const error=msg=>{if(aviso){aviso.textContent=msg;aviso.hidden=false;}};
+  f.addEventListener('input',()=>{if(aviso)aviso.hidden=true;});
   f.addEventListener('submit',async e=>{
     e.preventDefault();
-    if(!f.reportValidity()) return;
+    if(!f.checkValidity()){f.reportValidity();error('Revisa los campos: falta alguno o no está bien escrito.');return;}
     const datos=Object.fromEntries(new FormData(f));
     if(datos.botcheck) return;            /* trampa para bots: un humano no la marca */
     delete datos.botcheck;
     datos.curso=document.body.dataset.curso||document.title; datos.formulario=f.dataset.form;
     if(datos.nombre) datos.name=`${datos.nombre} ${datos.apellidos||''}`.trim();
-    const btn=$('button[type="submit"]',f); btn.disabled=true;
+    btn.disabled=true; btn.textContent='Enviando…'; if(aviso)aviso.hidden=true;
+    const corta=new AbortController(), reloj=setTimeout(()=>corta.abort(),15000);
     try{
       if(f.dataset.endpoint){
-        const r=await fetch(f.dataset.endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(datos)});
-        const j=await r.json().catch(()=>({}));
-        if(!r.ok||j.success===false) throw new Error(j.message||r.status);
+        const r=await fetch(f.dataset.endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(datos),signal:corta.signal});
+        const res=await r.json().catch(()=>({}));
+        if(!r.ok||res.success===false) throw new Error(res.message||r.status);
       }
       f.closest('.ins-panel').classList.add('enviado');
-    }catch(err){btn.disabled=false;alert('No hemos podido enviar el formulario. Inténtalo de nuevo o escríbenos a gerard@westlabs.es');}
+      f.closest('.inscripcion').scrollIntoView({behavior:'smooth',block:'start'});
+    }catch(err){
+      btn.disabled=false; btn.innerHTML=textoBtn;
+      error('No hemos podido enviar el formulario. Inténtalo de nuevo o escríbenos a gerard@westlabs.es.');
+    }finally{clearTimeout(reloj);}
   });
 });
 /* Precio de particulares según la modalidad elegida */
