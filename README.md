@@ -8,7 +8,9 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 |---|---|
 | `index.html` | Portada con el catálogo de cursos (estilos y código dentro del propio archivo) |
 | `contacto.html` | Página de contacto con los formularios de Empresas y Particulares |
-| `cursos/` | Una página por curso (por ahora, `alfabetizacion-en-ia.html`) |
+| `cursos/` | Una ficha por cada curso de la portada (19). **Se generan solas**: no se editan a mano |
+| `generador/` | Datos de los cursos (`datos.py`), plantilla de la ficha (`generar.py`) y partes comunes de las fichas (`parciales/`) |
+| `MAPA-WEB.md` | Mapa de todas las páginas y sus conexiones (se genera solo) |
 | `aviso-legal.html`, `privacidad.html`, `cookies.html` | Páginas legales |
 | `assets/css/base.css` | Estilos comunes de toda la web |
 | `assets/css/curso.css` | Estilos de las fichas de curso |
@@ -58,9 +60,9 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 
 ## Menú, pie y enlaces
 
-- El menú y el pie son iguales en todas las páginas. Si se cambia uno, hay que cambiarlo en todas: `index.html`, `contacto.html`, `cursos/*.html` y las tres páginas legales.
+- El menú y el pie son iguales en todas las páginas. Si se cambia uno, hay que cambiarlo en `index.html`, `contacto.html`, las tres páginas legales y, para las fichas, en `generador/parciales/cabecera.html` y `pie.html` (y después generar).
 - Los enlaces del menú a una herramienta usan `index.html?h=claude#oferta` (también `general`, `chatgpt`, `microsoft` y `gemini`): abren la portada con esa pestaña del catálogo.
-- Las tarjetas de curso enlazan a su ficha si existe (lista `FICHAS` en `index.html`). Si aún no hay ficha, llevan a `contacto.html?curso=Nombre del curso`, que deja el curso ya elegido en el formulario.
+- Todas las tarjetas de curso enlazan a su ficha en `cursos/` (lista `FICHAS` en `index.html`, que ahora incluye todos los cursos). `contacto.html?curso=Nombre del curso` sigue funcionando y deja el curso ya elegido en el formulario.
 - «Empresas» lleva a la sección de empresas de la portada (`index.html#empresas`).
 - Campus: https://westlabscampus.es/login · WhatsApp y teléfono de Gerard: 636 875 779.
 
@@ -71,13 +73,24 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 - Antes de activar los enlaces reales, prueba el pago con el **modo de prueba** de Stripe.
 - Pendiente: confirmar con Santi si los precios llevan el 21 % de IVA.
 
-## Crear una ficha de curso nueva
+## Fichas de curso
 
-1. Copia `cursos/alfabetizacion-en-ia.html` con el nombre del curso (el nombre del archivo sale del nombre del curso, en minúsculas y con guiones, por ejemplo `claude-esencial.html`).
-2. Cambia los textos: título, datos del curso, temario, modalidades, precio y preguntas frecuentes.
-3. Cambia el asunto de los dos formularios (`subject`) y `data-curso` en `<body>`.
-4. Si el curso tiene precio para particulares, pon su enlace de Stripe.
-5. Añade el nombre del archivo (sin `.html`) a la lista `FICHAS` de `index.html`, para que su tarjeta enlace a la ficha.
+Las 19 fichas de `cursos/` salen de una plantilla única y de un archivo de datos: todas tienen la misma estructura que la de Alfabetización en IA y se cambian a la vez.
+
+- **Cambiar un texto, unas horas, un temario o un precio:** en `generador/datos.py`.
+- **Cambiar la estructura de la ficha** (secciones y orden): en `generador/generar.py`.
+- **Cambiar la cabecera, el pie o los iconos de las fichas:** en `generador/parciales/`.
+- **Cambiar el diseño:** en `assets/css/curso.css`.
+
+Después de cualquier cambio en `generador/`, vuelve a crear las fichas:
+
+```
+python3 generador/generar.py
+```
+
+Esto sobrescribe todas las fichas de `cursos/` y actualiza `MAPA-WEB.md`. No edites a mano los HTML de `cursos/`: el cambio se perdería la próxima vez que se generen.
+
+**Curso nuevo:** añade un bloque `add(...)` en `generador/datos.py` (copia uno parecido), genera, y añade el curso a la lista `CURSOS` del `<script>` de `index.html` con el mismo nombre.
 
 ### Cursos del catálogo
 
@@ -107,10 +120,12 @@ Del catálogo, para que todas las páginas digan lo mismo:
 
 - [ ] Crear la rama `main` y conectar Netlify
 - [ ] Probar un envío real de los formularios en la web publicada
-- [ ] Enlace de pago de Stripe para Ready (119 €) en el botón «Matricúlate»
+- [ ] Enlaces de pago de Stripe para Ready (119 €) y Build (349 €) en el botón «Matricúlate»
+- [ ] Precio por persona de la modalidad online en directo (ahora sale «por confirmar»)
+- [ ] Revisar los temarios de las fichas: los de los cursos nuevos (Prompting eficaz, Investigación y análisis, Documentos y presentaciones, IA y cumplimiento normativo) y las horas de los niveles acumulados no están en el catálogo en PDF
+- [ ] Campus de ChatGPT, Microsoft y Gemini (niveles 1 y 2): la portada los marca con campus; las fichas dicen «próximamente»
 - [ ] Revisión de las páginas legales por el abogado
 - [ ] Tipografía AllRoundGothic en `assets/fonts/` (ahora los títulos salen en Poppins)
 - [ ] Página propia de empresas (ahora el menú lleva a la sección de empresas de la portada)
 - [ ] Compartir o publicar la hoja de convocatorias para que la web pueda leerla
 - [ ] Enlace de la agenda de citas de Google Calendar para «Solicita propuesta»
-- [ ] Fichas del resto de cursos
