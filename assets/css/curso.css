@@ -85,10 +85,6 @@
 .sales-con{margin-top:6px;border-radius:20px;padding:22px 24px;background:radial-gradient(400px 200px at 100% 0%,rgba(91,200,245,.3),transparent 70%),linear-gradient(135deg,#0E1B45,#1B3F94 60%,#2563EB);color:#fff;box-shadow:0 20px 50px rgba(27,63,148,.3)}
 .sales-con b{display:block;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--celeste);font-weight:600;margin-bottom:6px}
 .sales-con p{font-size:15.5px;color:rgba(255,255,255,.9)}
-.para-quien{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
-.pq{background:var(--tinte);border-radius:18px;padding:18px 20px}
-.pq b{display:block;font-weight:500;color:var(--titulo);font-size:15.5px;margin-bottom:2px}
-.pq span{font-size:14px;color:var(--gris)}
 .foto-porque{position:relative;padding:0 0 50px 40px}
 .foto-porque figure{margin:0;border-radius:26px;overflow:hidden;box-shadow:0 30px 70px rgba(14,27,69,.25);aspect-ratio:4/3.6}
 .foto-porque img{width:100%;height:100%;object-fit:cover}
@@ -107,34 +103,9 @@
 .centro-tabs{text-align:center}
 [role="tabpanel"][hidden]{display:none}
 
-/* ---------- Modalidades del curso ---------- */
-.esp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.esp{border-radius:22px;padding:24px 22px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(150,185,255,.18);transition:transform .25s,border-color .25s}
-.esp:hover{transform:translateY(-4px);border-color:rgba(91,200,245,.5)}
-.esp .logo-tile{width:46px;height:46px;border-radius:14px;margin-bottom:16px}
-.esp h3{font-size:18px;color:#fff;margin-bottom:6px}
-.esp p{font-size:14px;color:rgba(255,255,255,.72)}
-.mod-pie{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:22px;padding:20px 24px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(150,185,255,.18)}
-.mod-pie p{color:rgba(255,255,255,.82);font-size:15px}
-.mod-pie p b{color:#fff;font-weight:500}
 
-/* ---------- Comparativa ---------- */
-.compara{background:var(--tinte)}
-.tabla-wrap{overflow-x:auto;border-radius:24px;box-shadow:0 20px 50px rgba(27,63,148,.08)}
-.tabla{width:100%;border-collapse:separate;border-spacing:0;background:#fff;min-width:720px;font-size:15px}
-.tabla th,.tabla td{padding:18px 22px;text-align:left;vertical-align:top;border-bottom:1px solid var(--linea)}
-.tabla thead th{background:linear-gradient(120deg,#0E1B45,#1B3F94 55%,#2563EB);color:#fff;font-weight:500;font-size:16px}
-.tabla thead th small{display:block;font-weight:400;font-size:12.5px;color:rgba(255,255,255,.72)}
-.tabla thead th:first-child{background:#0E1B45}
-.tabla tbody th{font-weight:500;color:var(--titulo);width:18%;background:#FAFBFE}
-.tabla td{color:var(--gris)}
-.tabla td b{color:var(--tinta);font-weight:500}
-.tabla tbody tr:last-child th,.tabla tbody tr:last-child td{border-bottom:0}
-.compara .acciones{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:30px}
 
 /* ---------- Temario ---------- */
-.temario .wrap{max-width:980px}
-.tem-cab{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:6px}
 .tem-total{font-size:14.5px;color:var(--gris)}
 .tem-total b{color:var(--titulo);font-weight:500}
 .acordeon summary .num{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--p1);color:var(--intenso);font-weight:700;font-size:15px}
@@ -147,10 +118,6 @@
 .acordeon .cuerpo li{position:relative;padding-left:22px}
 .acordeon .cuerpo li::before{content:"";position:absolute;left:4px;top:10px;width:7px;height:7px;border-radius:50%;background:var(--grad-claro)}
 .acordeon .cuerpo .entregable{margin-top:12px;font-size:14.5px;background:var(--tinte);border-radius:12px;padding:10px 14px}
-.tem-sale{margin-top:22px;border-radius:20px;padding:22px 26px;display:flex;gap:16px;align-items:flex-start;background:linear-gradient(135deg,#EEF3FC,#E3F3FB);border:1px solid rgba(59,142,245,.2)}
-.tem-sale .logo-tile{width:46px;height:46px;border-radius:14px;box-shadow:none}
-.tem-sale b{display:block;color:var(--titulo);font-weight:500}
-.tem-sale p{font-size:15px;color:var(--gris)}
 .nota{font-size:13px;color:var(--gris);margin-top:14px}
 
 /* ---------- Particulares: precio y escalera ---------- */
@@ -175,8 +142,6 @@
 .esc.e2{background:var(--g1)}
 .esc.e3{background:var(--g2)}
 .esc .aqui{position:absolute;top:22px;right:22px;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;font-weight:600;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.16);color:#fff}
-.amplia{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:center;font-size:14.5px;color:var(--gris)}
-.amplia b{color:var(--titulo);font-weight:500}
 .empresa-linea{margin-top:16px;text-align:center;font-size:15px;color:var(--gris)}
 .empresa-linea a{color:var(--intenso);font-weight:500}
 
@@ -186,13 +151,13 @@
 /* ---------- Certificado en la ficha ---------- */
 .aiact .lista-check li b{font-weight:500}
 
-@media (max-width:1100px){.datos{grid-template-columns:repeat(3,1fr)}.dato:nth-child(4)::before{display:none}.esp-grid{grid-template-columns:1fr 1fr}.siguiente .cursos{grid-template-columns:1fr 1fr}}
+@media (max-width:1100px){.datos{grid-template-columns:repeat(3,1fr)}.dato:nth-child(4)::before{display:none}.siguiente .cursos{grid-template-columns:1fr 1fr}}
 @media (max-width:1024px){.hero-curso .grid,.porque-curso .dos-col{grid-template-columns:1fr}.inscripcion{max-width:560px}.fechas,.escalones{grid-template-columns:1fr}.foto-porque{max-width:560px}}
 @media (max-width:900px){.anclas{top:80px}}
 @media (max-width:640px){
   .hero-curso{padding:120px 0 90px}
   .datos{grid-template-columns:1fr 1fr}.dato::before{display:none}.dato:last-child{grid-column:1/-1}
-  .esp-grid,.siguiente .cursos,.para-quien{grid-template-columns:1fr}
+  .siguiente .cursos{grid-template-columns:1fr}
   .form{grid-template-columns:1fr}
   .opciones.dos{grid-template-columns:1fr}
   .ins-panel{padding:18px 12px 12px}
@@ -205,3 +170,67 @@
   .anclas a.apunta{margin-left:0}
 }
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ================= Ajustes v2 ================= */
+/* Para quién: fila de tres tarjetas a todo el ancho */
+.para-quien{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.pq{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--linea);border-radius:20px;padding:22px 24px;box-shadow:0 14px 34px rgba(27,63,148,.07);transition:transform .2s,box-shadow .2s}
+.pq:hover{transform:translateY(-3px);box-shadow:0 20px 44px rgba(37,99,235,.14)}
+.pq .logo-tile{width:46px;height:46px;border-radius:14px;background:var(--p1);box-shadow:none}
+.pq b{display:block;font-weight:500;color:var(--titulo);font-size:16.5px;margin-bottom:2px}
+.pq span{font-size:14.5px;color:var(--gris)}
+.porque-curso .dos-col{align-items:center}
+.foto-porque figure{aspect-ratio:4/3.9}
+
+/* Modalidades: tres tarjetas con su ficha */
+.mods-curso{align-items:stretch}
+.mods-curso .mf-txt{display:flex;flex-direction:column;flex:1;padding:26px 26px 28px}
+.mods-curso h3{margin:4px 0 8px}
+.mf-desc{font-size:14.5px;color:rgba(255,255,255,.75);margin-bottom:16px}
+.ficha{display:grid;gap:0;margin:0 0 22px;border-top:1px solid rgba(150,185,255,.16)}
+.ficha div{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid rgba(150,185,255,.16)}
+.ficha dt{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--celeste);font-weight:600;padding-top:2px}
+.ficha dd{font-size:14.5px;color:rgba(255,255,255,.88)}
+.ficha dd b{color:#fff;font-weight:600}
+.mods-curso .btn{margin-top:auto;align-self:flex-start}
+.mods-nota{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:34px;font-size:15px;color:rgba(255,255,255,.8);text-align:center}
+.mods-nota .i{width:22px;height:22px;padding:4px;border-radius:50%;background:rgba(91,200,245,.2);color:var(--celeste);flex:none}
+
+/* Temario: dos columnas y módulos en oscuro con relieve */
+.tem-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
+.tem-lado{position:sticky;top:170px}
+.tem-lado .tabs-c{margin:26px 0 22px}
+.tem-lado .intro .comun{vertical-align:2px}
+.tem-cab{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.tem-total{font-size:14.5px;color:var(--gris)}
+.tem-total b{color:var(--titulo);font-weight:500}
+.tem-cab .faq-acciones{margin:0}
+.tem-sale{border-radius:20px;padding:20px 22px;display:flex;gap:14px;align-items:flex-start;background:linear-gradient(135deg,#EEF3FC,#E3F3FB);border:1px solid rgba(59,142,245,.2)}
+.tem-sale .logo-tile{width:44px;height:44px;border-radius:13px;box-shadow:none}
+.tem-sale b{display:block;color:var(--titulo);font-weight:500}
+.tem-sale p{font-size:14.5px;color:var(--gris)}
+.temario .acordeon{gap:14px;margin:0}
+.temario .acordeon details,.temario .acordeon details[open]{position:relative;border:1px solid rgba(150,185,255,.22);border-radius:20px;padding:0 24px;
+  background:radial-gradient(500px 160px at 100% 0%,rgba(91,200,245,.18),transparent 70%),linear-gradient(150deg,#0E1B45 0%,#16306F 60%,#1B3F94 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 6px 0 #0A1433,0 22px 40px -12px rgba(14,27,69,.6);transition:transform .2s,box-shadow .2s,border-color .2s}
+.temario .acordeon details:hover{transform:translateY(-2px);border-color:rgba(91,200,245,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 8px 0 #0A1433,0 28px 50px -12px rgba(37,99,235,.55)}
+.temario .acordeon details[open]{border-color:rgba(91,200,245,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 6px 0 #0A1433,0 0 0 4px rgba(91,200,245,.12),0 26px 50px -12px rgba(37,99,235,.55)}
+.temario .acordeon summary{color:#fff}
+.temario .acordeon summary .t small{color:rgba(255,255,255,.65)}
+.temario .acordeon summary .num{background:rgba(255,255,255,.1);color:var(--celeste);border:1px solid rgba(150,185,255,.25)}
+.temario .acordeon details[open] summary .num{background:linear-gradient(135deg,#5BC8F5,#2563EB);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(91,200,245,.4)}
+.temario .acordeon summary .hrs{background:rgba(255,255,255,.1);color:#fff}
+.temario .acordeon summary::after{background:rgba(255,255,255,.12);color:#fff}
+.temario .acordeon details[open] summary::after{background:#fff;color:var(--azul)}
+.temario .acordeon .cuerpo{color:rgba(255,255,255,.8);border-top:1px solid rgba(150,185,255,.16);padding-top:16px}
+.temario .acordeon .cuerpo b{color:#fff}
+.temario .acordeon .cuerpo li::before{background:var(--celeste)}
+.temario .acordeon .cuerpo .entregable{background:rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
+.temario .comun,.temario .acordeon .comun{background:rgba(91,200,245,.18);color:#BDEBFF}
+.tem-lado .comun{background:var(--p1);color:var(--intenso)}
+
+/* Pie: solo escuela y Westlabs */
+footer .foot-grid{grid-template-columns:1.6fr 1fr 1fr}
+
+@media (max-width:1024px){.tem-grid{grid-template-columns:1fr;gap:36px}.tem-lado{position:static}.para-quien{grid-template-columns:1fr}}
+@media (max-width:640px){.ficha div{grid-template-columns:1fr;gap:2px}.mods-nota{align-items:flex-start;text-align:left}.temario .acordeon details{padding:0 16px}footer .foot-grid{grid-template-columns:1fr}}
