@@ -6,15 +6,15 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 
 | Archivo o carpeta | Qué es |
 |---|---|
-| `index.html` | Portada con el catálogo de cursos |
-| `cursos/` | Las 36 fichas de curso. **Se generan solas**, no se editan a mano (ver «Fichas de curso») |
-| `generador/` | Datos de los cursos (`datos.py`), plantilla de la ficha (`generar.py`) y partes comunes (`parciales/`) |
-| `MAPA-WEB.md` | Mapa de todas las páginas y sus conexiones (se genera solo) |
+| `index.html` | Portada con el catálogo de cursos (estilos y código dentro del propio archivo) |
+| `contacto.html` | Página de contacto con los formularios de Empresas y Particulares |
+| `cursos/` | Una página por curso (por ahora, `alfabetizacion-en-ia.html`) |
 | `aviso-legal.html`, `privacidad.html`, `cookies.html` | Páginas legales |
 | `assets/css/base.css` | Estilos comunes de toda la web |
 | `assets/css/curso.css` | Estilos de las fichas de curso |
 | `assets/css/legal.css` | Estilos de las páginas legales |
-| `assets/js/curso.js` | Menú, pestañas, formularios y animaciones de las fichas y las páginas legales |
+| `assets/js/curso.js` | Menú, pestañas, formularios y animaciones de las fichas, el contacto y las páginas legales |
+| `datos/convocatorias-westlabs.xlsx` | Plantilla de la hoja de convocatorias (la que se usa de verdad está en Google Sheets) |
 | `assets/` (resto) | Logos, fotos, fondos, iconos 3D y tipografías |
 
 ## Cómo se publica
@@ -47,6 +47,23 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 - Las pruebas de envío hay que hacerlas en la web publicada o en el enlace de prueba de Netlify. Desde una vista previa de claude.ai el envío puede no salir.
 - Plan gratuito: revisa los límites de envíos al mes en web3forms.com/pricing.
 
+## Convocatorias (Google Sheets)
+
+- El panel «Próximas convocatorias» de la portada lee la hoja **Convocatorias Westlabs** de Google Drive (pestaña «Convocatorias»).
+- El enlace está en `index.html`, en la constante `CONVOCATORIAS_CSV`.
+- Para que la web pueda leerla, la hoja tiene que estar compartida como «Cualquier persona con el enlace: lector» o publicada en la web como CSV.
+- Si la hoja no carga, se ve la lista escrita en la página.
+- Estados: Abierta, Últimas plazas y Completa se muestran; Por confirmar sale como «Fechas por confirmar»; Oculta no sale.
+- La columna «Notas internas» no se muestra en la web, pero cualquiera con el enlace puede ver la hoja.
+
+## Menú, pie y enlaces
+
+- El menú y el pie son iguales en todas las páginas. Si se cambia uno, hay que cambiarlo en todas: `index.html`, `contacto.html`, `cursos/*.html` y las tres páginas legales.
+- Los enlaces del menú a una herramienta usan `index.html?h=claude#oferta` (también `general`, `chatgpt`, `microsoft` y `gemini`): abren la portada con esa pestaña del catálogo.
+- Las tarjetas de curso enlazan a su ficha si existe (lista `FICHAS` en `index.html`). Si aún no hay ficha, llevan a `contacto.html?curso=Nombre del curso`, que deja el curso ya elegido en el formulario.
+- «Empresas» lleva a la sección de empresas de la portada (`index.html#empresas`).
+- Campus: https://westlabscampus.es/login · WhatsApp y teléfono de Gerard: 636 875 779.
+
 ## Pagos (Stripe)
 
 - Para particulares se usa un **enlace de pago de Stripe** (`https://buy.stripe.com/...`) en el botón «Matricúlate». No hay plataforma de pago propia.
@@ -54,26 +71,25 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 - Antes de activar los enlaces reales, prueba el pago con el **modo de prueba** de Stripe.
 - Pendiente: confirmar con Santi si los precios llevan el 21 % de IVA.
 
-## Fichas de curso
+## Crear una ficha de curso nueva
 
-Las 36 fichas de `cursos/` salen de una plantilla única y de un archivo de datos, así todas tienen el mismo diseño y se cambian a la vez.
+1. Copia `cursos/alfabetizacion-en-ia.html` con el nombre del curso (el nombre del archivo sale del nombre del curso, en minúsculas y con guiones, por ejemplo `claude-esencial.html`).
+2. Cambia los textos: título, datos del curso, temario, modalidades, precio y preguntas frecuentes.
+3. Cambia el asunto de los dos formularios (`subject`) y `data-curso` en `<body>`.
+4. Si el curso tiene precio para particulares, pon su enlace de Stripe.
+5. Añade el nombre del archivo (sin `.html`) a la lista `FICHAS` de `index.html`, para que su tarjeta enlace a la ficha.
 
-- **Cambiar un texto, unas horas, un temario o un precio:** edítalo en `generador/datos.py`.
-- **Cambiar la estructura de la ficha** (qué secciones lleva y en qué orden): `generador/generar.py`.
-- **Cambiar la cabecera, el pie o los iconos:** `generador/parciales/`.
-- **Cambiar el diseño:** `assets/css/curso.css`.
+### Cursos del catálogo
 
-Después de cualquier cambio en `generador/`, vuelve a crear las fichas:
+- **Formación general:** Alfabetización en IA, Prompting eficaz, Investigación y análisis con IA, Documentos y presentaciones con IA, IA para dirección, IA y cumplimiento normativo.
+- **Por herramienta** (niveles acumulativos; el nivel 3 es el curso completo):
+  - Claude: Claude Esencial, Claude Avanzado, Claude Completo.
+  - ChatGPT: Fundamentos de ChatGPT, ChatGPT en profundidad, ChatGPT de cero a experto.
+  - Microsoft: Microsoft 365 Copilot desde cero, Copilot en tus apps de Microsoft 365, Microsoft 365 Copilot completo, y Copilot Studio como complemento.
+  - Gemini: Introducción a Gemini, Gemini práctico, Gemini completo.
+- Los cursos especializados (por área, administración de la herramienta, Claude Code) están fuera por ahora.
 
-```
-python3 generador/generar.py
-```
-
-Esto sobrescribe todas las fichas de `cursos/` y actualiza `MAPA-WEB.md`. No edites a mano los HTML de `cursos/`: el cambio se perdería al generar.
-
-Para añadir un curso nuevo, añade un bloque `add(...)` en `generador/datos.py` (copia uno parecido) y genera. Si debe salir en la portada, añádelo también a la lista `CURSOS` del `<script>` de `index.html`, con el mismo nombre.
-
-El contenido sale del documento «Westlabs · Cursos de teleformación» (noviembre 2026).
+El contenido de cada curso sale del documento «Westlabs: catálogo de cursos de IA y fichas para la web».
 
 ## Cómo hablamos de los cursos
 
@@ -91,15 +107,10 @@ Del catálogo, para que todas las páginas digan lo mismo:
 
 - [ ] Crear la rama `main` y conectar Netlify
 - [ ] Probar un envío real de los formularios en la web publicada
-- [ ] Enlaces de pago de Stripe para Ready (119 €), Build (349 €) y Agents (469 €), y cómo cobrar las ampliaciones (230 €, 350 €, 120 €)
-- [ ] Precio por persona de la modalidad online en directo (ahora sale «por confirmar»)
-- [ ] Fechas de las convocatorias en directo (ahora «primer trimestre de 2027» o «por confirmar»)
-- [ ] Confirmar los nombres de los niveles: en la web van como Esencial, Avanzado y Experto, con el nombre del catálogo como subtítulo
-- [ ] Decidir si las fichas de Gemini se publican ya (están creadas; el catálogo dice que se publican cuando haya demanda)
-- [ ] Revisar los temarios adaptados a cada herramienta (sobre todo Microsoft y Gemini, que cambian a menudo)
+- [ ] Enlace de pago de Stripe para Ready (119 €) en el botón «Matricúlate»
 - [ ] Revisión de las páginas legales por el abogado
 - [ ] Tipografía AllRoundGothic en `assets/fonts/` (ahora los títulos salen en Poppins)
-- [ ] Páginas `contacto.html` y `empresas.html`
-- [ ] Confirmar enlaces: campus.westlabs.es, westlabs.es, LinkedIn y el email y teléfono de contacto
-- [ ] Entrada «Cursos para particulares» en el menú (lo pide el catálogo)
-- [ ] Confirmar con Santi si los precios llevan el 21 % de IVA
+- [ ] Página propia de empresas (ahora el menú lleva a la sección de empresas de la portada)
+- [ ] Compartir o publicar la hoja de convocatorias para que la web pueda leerla
+- [ ] Enlace de la agenda de citas de Google Calendar para «Solicita propuesta»
+- [ ] Fichas del resto de cursos

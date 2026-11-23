@@ -378,7 +378,6 @@ footer address{font-style:normal;display:grid;gap:6px}
 .sellos-foot span{font-size:12px;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 12px}
 .foot-bajo{border-top:1px solid rgba(255,255,255,.12);margin-top:56px;padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px}
 .foot-bajo nav{display:flex;gap:20px;flex-wrap:wrap}
-footer .foot-grid{grid-template-columns:1.6fr 1fr 1fr}
 
 
 /* ---------- Logos múltiples en tarjetas ---------- */
@@ -488,6 +487,7 @@ footer .foot-grid{grid-template-columns:1.6fr 1fr 1fr}
 .curso.grande .tag.h{background:#fff;color:var(--azul)}
 .curso.grande .ver{position:absolute;right:24px;top:50%;transform:translateY(-50%)}
 .curso .et{display:block;font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--intenso);font-weight:500;margin-bottom:2px}
+.sidebar button .ic svg{width:20px;height:20px;color:var(--intenso)}
 .sidebar button .ic img{width:62%;height:62%;object-fit:contain}
 /* empresas */
 .empresas{background:linear-gradient(180deg,#fff,var(--tinte))}
@@ -848,6 +848,74 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
 .ruta li.conmed::before{display:none}
 .ruta li.conmed{padding-left:4px}
 .ruta li img{width:26px;height:26px;object-fit:contain}
+
+/* ================= Más ancho y texto justificado ================= */
+:root{--ancho:1440px}
+.wrap{padding:0 48px}
+.hero .grid{gap:64px}
+.dos-col{gap:88px}
+.conv-grid{gap:80px}
+.cursos{gap:18px}
+#catalogo:has(> .curso:nth-child(2):last-child){grid-template-columns:repeat(2,1fr)}
+.dos-col .intro,.conv-grid .intro,.mf-txt,.acordeon .cuerpo,.fases li>span:last-child,.cp span,.fbanda p{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.dos-col .intro,.conv-grid .intro{max-width:none}
+.cab-sec .intro{max-width:760px}
+.hero .intro{text-align:left}
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+@media (max-width:1024px){.wrap{padding:0 28px}}
+@media (max-width:640px){.wrap{padding:0 18px}.dos-col .intro,.conv-grid .intro,.mf-txt,.acordeon .cuerpo{text-align:left}}
+
+/* tarjetas: puntos, curso completo e iconos generales */
+.curso .puntos{list-style:none;display:grid;gap:6px;margin:2px 0 4px}
+.curso .puntos li{position:relative;padding-left:20px;font-size:14px;color:#33415F;line-height:1.4}
+.curso .puntos li::before{content:"";position:absolute;left:2px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--grad-claro)}
+.curso .tag.inc{background:rgba(244,183,64,.18);color:#8A5A00}
+.curso.completo{overflow:visible;background:radial-gradient(400px 200px at 100% 0%,rgba(91,200,245,.35),transparent 70%),linear-gradient(150deg,#0E1B45,#1B3F94 55%,#2563EB)!important;border-color:rgba(91,200,245,.5);box-shadow:0 20px 50px rgba(27,63,148,.35)}
+.curso.completo h4{color:#fff}.curso.completo .et{color:var(--celeste)}
+.curso.completo .puntos li{color:rgba(255,255,255,.85)}
+.curso.completo .tag{background:rgba(255,255,255,.12);color:#fff}
+.curso.completo .tag.h{background:#fff;color:var(--azul)}
+.curso.completo .tag.inc{background:rgba(244,183,64,.25);color:#FFE2A3}
+.curso.completo::after{background:rgba(255,255,255,.08)}
+.sello-completo{position:absolute;top:-11px;left:24px;z-index:2;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;font-weight:600;padding:6px 12px;border-radius:999px;background:linear-gradient(135deg,#F4B740,#E39A1F);color:#3A2600;box-shadow:0 8px 18px rgba(244,183,64,.4)}
+.ico-gen{background:linear-gradient(135deg,#EEF4FF,#DCEBFF)!important}
+.ico-gen svg{width:56%;height:56%}
+
+.wa-flot{position:fixed;right:22px;bottom:22px;z-index:90;display:flex;align-items:center;gap:10px;padding:12px 18px 12px 14px;border-radius:999px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;font-weight:500;font-size:14.5px;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 14px 30px -8px rgba(18,140,126,.6);transition:transform .2s,box-shadow .2s}
+.wa-flot svg{width:24px;height:24px}
+.wa-flot:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 18px 36px -8px rgba(18,140,126,.75)}
+@media (max-width:640px){.wa-flot span{display:none}.wa-flot{padding:14px}}
+.ico-3d{width:56px;height:56px;flex:none;display:grid;place-items:center}
+.ico-3d img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(27,63,148,.25));transition:transform .4s}
+.curso:hover .ico-3d img{transform:scale(1.1) rotate(-5deg)}
+
+/* FAQ igual que en las fichas de curso */
+.faq .acordeon{gap:12px}
+.faq .acordeon details,.faq .acordeon details[open]{border:1px solid #D5E2F5;border-radius:18px;background:linear-gradient(180deg,#F5F8FE,#EAF1FC);box-shadow:0 10px 28px -8px rgba(27,63,148,.18);transition:box-shadow .2s,border-color .2s,background .2s}
+.faq .acordeon details:hover{border-color:#B9CDEE;box-shadow:0 14px 34px -8px rgba(27,63,148,.26)}
+.faq .acordeon details[open]{background:#fff;border-color:#9DBDF0;box-shadow:0 18px 40px -10px rgba(37,99,235,.3)}
+.faq .acordeon summary{font-size:16.5px;padding:20px 0;color:var(--titulo)}
+.faq .acordeon summary::after{flex:none;background:#fff;color:var(--intenso);box-shadow:0 2px 6px rgba(27,63,148,.12)}
+.faq .acordeon details[open] summary::after{background:var(--grad);color:#fff}
+.faq .acordeon .cuerpo{border-top:1px solid var(--linea);padding-top:14px}
+.faq .acordeon .cuerpo ul{margin-left:0;list-style:none}
+.faq .acordeon .cuerpo li{position:relative;padding-left:22px}
+.faq .acordeon .cuerpo li::before{content:"";position:absolute;left:4px;top:10px;width:7px;height:7px;border-radius:50%;background:var(--grad-claro)}
+@media (max-width:640px){.faq .acordeon details{padding:0 16px}}
+/* iconos y logos de las tarjetas más pequeños */
+.curso .cab .logo-tile{width:40px;height:40px;border-radius:12px}
+.ico-3d{width:46px!important;height:46px!important}
+.curso .medalla{width:22px;height:22px}
+.sidebar button .ic{width:34px;height:34px;border-radius:10px}
+
+/* logos aún más discretos */
+.curso .cab .logo-tile{width:32px;height:32px;border-radius:9px;box-shadow:0 2px 6px rgba(27,63,148,.1)}
+.curso .cab .logo-tile img{width:66%;height:66%}
+.ico-3d{width:36px!important;height:36px!important}
+.curso .medalla{width:18px;height:18px}
+.curso .cab{gap:12px}
+.sidebar button .ic{width:28px;height:28px;border-radius:8px}
 /* ---------- Responsive ---------- */
 @media (max-width:1100px){
   .cursos{grid-template-columns:repeat(2,1fr)}
@@ -966,6 +1034,7 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
 </svg>
 
 <div class="progreso" aria-hidden="true"></div>
+<a class="wa-flot" href="https://wa.me/34636875779?text=Hola%20Gerard%2C%20me%20interesa%20la%20formaci%C3%B3n%20en%20IA%20de%20Westlabs" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Gerard"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.6.3-.8.3-1.4.2-1.6-.1-.1-.3-.2-.6-.4z"/></svg><span>¿Hablamos?</span></a>
 <a class="skip" href="#contenido">Ir al contenido</a>
 
 <!-- ============ CABECERA ============ -->
@@ -978,24 +1047,29 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
         <button aria-expanded="false">Formaciones <i class="caret"></i></button>
         <div class="mega">
           <div>
-            <h5>Cursos por herramienta</h5>
+            <h5>Formación general</h5>
             <ul>
-              <li><a href="#oferta" data-ir="curso" data-herr="claude"><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span>Claude</a></li>
-              <li><a href="#oferta" data-ir="curso" data-herr="chatgpt"><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span>ChatGPT</a></li>
-              <li><a href="#oferta" data-ir="curso" data-herr="microsoft"><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span>Microsoft 365 Copilot</a></li>
-              <li><a href="#oferta" data-ir="curso" data-herr="otros"><span class="logo-tile"><img src="assets/herramientas/gemini.png" alt=""></span>Gemini</a></li>
+              <li><a href="index.html?h=general#oferta"><span class="logo-tile"><svg><use href="#i-grid"/></svg></span>Todos los cursos generales</a></li>
             </ul>
-            <h5 style="margin-top:22px">Especializados</h5>
+            <h5 style="margin-top:22px">Por herramienta</h5>
             <ul>
-              <li><a href="#oferta" data-ir="esp"><span class="logo-tile"><svg><use href="#i-users"/></svg></span>IA por área: comercial, administración y RRHH</a></li>
-              <li><a href="#oferta" data-ir="esp" data-herr="microsoft"><span class="logo-tile"><img src="assets/herramientas/copilot-studio.png" alt=""></span>Copilot Studio</a></li>
-              <li><a href="#oferta" data-ir="esp" data-herr="claude"><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span>Claude Code para no programadores</a></li>
+              <li><a href="index.html?h=claude#oferta"><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span>Claude</a></li>
+              <li><a href="index.html?h=chatgpt#oferta"><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span>ChatGPT</a></li>
+              <li><a href="index.html?h=microsoft#oferta"><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span>Microsoft 365 Copilot</a></li>
+              <li><a href="index.html?h=gemini#oferta"><span class="logo-tile"><img src="assets/herramientas/gemini.png" alt=""></span>Gemini</a></li>
             </ul>
           </div>
           <div>
             <h5>Cursos destacados</h5>
-            <ul class="dos" id="mega-cursos"></ul>
-            <a href="#oferta" class="ver-todo">Ver todos los cursos <svg class="i"><use href="#i-arrow"/></svg></a>
+            <ul class="dos">
+              <li><a href="cursos/alfabetizacion-en-ia.html"><span class="logo-tile"><svg><use href="#i-shield"/></svg></span>Alfabetización en IA</a></li>
+              <li><a href="index.html?h=general#oferta"><span class="logo-tile"><svg><use href="#i-pen"/></svg></span>Prompting eficaz</a></li>
+              <li><a href="index.html?h=claude#oferta"><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span>Claude Esencial</a></li>
+              <li><a href="index.html?h=chatgpt#oferta"><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span>Fundamentos de ChatGPT</a></li>
+              <li><a href="index.html?h=microsoft#oferta"><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span>Microsoft 365 Copilot desde cero</a></li>
+              <li><a href="index.html?h=microsoft#oferta"><span class="logo-tile"><img src="assets/herramientas/copilot-studio.png" alt=""></span>Copilot Studio</a></li>
+            </ul>
+            <a href="index.html#oferta" class="ver-todo">Ver todos los cursos <svg class="i"><use href="#i-arrow"/></svg></a>
           </div>
           <div class="destacado">
             <div>
@@ -1003,12 +1077,12 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
               <strong>¿Formación para tu equipo?</strong>
               <p>Diseñamos un plan a medida, con vuestros casos y bonificable por FUNDAE.</p>
             </div>
-            <a href="empresas.html" class="btn btn-claro">Diseña tu plan <svg class="i fl"><use href="#i-arrow"/></svg></a>
+            <a href="contacto.html" class="btn btn-claro">Diseña tu plan <svg class="i fl"><use href="#i-arrow"/></svg></a>
           </div>
         </div>
       </li>
-      <li><a href="empresas.html">Empresas</a></li>
-      <li class="campus"><a href="https://campus.westlabs.es" target="_blank" rel="noopener"><svg class="i"><use href="#i-laptop-w"/></svg>Campus</a></li>
+      <li><a href="index.html#empresas">Empresas</a></li>
+      <li class="campus"><a href="https://westlabscampus.es/login" target="_blank" rel="noopener"><svg class="i"><use href="#i-laptop-w"/></svg>Campus</a></li>
       <li class="cta"><a href="contacto.html">Contacto</a></li>
     </ul>
   </div>
@@ -1026,7 +1100,7 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
         <p class="intro">Cursos prácticos para que tu equipo use la IA en su trabajo desde el primer día.</p>
         <div class="botones">
           <a href="#oferta" class="btn btn-claro">Descubre nuestros cursos <svg class="i fl"><use href="#i-arrow"/></svg></a>
-          <a href="empresas.html" class="btn btn-borde">Formación para empresas</a>
+          <a href="#empresas" class="btn btn-borde">Formación para empresas</a>
         </div>
         <ul class="hero-datos">
           <li><svg class="i"><use href="#i-check"/></svg>4 herramientas de IA</li>
@@ -1042,7 +1116,6 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
         <div class="flota f3" data-tool="gemini" data-ico="i-gem"><span class="logo-tile"></span><div>Gemini<small>Google Workspace</small></div></div>
         <div class="flota f4" data-tool="agentes" data-ico="i-robot"><span class="logo-tile"></span><div>Agentes de IA<small>Para tu negocio</small></div></div>
         <div class="flota f6" data-tool="claude" data-ico="i-doc"><span class="logo-tile"></span><div>Claude<small>Documentos y proyectos</small></div></div>
-        <div class="flota f7" data-tool="copilot-studio" data-ico="i-robot"><span class="logo-tile"></span><div>Copilot Studio<small>Agentes</small></div></div>
       </div>
     </div>
   </div>
@@ -1058,17 +1131,14 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
       <div class="herr-card"><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span>Claude</div>
       <div class="herr-card"><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span>ChatGPT</div>
       <div class="herr-card"><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span>Microsoft 365 Copilot</div>
-      <div class="herr-card"><span class="logo-tile"><img src="assets/herramientas/copilot-studio.png" alt=""></span>Copilot Studio</div>
       <div class="herr-card"><span class="logo-tile"><img src="assets/herramientas/gemini.png" alt=""></span>Gemini</div>
       <div class="herr-card" aria-hidden="true"><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span>Claude</div>
       <div class="herr-card" aria-hidden="true"><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span>ChatGPT</div>
       <div class="herr-card" aria-hidden="true"><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span>Microsoft 365 Copilot</div>
-      <div class="herr-card" aria-hidden="true"><span class="logo-tile"><img src="assets/herramientas/copilot-studio.png" alt=""></span>Copilot Studio</div>
       <div class="herr-card" aria-hidden="true"><span class="logo-tile"><img src="assets/herramientas/gemini.png" alt=""></span>Gemini</div>
       <div class="herr-card" aria-hidden="true"><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span>Claude</div>
       <div class="herr-card" aria-hidden="true"><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span>ChatGPT</div>
       <div class="herr-card" aria-hidden="true"><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span>Microsoft 365 Copilot</div>
-      <div class="herr-card" aria-hidden="true"><span class="logo-tile"><img src="assets/herramientas/copilot-studio.png" alt=""></span>Copilot Studio</div>
       <div class="herr-card" aria-hidden="true"><span class="logo-tile"><img src="assets/herramientas/gemini.png" alt=""></span>Gemini</div>
       </div>
     </div>
@@ -1081,15 +1151,14 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
     <div class="cab-sec reveal">
       <div class="pre">Nuestros cursos</div>
       <h2>Oferta <span class="acento">formativa</span></h2>
-      <p class="intro">Elige tu herramienta. Los niveles 1, 2 y 3 son acumulativos: al acabar uno, puedes seguir con el siguiente.</p>
     </div>
     <div class="catalogo-grid">
       <div class="lado">
         <div class="tabs" role="tablist" aria-label="Tipo de formación">
-          <button role="tab" aria-selected="true" data-tipo="curso">Cursos</button>
-          <button role="tab" aria-selected="false" data-tipo="esp">Especializados</button>
+          <button role="tab" aria-selected="true" data-tipo="general">Formación general</button>
+          <button role="tab" aria-selected="false" data-tipo="herr">Por herramienta</button>
         </div>
-        <aside class="sidebar" id="sidebar" aria-label="Áreas"></aside>
+        <aside class="sidebar" id="sidebar" aria-label="Herramientas"></aside>
       </div>
       <div>
         <div class="cursos" id="catalogo"></div>
@@ -1113,13 +1182,12 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
     </div>
     <div class="conv-panel reveal">
       <figure class="conv-foto"><img src="assets/fotos/grupo-abierto.jpg" alt="Alumnos practicando con sus portátiles durante una formación" loading="lazy"><figcaption>Clase práctica: cada alumno con su portátil</figcaption></figure>
-      <div class="conv-cab"><span>Próximas convocatorias</span><b>Primer trimestre de 2027</b></div>
-      <ul class="conv-lista">
-        <li><span class="logos"><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span></span><div><b>Alfabetización en IA</b><span>8 h · 4 sesiones de 2 h</span></div><em>Fechas por confirmar</em></li>
-        <li><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span><div><b>Claude Esencial</b><span>12 h · 6 sesiones de 2 h</span></div><em>Fechas por confirmar</em></li>
-        <li><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span><div><b>ChatGPT Esencial</b><span>12 h · 6 sesiones de 2 h</span></div><em>Fechas por confirmar</em></li>
-        <li><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span><div><b>Microsoft 365 Copilot Esencial</b><span>12 h · 6 sesiones de 2 h</span></div><em>Fechas por confirmar</em></li>
-        <li><span class="logo-tile"><img src="assets/herramientas/copilot-studio.png" alt=""></span><div><b>Copilot Studio I · Crea tu primer agente</b><span>12 h · 6 sesiones de 2 h</span></div><em>Fechas por confirmar</em></li>
+      <div class="conv-cab"><span>Próximas convocatorias</span><b>Enero de 2027</b></div>
+      <ul class="conv-lista" id="conv-lista">
+        <li><span class="logos"><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span></span><div><b>Alfabetización en IA</b><span>Sesiones de 2 h</span></div><em>Desde el 11 de enero</em></li>
+        <li><span class="logo-tile"><img src="assets/herramientas/claude.svg" alt=""></span><div><b>Claude Esencial</b><span>Sesiones de 2 h</span></div><em>Desde el 11 de enero</em></li>
+        <li><span class="logo-tile"><img src="assets/herramientas/chatgpt.png" alt=""></span><div><b>Fundamentos de ChatGPT</b><span>Sesiones de 2 h</span></div><em>Desde el 11 de enero</em></li>
+        <li><span class="logo-tile"><img src="assets/herramientas/copilot.png" alt=""></span><div><b>Microsoft 365 Copilot desde cero</b><span>Sesiones de 2 h</span></div><em>Desde el 11 de enero</em></li>
       </ul>
       <a href="contacto.html" class="btn btn-primario">Avísame cuando abran <svg class="i fl"><use href="#i-arrow"/></svg></a>
     </div>
@@ -1145,7 +1213,7 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
         <li>Online o presencial, en las fechas que os vayan bien</li>
         <li>Si queréis ir más allá, implantamos las soluciones con vosotros</li>
       </ul>
-      <a href="empresas.html" class="btn btn-primario">Diseña tu plan formativo <svg class="i fl"><use href="#i-arrow"/></svg></a>
+      <a href="contacto.html" class="btn btn-primario">Diseña tu plan formativo <svg class="i fl"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
   <div class="wrap">
@@ -1188,7 +1256,7 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
           <span class="mf-et">A tu ritmo</span>
           <h3>Campus</h3>
           <ul class="mlista"><li><b>WestLabs Campus</b>, desde cualquier dispositivo</li><li><b>Vídeos y ejercicios</b> con tu propio caso</li><li><b>Empieza cuando quieras</b> · bonificable</li></ul>
-          <a href="https://campus.westlabs.es" class="btn btn-claro btn-sm" target="_blank" rel="noopener">Entrar al campus <svg class="i fl"><use href="#i-arrow"/></svg></a>
+          <a href="https://westlabscampus.es/login" class="btn btn-claro btn-sm" target="_blank" rel="noopener">Entrar al campus <svg class="i fl"><use href="#i-arrow"/></svg></a>
         </div>
       </article>
     </div>
@@ -1219,11 +1287,11 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
     </div>
     <div class="reveal">
       <div class="pre">EU AI Act</div>
-      <h2>Forma a tu equipo en IA <span class="acento">y demuéstralo</span></h2>
-      <p class="intro">Desde febrero de 2025, el artículo 4 del Reglamento Europeo de IA pide a las empresas que usan IA que tomen medidas para formar a su equipo. Nuestro certificado sirve como prueba de esa formación.</p>
+      <h2>Cumple el AI Act y <span class="acento">certifica a tu equipo</span></h2>
+      <p class="intro">Desde febrero de 2025, el artículo 4 del Reglamento europeo de IA obliga a toda empresa que use IA a formar a su equipo. Te ayudamos a cumplirlo y a demostrarlo.</p>
       <ul class="lista-check">
         <li>Certificado nominativo para cada persona, con contenidos y horas</li>
-        <li>Verificable con un código QR; el modelo de certificado y el programa están protocolizados ante notario</li>
+        <li>Aval notarial e insignia para compartir en LinkedIn</li>
         <li>Prueba documentada para clientes, auditorías o inspecciones</li>
         <li><span>Todos los cursos incluyen el bloque de IA segura y legal, así que <b>todos los certificados cubren el art. 4</b></span></li>
       </ul>
@@ -1254,21 +1322,19 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
       <h2>Preguntas <span class="acento">frecuentes</span></h2>
       <p class="intro">Lo que más nos preguntan empresas y particulares antes de empezar.</p>
       <div class="faq-acciones"><button type="button" data-faq="abrir">Expandir todo</button><button type="button" data-faq="cerrar">Contraer todo</button></div>
-      <div class="faq-contacto"><b>¿No encuentras tu respuesta?</b><span>Escríbenos a <a href="mailto:gerard@westlabs.es">gerard@westlabs.es</a> o llámanos al <a href="tel:+34711790775">711 790 775</a>.</span></div>
+      <div class="faq-contacto"><b>¿No encuentras tu respuesta?</b><span>Escríbenos a <a href="mailto:gerard@westlabs.es">gerard@westlabs.es</a> o escribe por WhatsApp a Gerard al <a href="https://wa.me/34636875779?text=Hola%20Gerard%2C%20me%20interesa%20la%20formaci%C3%B3n%20en%20IA%20de%20Westlabs" target="_blank" rel="noopener">636 875 779</a>.</span></div>
     </div>
     <div class="acordeon reveal" id="faq-lista">
-      <details><summary>¿Cómo se organizan los cursos?</summary><div class="cuerpo">En dos pestañas, y en cada una eliges la herramienta: Claude, ChatGPT, Microsoft 365 Copilot o Gemini.<ul>
-        <li><b>Cursos:</b> Alfabetización en IA para empezar y tres niveles acumulativos (para el trabajo, automatizaciones y agentes). Cada año, un curso para ponerte al día.</li>
-        <li><b>Especializados:</b> cursos por área (comercial y marketing, administración y finanzas, RRHH), administración de la herramienta, Claude Code, Copilot Studio e IA para dirección.</li></ul></div></details>
-      <details><summary>¿Necesito conocimientos técnicos?</summary><div class="cuerpo">No. Alfabetización en IA y el nivel 1 no tienen requisitos. Para el nivel 2 hay que haber hecho el nivel 1, y para el nivel 3, el nivel 2.</div></details>
-      <details><summary>¿Con qué herramientas trabajamos?</summary><div class="cuerpo">Con Claude, ChatGPT, Microsoft 365 Copilot y Copilot Studio, y Gemini. Elige la que ya use tu empresa.</div></details>
+      <details><summary>¿Cómo se organizan los cursos?</summary><div class="cuerpo">En dos bloques:<ul><li><b>Formación general:</b> cursos que sirven con cualquier herramienta, como Alfabetización en IA, Prompting eficaz o IA y cumplimiento normativo.</li><li><b>Por herramienta:</b> eliges Claude, ChatGPT, Microsoft 365 Copilot o Gemini. El nivel 1 es para empezar, el nivel 2 incluye el nivel 1 y profundiza, y el nivel 3 es el curso completo: incluye los dos anteriores y llega hasta crear tus propios agentes.</li></ul></div></details>
+      <details><summary>¿Necesito conocimientos técnicos?</summary><div class="cuerpo">No. Ningún curso tiene requisitos técnicos. En cada herramienta, el nivel 2 incluye lo del nivel 1 y el nivel 3 es el curso completo, así que puedes empezar directamente por el que más te encaje.</div></details>
+      <details><summary>¿Con qué herramientas trabajamos?</summary><div class="cuerpo">Con Claude, ChatGPT, Microsoft 365 Copilot y Gemini. Elige la que ya use tu empresa.</div></details>
       <details><summary>¿Cuáles son las modalidades?</summary><div class="cuerpo"><ul>
         <li><b>Online en directo:</b> fechas fijas y grupos reducidos, con sesiones de 2 h.</li>
         <li><b>In company:</b> solo para tu equipo, online en sesiones de 2 h o presencial en jornadas de 4 h.</li>
         <li><b>Campus:</b> a tu ritmo, con la teoría en vídeo y ejercicios con tu caso.</li></ul>
         En cada curso indicamos las modalidades disponibles.</div></details>
-      <details><summary>¿Qué exige el AI Act a mi empresa?</summary><div class="cuerpo">El artículo 4 pide a las empresas que usan IA que tomen medidas para que su equipo tenga la formación suficiente. Todos nuestros cursos incluyen el bloque de IA segura y legal, así que el certificado de cada persona sirve como prueba.</div></details>
-      <details><summary>¿Qué certificado recibo?</summary><div class="cuerpo">Un certificado nominativo de Westlabs con el curso, los contenidos y las horas. Lleva un código QR para verificarlo, y el modelo y el programa están protocolizados ante notario. No es un título oficial.</div></details>
+      <details><summary>¿Qué exige el AI Act a mi empresa?</summary><div class="cuerpo">El artículo 4 obliga a las empresas que usan IA a asegurar que su equipo tiene la formación suficiente. Todos nuestros cursos incluyen el bloque de IA segura y legal, así que el certificado de cada persona sirve como prueba.</div></details>
+      <details><summary>¿Qué certificado recibo?</summary><div class="cuerpo">Un certificado de Westlabs con aval notarial, con el curso, los contenidos y las horas realizadas.</div></details>
       <details><summary>¿Puedo bonificar la formación por FUNDAE?</summary><div class="cuerpo">Sí. Somos entidad organizadora y nos encargamos de toda la gestión si tu empresa tiene crédito de formación disponible.</div></details>
       <details><summary>¿Cómo me apunto?</summary><div class="cuerpo"><ul>
         <li><b>Particulares y equipos pequeños:</b> te apuntas a una convocatoria abierta, con fecha y hora fijas y alumnos de varias empresas, o haces el curso a tu ritmo en el campus.</li>
@@ -1305,20 +1371,31 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
         <address>
           <span>Av. Blondel, 25</span><span>25001 Lleida</span>
           <a href="mailto:gerard@westlabs.es">gerard@westlabs.es</a>
-          <a href="tel:+34711790775">711 790 775</a>
+          <a href="tel:+34636875779">636 875 779 (Gerard, también WhatsApp)</a>
         </address>
         <div class="sellos-foot"><span>Bonificable FUNDAE</span><span>Formación · Consultoría · Implementación</span></div>
       </div>
+      <div><h5>Cursos</h5><ul>
+        <li><a href="cursos/alfabetizacion-en-ia.html">Alfabetización en IA</a></li>
+        <li><a href="index.html?h=general#oferta">Prompting eficaz</a></li>
+        <li><a href="index.html?h=claude#oferta">Claude Esencial</a></li>
+        <li><a href="index.html?h=chatgpt#oferta">Fundamentos de ChatGPT</a></li>
+        <li><a href="index.html?h=microsoft#oferta">Microsoft 365 Copilot desde cero</a></li>
+        <li><a href="index.html?h=gemini#oferta">Introducción a Gemini</a></li>
+        <li><a href="index.html#oferta">Ver todos los cursos</a></li></ul></div>
       <div><h5>La escuela</h5><ul>
-        <li><a href="#convocatorias">Convocatorias abiertas</a></li>
-        <li><a href="https://campus.westlabs.es" target="_blank" rel="noopener">Campus</a></li>
-        <li><a href="#ai-act">Certificado AI Act</a></li>
-        <li><a href="#fundae">FUNDAE</a></li></ul></div>
+        <li><a href="index.html#convocatorias">Convocatorias abiertas</a></li>
+        <li><a href="index.html#ai-act">Certificado AI Act</a></li>
+        <li><a href="index.html#fundae">FUNDAE</a></li>
+        <li><a href="https://westlabscampus.es/login" target="_blank" rel="noopener">Campus</a></li>
+        <li><a href="index.html#faq">Preguntas frecuentes</a></li></ul></div>
       <div><h5>Westlabs</h5><ul>
-        <li><a href="empresas.html">Formación para empresas</a></li>
+        <li><a href="index.html#empresas">Formación para empresas</a></li>
         <li><a href="https://westlabs.es" target="_blank" rel="noopener">Consultoría e implementación</a></li>
         <li><a href="contacto.html">Contacto</a></li>
-        <li><a href="https://www.linkedin.com/company/westlabss" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+        <li><a href="https://www.linkedin.com/company/westlabss" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://www.instagram.com/westlabs.es/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.google.com/maps/place/WestLabs/@41.6118143,0.6203506,852m/data=!3m2!1e3!4b1!4m6!3m5!1s0x12a6e1565a5aaa9f:0xe07510bf8b1013ec!8m2!3d41.6118103!4d0.6229255!16s%2Fg%2F11zyn2mr6j" target="_blank" rel="noopener">Reseñas en Google</a></li></ul></div>
     </div>
     <div class="foot-bajo">
       <span>© <span id="anio">2026</span> Westlabs</span>
@@ -1330,53 +1407,64 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
 <script>
 /* ============================================================
    CATÁLOGO — sale del documento "Westlabs · catálogo de cursos de IA".
-   t: curso | esp (especializado) · herr: herramienta o "todas"
+   t: curso · herr: "general" (Alfabetización e IA para dirección) o la herramienta
    h: horas online o presencial · hc: horas campus (0 = sin campus)
    dir: online en directo · ic: in company o presencial
    tool: logo en assets/herramientas/ (.svg o .png; si no existe, sale el icono "ico") · dest: sale en menú y pie
    ============================================================ */
 const HERR = {
-  claude:   {n:"Claude",          logo:"claude",  nombre:"Claude"},
-  chatgpt:  {n:"ChatGPT",         logo:"chatgpt", nombre:"ChatGPT"},
-  microsoft:{n:"Microsoft",       logo:"copilot", nombre:"Microsoft 365 Copilot"},
-  otros:    {n:"Otros (Gemini)",  logo:"gemini",  nombre:"Gemini"}
-};
-/* Nombre de cada nivel: deja claro hasta dónde se llega con la herramienta */
-const NIVEL = ["Esencial","Avanzado","Experto"];
-const QUE = {  /* qué se ve en cada nivel, con el nombre propio de cada herramienta */
-  claude:   ["Prompting, configuración y memoria, proyectos y conectores","Skills, Claude en Excel, Word y correo, y automatizaciones en el navegador","Contexto avanzado, artefactos y miniaplicaciones, agentes y un proyecto propio"],
-  chatgpt:  ["Prompting, configuración y memoria, proyectos y conectores","GPTs propios, tareas programadas y la IA en tus documentos y correo","Contexto avanzado, Canvas y miniaplicaciones, agentes y un proyecto propio"],
-  microsoft:["Copilot Chat, prompting, Notebooks y conectores (funciona sin licencia)","Copilot dentro de Word, Excel, PowerPoint y Outlook, y automatizaciones","Contexto avanzado, agentes en Microsoft 365 Copilot y un proyecto propio"],
-  otros:    ["Prompting, Gemini en Google Workspace, proyectos y conectores","Gems, Gemini en Gmail, Docs y Sheets, y automatizaciones","Contexto avanzado, miniaplicaciones, agentes y un proyecto propio"]
+  claude:   {n:"Claude",    logo:"claude"},
+  chatgpt:  {n:"ChatGPT",   logo:"chatgpt"},
+  microsoft:{n:"Microsoft", logo:"copilot"},
+  gemini:   {n:"Gemini",    logo:"gemini"}
 };
 const slug = t => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const TODAS = ["claude","chatgpt","copilot","gemini"];
-const CURSOS = [];
-CURSOS.push({t:"curso",herr:"todas",tools:TODAS,ico:"i-shield",bg:"p1",n:"Alfabetización en IA",et:"Para empezar",d:"Qué es la IA, AI Act y RGPD, y las cuatro herramientas para elegir con criterio",h:8,hc:10,dir:1,ic:1,dest:1});
-const BG=["p3","p2","p5","p4"];
-Object.keys(HERR).forEach(k=>{
-  const H=HERR[k].nombre;
-  [0,1,2].forEach(i=>CURSOS.push({t:"curso",herr:k,tool:HERR[k].logo,ico:"i-chat",bg:BG[i],nivel:i+1,
-    n:`${H} ${NIVEL[i]}`,et:`Nivel ${i+1} de 3`,d:QUE[k][i],h:[12,16,20][i],hc:(k==="claude"?[25,25,40][i]:0),dir:1,ic:1,dest:i===0&&k!=="otros"}));
-  CURSOS.push({t:"curso",herr:k,tool:HERR[k].logo,ico:"i-refresh",bg:"p6",n:`${H} al día`,et:"Cada año",d:"Novedades del año, lo que no se ha asentado y un taller con tu caso",h:8,hc:10,dir:1,ic:1});
+/* Modalidades: dir = online en directo · pre = presencial o in company · cam = campus */
+const CURSOS = [
+  /* ---------- Formación general ---------- */
+  {t:"general",ico:"i-shield",bg:"p1",et:"Para toda la plantilla",n:"Alfabetización en IA",img3d:"alfabetizacion",h:8,
+   p:["Qué es la IA y cómo usarla con criterio","AI Act y RGPD en sencillo","Certificado del art. 4"],dir:1,pre:1,cam:1,dest:1},
+  {t:"general",ico:"i-pen",bg:"p3",et:"Para toda la plantilla",n:"Prompting eficaz",img3d:"prompting",h:4,
+   p:["Cómo pedirle las cosas a la IA","Respuestas fiables y reutilizables","Plantillas para tu trabajo"],dir:1,pre:1,cam:1,dest:1},
+  {t:"general",ico:"i-chart",bg:"p2",et:"Taller práctico",n:"Investigación y análisis con IA",img3d:"investigacion",h:4,
+   p:["Buscar y contrastar fuentes","Resumir y comparar información","Informes claros"],dir:1,pre:1},
+  {t:"general",ico:"i-doc",bg:"p5",et:"Taller práctico",n:"Documentos y presentaciones con IA",img3d:"documentos",h:4,
+   p:["Informes y propuestas","Presentaciones en menos tiempo","Con el estilo de tu empresa"],dir:1,pre:1},
+  {t:"general",ico:"i-boss",bg:"p4",et:"Para dirección",n:"IA para dirección",img3d:"direccion",h:8,
+   p:["Dónde aplicar la IA","Priorizar y medir el retorno","Plan de adopción"],pre:1},
+  {t:"general",ico:"i-scale",bg:"p6",et:"Para legal y compliance",n:"IA y cumplimiento normativo",img3d:"cumplimiento",h:8,
+   p:["Obligaciones del AI Act","Datos y propiedad intelectual","Política de uso interna"],dir:1,pre:1},
+  /* ---------- Por herramienta: el nivel 3 es el curso completo (incluye 1 y 2) ---------- */
+  {t:"herr",herr:"claude",nivel:1,n:"Claude Esencial",p:["Prompting y configuración","Proyectos y memoria","Conectores con tus herramientas"],dest:1},
+  {t:"herr",herr:"claude",nivel:2,n:"Claude Avanzado",p:["Todo lo del nivel 1","Skills y Claude en Excel, Word y correo","Automatizaciones en el navegador"]},
+  {t:"herr",herr:"claude",nivel:3,n:"Claude Completo",p:["Todo lo de los niveles 1 y 2","Artefactos y miniaplicaciones","Agentes y proyecto propio"]},
+  {t:"herr",herr:"chatgpt",nivel:1,n:"Fundamentos de ChatGPT",p:["Prompting y configuración","Proyectos y memoria","Conectores con tus herramientas"],dest:1},
+  {t:"herr",herr:"chatgpt",nivel:2,n:"ChatGPT en profundidad",p:["Todo lo del nivel 1","GPTs a medida y tareas programadas","ChatGPT en documentos y correo"]},
+  {t:"herr",herr:"chatgpt",nivel:3,n:"ChatGPT de cero a experto",p:["Todo lo de los niveles 1 y 2","Canvas y miniaplicaciones","Agentes y proyecto propio"]},
+  {t:"herr",herr:"microsoft",nivel:1,n:"Microsoft 365 Copilot desde cero",p:["Copilot Chat, también sin licencia","Prompting y Notebooks","Documentos de tu empresa"],dest:1},
+  {t:"herr",herr:"microsoft",nivel:2,n:"Copilot en tus apps de Microsoft 365",p:["Todo lo del nivel 1","Copilot en Word, Excel y PowerPoint","Outlook y Teams"]},
+  {t:"herr",herr:"microsoft",nivel:3,n:"Microsoft 365 Copilot completo",p:["Todo lo de los niveles 1 y 2","Agentes en Microsoft 365 Copilot","Proyecto propio con seguimiento"]},
+  {t:"herr",herr:"microsoft",extra:1,tool:"copilot-studio",ico:"i-robot",bg:"p6",et:"Complemento",n:"Copilot Studio",h:12,
+   p:["Crea tu primer agente sin programar","Con SharePoint y tus archivos","Publicado en Teams"],dir:1,pre:1,dest:1},
+  {t:"herr",herr:"gemini",nivel:1,n:"Introducción a Gemini",p:["Prompting y configuración","Gemini en Google Workspace","Conexión con Drive"]},
+  {t:"herr",herr:"gemini",nivel:2,n:"Gemini práctico",p:["Todo lo del nivel 1","Gems para tareas repetidas","Gmail, Docs, Sheets y automatizaciones"]},
+  {t:"herr",herr:"gemini",nivel:3,n:"Gemini completo",p:["Todo lo de los niveles 1 y 2","Miniaplicaciones","Agentes y proyecto propio"]}
+];
+const BGN=["p3","p2","p5"];
+CURSOS.forEach(x=>{
+  x.slug=slug(x.n);
+  if(x.t==="herr"&&x.nivel){Object.assign(x,{tool:HERR[x.herr].logo,ico:"i-chat",bg:BGN[x.nivel-1],
+    et:["Nivel 1 · Para empezar","Nivel 2 · Incluye nivel 1","Nivel 3 · Curso completo"][x.nivel-1],
+    incluye:["","Incluye nivel 1","Incluye niveles 1 y 2"][x.nivel-1],dir:1,pre:1,cam:x.nivel<3?1:0,completo:x.nivel===3});}
 });
-Object.keys(HERR).forEach(k=>{
-  const H=HERR[k].nombre;
-  [["comercial y marketing","Reuniones, propuestas, leads, contenido y campañas"],["administración y finanzas","Facturas, conciliaciones, informes y previsiones"],["RRHH","Selección sin sesgos, acogida, formación y comunicación interna"]]
-    .forEach(([a,d],i)=>CURSOS.push({t:"esp",herr:k,tool:HERR[k].logo,ico:"i-users",bg:["p1","p3","p4"][i],n:`${H} para ${a}`,et:"Por área",d,h:16,hc:25,dir:1,ic:1}));
-  if(k!=="otros") CURSOS.push({t:"esp",herr:k,tool:HERR[k].logo,ico:"i-shield",bg:"p2",n:`Administración de ${H} para empresas`,et:"Para IT",d:"Usuarios y permisos, seguridad, lo que se comparte, uso y costes",h:8,hc:0,dir:0,ic:1});
-});
-CURSOS.push({t:"esp",herr:"claude",tool:"claude",ico:"i-studio",bg:"p5",n:"Claude Code para no programadores",et:"Avanzado",d:"Carpetas, archivos y datos, y tus propias herramientas sin programar",h:16,hc:0,dir:0,ic:1,dest:1});
-CURSOS.push({t:"esp",herr:"microsoft",tool:"copilot-studio",ico:"i-robot",bg:"p5",n:"Copilot Studio I · Crea tu primer agente",et:"Agentes",d:"Un agente con SharePoint y archivos, publicado en Teams",h:12,hc:0,dir:1,ic:1,dest:1});
-CURSOS.push({t:"esp",herr:"microsoft",tool:"copilot-studio",ico:"i-robot",bg:"p6",n:"Copilot Studio II · Agentes conectados a tu empresa",et:"Agentes",d:"Acciones, conectores, flujos y los datos de tus sistemas",h:16,hc:0,dir:1,ic:1});
-CURSOS.push({t:"esp",herr:"todas",tool:"direccion",ico:"i-boss",bg:"p2",n:"IA para dirección",et:"Dirección",d:"Por dónde empezar, coste y retorno, y la política de uso interna",h:8,hc:0,dir:0,ic:1});
-CURSOS.forEach(x=>x.slug=slug(x.n));
 
 function logosTile(x){
   if(!x.tools) return logoTile(x.tool,x.ico);
   return `<span class="logos">${x.tools.map(t=>logoTile(t,x.ico)).join('')}</span>`;
 }
-const url = x => `cursos/${x.slug}.html`;
+const FICHAS = ['alfabetizacion-en-ia'];  /* cursos que ya tienen su ficha en cursos/ */
+const url = x => FICHAS.includes(x.slug) ? `cursos/${x.slug}.html` : `contacto.html?curso=${encodeURIComponent(x.n)}`;
 /* Logo: prueba assets/herramientas/<tool>.svg, luego .png y, si no hay ninguno, pinta el icono */
 function logoTile(tool, ico){
   return `<span class="logo-tile"><img src="assets/herramientas/${tool}.svg" alt="" data-ico="${ico}" data-tool="${tool}" onerror="logoFallo(this)"></span>`;
@@ -1388,45 +1476,41 @@ function logoFallo(img){
 document.querySelectorAll('.constelacion [data-tool]').forEach(el=>{el.querySelector('.logo-tile').outerHTML=logoTile(el.dataset.tool,el.dataset.ico);});
 
 const catalogo=document.getElementById('catalogo'), sidebar=document.getElementById('sidebar');
-let tipo='curso', herr='claude';
+let tipo='general', herr='claude';
 function tarjeta(x){
-  const mods=[x.dir&&"En directo",x.ic&&"In company",x.hc&&"Campus"].filter(Boolean).map(m=>`<span class="tag">${m}</span>`).join('');
-  const medidor=x.nivel?`<img class="medalla" src="assets/3d/medalla-${x.nivel}.png" alt="Nivel ${x.nivel} de 3">`:'';
-  return `<a href="${url(x)}" class="curso" style="background:var(--${x.bg})">
-      <div class="cab">${logosTile(x)}<div class="tit"><span class="et">${x.et}${medidor}</span><h4>${x.n}</h4></div></div>
-      <p class="que">${x.d}</p>
-      <div class="tags"><span class="tag h">${x.h} h</span>${mods}</div>
+  const mods=[x.dir&&"En directo",x.pre&&"Presencial",x.cam&&"Campus"].filter(Boolean).map(m=>`<span class="tag">${m}</span>`).join('');
+  const medalla=x.nivel?`<img class="medalla" src="assets/3d/medalla-${x.nivel}.png" alt="">`:'';
+  const icono=x.t==="general"?(x.img3d?`<span class="ico-3d"><img src="assets/3d/${x.img3d}.png" alt=""></span>`:`<span class="logo-tile ico-gen"><svg><use href="#${x.ico}"/></svg></span>`):logosTile(x);
+  return `<a href="${url(x)}" class="curso${x.completo?' completo':''}" style="background:var(--${x.bg})">
+      ${x.completo?'<span class="sello-completo">Curso completo</span>':''}
+      <div class="cab">${icono}<div class="tit"><span class="et">${x.et}${medalla}</span><h4>${x.n}</h4></div></div>
+      <ul class="puntos">${x.p.map(t=>`<li>${t}</li>`).join('')}</ul>
+      <div class="tags">${x.incluye?`<span class="tag inc">${x.incluye}</span>`:''}${mods}</div>
       <span class="ver"><svg class="i"><use href="#i-arrow"/></svg></span></a>`;
 }
 function pintar(){
-  const delTipo=CURSOS.filter(x=>x.t===tipo);
+  sidebar.style.display=tipo==='herr'?'':'none';
   sidebar.innerHTML=Object.keys(HERR).map(k=>{
-    const n=delTipo.filter(x=>x.herr===k||x.herr==='todas').length;
-    return `<button data-h="${k}" class="${herr===k?'activo':''}"><span class="ic"><img src="assets/herramientas/${HERR[k].logo}.${k==='claude'?'svg':'png'}" alt=""></span>${HERR[k].n}<span class="n">${n}</span></button>`;}).join('');
-  const lista=delTipo.filter(x=>x.herr===herr||x.herr==='todas');
-  let ruta='';
-  if(tipo==='curso'){
-    const pasos=lista.filter(x=>x.nivel||x.herr==='todas');
-    ruta=`<div class="ruta"><span class="ruta-t">Tu itinerario con ${HERR[herr].nombre}</span><ol>${pasos.map(x=>`<li class="${x.nivel?'conmed':''}">${x.nivel?`<img src="assets/3d/medalla-${x.nivel}.png" alt="">`:''}<b>${x.nivel?NIVEL[x.nivel-1]:'Alfabetización'}</b><span>${x.h} h</span></li>`).join('')}</ol></div>`;
-  }
-  catalogo.innerHTML=ruta+(lista.map(tarjeta).join('')||'<p class="vacio">Pronto habrá cursos con esta herramienta.</p>');
+    const ic=`<img src="assets/herramientas/${HERR[k].logo}.${k==='claude'?'svg':'png'}" alt="">`;
+    return `<button data-h="${k}" class="${herr===k?'activo':''}"><span class="ic">${ic}</span>${HERR[k].n}</button>`;}).join('');
+  const lista=CURSOS.filter(x=>x.t===tipo&&(tipo==='general'||x.herr===herr));
+  catalogo.innerHTML=lista.map(tarjeta).join('');
 }
 function elegir(t,h){
-  if(t){tipo=t;document.querySelectorAll('.tabs button').forEach(o=>o.setAttribute('aria-selected',o.dataset.tipo===t));}
+  if(t){tipo=t;document.querySelectorAll('.lado .tabs button').forEach(o=>o.setAttribute('aria-selected',o.dataset.tipo===t));}
   if(h) herr=h;
   pintar();
 }
-document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>elegir(b.dataset.tipo)));
+document.querySelectorAll('.lado .tabs button').forEach(b=>b.addEventListener('click',()=>elegir(b.dataset.tipo)));
 sidebar.addEventListener('click',e=>{const b=e.target.closest('button');if(b)elegir(null,b.dataset.h);});
-document.querySelectorAll('[data-ir]').forEach(a=>a.addEventListener('click',()=>{elegir(a.dataset.ir,a.dataset.herr);document.body.classList.remove('menu-abierto');}));
+/* Enlaces del menú y del pie: index.html?h=claude#oferta abre esa pestaña sin recargar */
+const irA=h=>{if(h==='general')elegir('general');else if(HERR[h])elegir('herr',h);};
+document.querySelectorAll('a[href*="index.html?h="]').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();const h=new URL(a.href).searchParams.get('h');irA(h);document.body.classList.remove('menu-abierto');
+  document.getElementById('oferta').scrollIntoView({behavior:'smooth'});history.replaceState(null,'','?h='+h+'#oferta');}));
+irA(new URLSearchParams(location.search).get('h'));
 pintar();
 
-/* Mega menú y pie con los cursos destacados */
-const dest=CURSOS.filter(x=>x.dest);
-const megaCursos=document.getElementById('mega-cursos');
-if(megaCursos)megaCursos.innerHTML=dest.map(x=>`<li><a href="${url(x)}">${logoTile(x.tool,x.ico)}${x.n}</a></li>`).join('');
-const footCursos=document.getElementById('foot-cursos');
-if(footCursos)footCursos.innerHTML=dest.map(x=>`<li><a href="${url(x)}">${x.n}</a></li>`).join('')+'<li><a href="#oferta">Ver todos los cursos</a></li>';
 
 /* Menú */
 const body=document.body, ham=document.querySelector('.hamburguesa');
@@ -1451,6 +1535,35 @@ document.querySelectorAll('[data-faq]').forEach(b=>b.addEventListener('click',()
 const io='IntersectionObserver' in window ? new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visto');io.unobserve(e.target);}}),{threshold:.12}) : null;
 document.querySelectorAll('.reveal').forEach(el=>io?io.observe(el):el.classList.add('visto'));
 document.getElementById('anio').textContent=new Date().getFullYear();
+
+/* Convocatorias: se leen de la hoja de Google Sheets publicada como CSV.
+   Si CONVOCATORIAS_CSV está vacío o no carga, se queda la lista escrita en la página. */
+const CONVOCATORIAS_CSV = 'https://docs.google.com/spreadsheets/d/1O33oTrorKG0-tuYD0zZz9dqVjytWtofNGPol-mFnsFo/gviz/tq?tqx=out:csv&sheet=Convocatorias';
+(function(){
+  if(!CONVOCATORIAS_CSV) return;
+  const LOGO={general:null,claude:'claude.svg',chatgpt:'chatgpt.png',microsoft:'copilot.png',gemini:'gemini.png'};
+  const parse=t=>{const f=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];
+    if(q){if(ch=='"'&&t[i+1]=='"'){c+='"';i++;}else if(ch=='"')q=false;else c+=ch;}
+    else if(ch=='"')q=true;else if(ch==','){r.push(c);c='';}else if(ch=='\n'){r.push(c);f.push(r);r=[];c='';}else if(ch!='\r')c+=ch;}
+    if(c||r.length){r.push(c);f.push(r);}return f;};
+  const esc=v=>String(v||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+  fetch(CONVOCATORIAS_CSV).then(r=>r.ok?r.text():Promise.reject()).then(t=>{
+    const [cab,...filas]=parse(t); const k=n=>cab.findIndex(h=>h.trim().toLowerCase().startsWith(n));
+    const iC=k('curso'),iH=k('herramienta'),iF=k('fecha'),iHo=k('horario'),iS=k('sesiones'),iE=k('estado'),iL=k('enlace');
+    const items=filas.filter(f=>f[iC]&&(f[iE]||'').trim().toLowerCase()!=='oculta');
+    if(!items.length) return;
+    document.getElementById('conv-lista').innerHTML=items.slice(0,6).map(f=>{
+      const h=(f[iH]||'').trim().toLowerCase(), logo=LOGO[h];
+      const est=(f[iE]||'').trim(), conf=est.toLowerCase()==='por confirmar'||!f[iF];
+      const sub=conf?'Sesiones de 2 h':[f[iF],f[iHo],f[iS]&&`${f[iS]} sesiones`].filter(Boolean).map(esc).join(' · ');
+      const tag=conf?'Fechas por confirmar':esc(est||'Abierta');
+      const ic=logo?`<span class="logo-tile"><img src="assets/herramientas/${logo}" alt=""></span>`:`<span class="logo-tile"><svg><use href="#i-shield"/></svg></span>`;
+      const li=`${ic}<div><b>${esc(f[iC])}</b><span>${sub}</span></div><em>${tag}</em>`;
+      return f[iL]?`<li><a href="${esc(f[iL])}" target="_blank" rel="noopener" style="display:contents">${li}</a></li>`:`<li>${li}</li>`;
+    }).join('');
+  }).catch(()=>{});
+})();
+
 
 /* Barra de progreso e inclinación 3D de tarjetas */
 (function(){
