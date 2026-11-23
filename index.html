@@ -1279,8 +1279,8 @@ p{text-wrap:pretty}
       <div class="faq-contacto"><b>¿No encuentras tu respuesta?</b><span>Escríbenos a <a href="mailto:gerard@westlabs.es">gerard@westlabs.es</a> o llámanos al <a href="tel:+34711790775">711 790 775</a>.</span></div>
     </div>
     <div class="acordeon reveal" id="faq-lista">
-      <details><summary>¿Cómo se organizan los cursos?</summary><div class="cuerpo">En dos bloques:<ul><li><b>Formación general:</b> cursos que sirven con cualquier herramienta, como Alfabetización en IA, Prompting eficaz o IA y cumplimiento normativo.</li><li><b>Por herramienta:</b> eliges Claude, ChatGPT, Microsoft 365 Copilot o Gemini. El nivel 1 es para empezar, el nivel 2 profundiza y el nivel 3 es el curso completo: incluye los dos anteriores y llega hasta crear tus propios agentes.</li></ul></div></details>
-      <details><summary>¿Necesito conocimientos técnicos?</summary><div class="cuerpo">No. Los cursos de formación general y el primer nivel de cada herramienta no tienen requisitos. Para el nivel 2 conviene haber hecho el nivel 1, y para el nivel 3, el nivel 2.</div></details>
+      <details><summary>¿Cómo se organizan los cursos?</summary><div class="cuerpo">En dos bloques:<ul><li><b>Formación general:</b> cursos que sirven con cualquier herramienta, como Alfabetización en IA, Prompting eficaz o IA y cumplimiento normativo.</li><li><b>Por herramienta:</b> eliges Claude, ChatGPT, Microsoft 365 Copilot o Gemini. El nivel 1 es para empezar, el nivel 2 incluye el nivel 1 y profundiza, y el nivel 3 es el curso completo: incluye los dos anteriores y llega hasta crear tus propios agentes.</li></ul></div></details>
+      <details><summary>¿Necesito conocimientos técnicos?</summary><div class="cuerpo">No. Ningún curso tiene requisitos técnicos. En cada herramienta, el nivel 2 incluye lo del nivel 1 y el nivel 3 es el curso completo, así que puedes empezar directamente por el que más te encaje.</div></details>
       <details><summary>¿Con qué herramientas trabajamos?</summary><div class="cuerpo">Con Claude, ChatGPT, Microsoft 365 Copilot y Gemini. Elige la que ya use tu empresa.</div></details>
       <details><summary>¿Cuáles son las modalidades?</summary><div class="cuerpo"><ul>
         <li><b>Online en directo:</b> fechas fijas y grupos reducidos, con sesiones de 2 h.</li>
@@ -1378,26 +1378,26 @@ const CURSOS = [
    p:["Obligaciones del AI Act","Datos y propiedad intelectual","Política de uso interna"],dir:1,pre:1},
   /* ---------- Por herramienta: el nivel 3 es el curso completo (incluye 1 y 2) ---------- */
   {t:"herr",herr:"claude",nivel:1,n:"Claude Esencial",p:["Prompting y configuración","Proyectos y memoria","Conectores con tus herramientas"],dest:1},
-  {t:"herr",herr:"claude",nivel:2,n:"Claude Avanzado",p:["Skills para tareas repetidas","Claude en Excel, Word y correo","Automatizaciones en el navegador"]},
+  {t:"herr",herr:"claude",nivel:2,n:"Claude Avanzado",p:["Todo lo del nivel 1","Skills y Claude en Excel, Word y correo","Automatizaciones en el navegador"]},
   {t:"herr",herr:"claude",nivel:3,n:"Claude Completo",p:["Todo lo de los niveles 1 y 2","Artefactos y miniaplicaciones","Agentes y proyecto propio"]},
   {t:"herr",herr:"chatgpt",nivel:1,n:"Fundamentos de ChatGPT",p:["Prompting y configuración","Proyectos y memoria","Conectores con tus herramientas"],dest:1},
-  {t:"herr",herr:"chatgpt",nivel:2,n:"ChatGPT en profundidad",p:["GPTs a medida","Tareas programadas","ChatGPT en documentos y correo"]},
+  {t:"herr",herr:"chatgpt",nivel:2,n:"ChatGPT en profundidad",p:["Todo lo del nivel 1","GPTs a medida y tareas programadas","ChatGPT en documentos y correo"]},
   {t:"herr",herr:"chatgpt",nivel:3,n:"ChatGPT de cero a experto",p:["Todo lo de los niveles 1 y 2","Canvas y miniaplicaciones","Agentes y proyecto propio"]},
   {t:"herr",herr:"microsoft",nivel:1,n:"Microsoft 365 Copilot desde cero",p:["Copilot Chat, también sin licencia","Prompting y Notebooks","Documentos de tu empresa"],dest:1},
-  {t:"herr",herr:"microsoft",nivel:2,n:"Copilot en tus apps de Microsoft 365",p:["Word y PowerPoint","Excel y análisis de datos","Outlook y Teams"]},
+  {t:"herr",herr:"microsoft",nivel:2,n:"Copilot en tus apps de Microsoft 365",p:["Todo lo del nivel 1","Copilot en Word, Excel y PowerPoint","Outlook y Teams"]},
   {t:"herr",herr:"microsoft",nivel:3,n:"Microsoft 365 Copilot completo",p:["Todo lo de los niveles 1 y 2","Agentes en Microsoft 365 Copilot","Proyecto propio con seguimiento"]},
   {t:"herr",herr:"microsoft",extra:1,tool:"copilot-studio",ico:"i-robot",bg:"p6",et:"Complemento",n:"Copilot Studio",h:12,
    p:["Crea tu primer agente sin programar","Con SharePoint y tus archivos","Publicado en Teams"],dir:1,pre:1,dest:1},
   {t:"herr",herr:"gemini",nivel:1,n:"Introducción a Gemini",p:["Prompting y configuración","Gemini en Google Workspace","Conexión con Drive"]},
-  {t:"herr",herr:"gemini",nivel:2,n:"Gemini práctico",p:["Gems para tareas repetidas","Gmail, Docs y Sheets","Automatizaciones"]},
+  {t:"herr",herr:"gemini",nivel:2,n:"Gemini práctico",p:["Todo lo del nivel 1","Gems para tareas repetidas","Gmail, Docs, Sheets y automatizaciones"]},
   {t:"herr",herr:"gemini",nivel:3,n:"Gemini completo",p:["Todo lo de los niveles 1 y 2","Miniaplicaciones","Agentes y proyecto propio"]}
 ];
 const BGN=["p3","p2","p5"];
 CURSOS.forEach(x=>{
   x.slug=slug(x.n);
   if(x.t==="herr"&&x.nivel){Object.assign(x,{tool:HERR[x.herr].logo,ico:"i-chat",bg:BGN[x.nivel-1],
-    et:["Nivel 1 · Para empezar","Nivel 2 · Requiere nivel 1","Nivel 3 · Curso completo"][x.nivel-1],
-    h:[12,16,48][x.nivel-1],incluye:x.nivel===3?"Incluye niveles 1 y 2":"",dir:1,pre:1,cam:x.nivel<3?1:0,completo:x.nivel===3});}
+    et:["Nivel 1 · Para empezar","Nivel 2 · Incluye nivel 1","Nivel 3 · Curso completo"][x.nivel-1],
+    incluye:["","Incluye nivel 1","Incluye niveles 1 y 2"][x.nivel-1],dir:1,pre:1,cam:x.nivel<3?1:0,completo:x.nivel===3});}
 });
 
 function logosTile(x){
@@ -1425,7 +1425,7 @@ function tarjeta(x){
       ${x.completo?'<span class="sello-completo">Curso completo</span>':''}
       <div class="cab">${icono}<div class="tit"><span class="et">${x.et}${medalla}</span><h4>${x.n}</h4></div></div>
       <ul class="puntos">${x.p.map(t=>`<li>${t}</li>`).join('')}</ul>
-      <div class="tags"><span class="tag h">${x.h} h</span>${x.incluye?`<span class="tag inc">${x.incluye}</span>`:''}${mods}</div>
+      <div class="tags">${x.incluye?`<span class="tag inc">${x.incluye}</span>`:''}${mods}</div>
       <span class="ver"><svg class="i"><use href="#i-arrow"/></svg></span></a>`;
 }
 function pintar(){
