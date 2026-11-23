@@ -229,8 +229,31 @@
 .temario .comun,.temario .acordeon .comun{background:rgba(91,200,245,.18);color:#BDEBFF}
 .tem-lado .comun{background:var(--p1);color:var(--intenso)}
 
+/* FAQ: mismas tarjetas oscuras con relieve que el temario */
+.faq .acordeon{gap:12px}
+.faq .acordeon details,.faq .acordeon details[open]{position:relative;border:1px solid rgba(150,185,255,.22);border-radius:20px;padding:0 24px;
+  background:radial-gradient(500px 160px at 100% 0%,rgba(91,200,245,.18),transparent 70%),linear-gradient(150deg,#0E1B45 0%,#16306F 60%,#1B3F94 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 6px 0 #0A1433,0 22px 40px -12px rgba(14,27,69,.6);transition:transform .2s,box-shadow .2s,border-color .2s}
+.faq .acordeon details:hover{transform:translateY(-2px);border-color:rgba(91,200,245,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 8px 0 #0A1433,0 28px 50px -12px rgba(37,99,235,.55)}
+.faq .acordeon details[open]{border-color:rgba(91,200,245,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 6px 0 #0A1433,0 0 0 4px rgba(91,200,245,.12),0 26px 50px -12px rgba(37,99,235,.55)}
+.faq .acordeon summary{color:#fff}
+.faq .acordeon summary .t small{color:rgba(255,255,255,.65)}
+.faq .acordeon summary .num{background:rgba(255,255,255,.1);color:var(--celeste);border:1px solid rgba(150,185,255,.25)}
+.faq .acordeon details[open] summary .num{background:linear-gradient(135deg,#5BC8F5,#2563EB);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(91,200,245,.4)}
+.faq .acordeon summary .hrs{background:rgba(255,255,255,.1);color:#fff}
+.faq .acordeon summary::after{background:rgba(255,255,255,.12);color:#fff}
+.faq .acordeon details[open] summary::after{background:#fff;color:var(--azul)}
+.faq .acordeon .cuerpo{color:rgba(255,255,255,.8);border-top:1px solid rgba(150,185,255,.16);padding-top:16px}
+.faq .acordeon .cuerpo b{color:#fff}
+.faq .acordeon .cuerpo li::before{background:var(--celeste)}
+.faq .acordeon .cuerpo .entregable{background:rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
+.faq .acordeon .comun{background:rgba(91,200,245,.18);color:#BDEBFF}
+.faq .acordeon summary{font-size:16.5px;padding:20px 0}
+.faq .acordeon .cuerpo a{color:var(--celeste)}
+
 /* Pie: solo escuela y Westlabs */
 footer .foot-grid{grid-template-columns:1.6fr 1fr 1fr}
 
 @media (max-width:1024px){.tem-grid{grid-template-columns:1fr;gap:36px}.tem-lado{position:static}.para-quien{grid-template-columns:1fr}}
-@media (max-width:640px){.ficha div{grid-template-columns:1fr;gap:2px}.mods-nota{align-items:flex-start;text-align:left}.temario .acordeon details{padding:0 16px}footer .foot-grid{grid-template-columns:1fr}}
+@media (max-width:640px){.ficha div{grid-template-columns:1fr;gap:2px}.mods-nota{align-items:flex-start;text-align:left}.temario .acordeon details,.faq .acordeon details{padding:0 16px}footer .foot-grid{grid-template-columns:1fr}}
+.acordeon summary::after{flex:none}
