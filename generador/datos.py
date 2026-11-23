@@ -363,7 +363,8 @@ for k in ORDEN_HERR:
         sig=[slug(NOM[1]), slug(NOM[2])] + (['copilot-studio'] if k == 'microsoft' else []) + ['prompting-eficaz', 'documentos-y-presentaciones-con-ia'])
     # Nivel 2 (incluye el 1)
     add(n=NOM[1], t='herr', herr=k, nivel=2, et=f'{N} · Nivel 2 · Incluye nivel 1', ficha_et='Nivel 2 · Build · Incluye nivel 1',
-        dur_dir='17 h por persona · teoría en sesiones de 2 h y talleres de 1,5 h', dur_ic='6 días: 17 h por persona (23 h de formador, talleres en 3 grupos por área)',
+        dur_dir='17 h por persona · teoría en sesiones de 2 h y talleres de 1,5 h',
+        faq_dur='Son 17 horas por persona, con el nivel 1 incluido: 12 h de teoría en sesiones de 2 h, dos talleres prácticos de 1,5 h y la sesión de cierre de 2 h. En empresa son 6 días.', dur_ic='6 días: 17 h por persona (23 h de formador, talleres en 3 grupos por área)',
         sub=f'Que {N} te haga tareas enteras', h=17, hc=(25 if es_c else 'pronto'), campus=camp, art4=True, ico='i-chat', bg='p2',
         p={'claude': ['Todo lo del nivel 1', 'Skills y Claude en Excel, Word y correo', 'Automatizaciones en el navegador'],
            'chatgpt': ['Todo lo del nivel 1', 'GPTs a medida y tareas programadas', 'ChatGPT en documentos y correo'],
@@ -389,7 +390,8 @@ for k in ORDEN_HERR:
         sig=[slug(NOM[2])] + (['copilot-studio'] if k == 'microsoft' else []) + ['documentos-y-presentaciones-con-ia', 'investigacion-y-analisis-con-ia', 'prompting-eficaz'])
     # Nivel 3 (curso completo)
     add(n=NOM[2], t='herr', herr=k, nivel=3, completo=True, et=f'{N} · Nivel 3 · Curso completo', ficha_et='Nivel 3 · Agents · Curso completo',
-        dur_dir='22,5 h por persona · teoría en sesiones de 2 h y talleres de 1,5 h', dur_ic='8 días + 1 h con dirección: 22,5 h por persona (31,5 h de formador)',
+        dur_dir='22,5 h por persona · teoría en sesiones de 2 h y talleres de 1,5 h',
+        faq_dur='Son 22,5 horas por persona, con los niveles 1 y 2 incluidos: 16 h de teoría en sesiones de 2 h, tres talleres prácticos de 1,5 h y la sesión de cierre de 2 h. En empresa son 8 días y, además, 1 h con dirección.', dur_ic='8 días + 1 h con dirección: 22,5 h por persona (31,5 h de formador)',
         sub='De cero a tu propio agente funcionando', h=22.5, art4=True, ico='i-robot', bg='p5',
         p={'claude': ['Todo lo de los niveles 1 y 2', 'Artefactos y mini aplicaciones', 'Agentes y tres talleres prácticos'],
            'chatgpt': ['Todo lo de los niveles 1 y 2', 'Canvas y mini aplicaciones', 'Agentes y tres talleres prácticos'],

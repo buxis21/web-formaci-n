@@ -511,7 +511,7 @@ def faqs(c):
     else:
         previo = c['req']
         if c['req'].startswith('Nivel') and c['herr'] in HERR:
-            previo = f'{HERR[c["herr"]]["nombre"]} {["Esencial", "Avanzado", "Experto"][int(c["req"][-1]) - 1]}'
+            previo = HERR[c["herr"]]["nombres"][int(c["req"][-1]) - 1]
         req = f'No hace falta saber programar. Sí te pedimos haber hecho antes {previo} o tener una experiencia equivalente, porque partimos de lo que se ve ahí.'
     q.append(('¿Necesito conocimientos técnicos?', req))
     q.append(('¿Qué herramienta o licencia necesito?', c['cuenta']))
@@ -525,8 +525,11 @@ def faqs(c):
     else:
         q.append(('¿Cómo lo contratamos?', 'Rellena el formulario de arriba. Hablamos con vosotros, preparamos los casos de vuestra empresa en una consultoría previa y os enviamos la propuesta con fechas, modalidad y la gestión de FUNDAE.'))
     ses = int(c['h'] / 2); jor = c['h'] / 4
-    t = f'Son {int(c["h"])} horas' + (' en total, con los niveles anteriores incluidos' if c.get('nivel', 0) > 1 else '') + ': '
-    t += f'{ses} sesiones de 2 h online' + (f' o {int(jor)} jornadas de 4 h presenciales' if jor == int(jor) and jor > 1 else '') + '.'
+    if c.get('faq_dur'):
+        t = c['faq_dur']
+    else:
+        t = f'Son {int(c["h"])} horas' + (' en total, con los niveles anteriores incluidos' if c.get('nivel', 0) > 1 else '') + ': '
+        t += f'{ses} sesiones de 2 h online' + (f' o {int(jor)} jornadas de 4 h presenciales' if jor == int(jor) and jor > 1 else '') + '.'
     if c.get('campus') == 'ready': t += ' En el campus son 10 horas a tu ritmo, con 12 meses para hacerlo.'
     elif c.get('campus'): t += f' En el campus va dentro de {c["campus"].capitalize()}, a tu ritmo y con 12 meses de acceso.'
     elif c['hc'] == 'pronto': t += ' La versión del campus llegará pronto.'
