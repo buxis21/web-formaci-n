@@ -848,6 +848,23 @@ footer{background:radial-gradient(700px 300px at 0% 0%,rgba(37,99,235,.18),trans
 .ruta li.conmed::before{display:none}
 .ruta li.conmed{padding-left:4px}
 .ruta li img{width:26px;height:26px;object-fit:contain}
+
+/* ================= Más ancho y texto justificado ================= */
+:root{--ancho:1440px}
+.wrap{padding:0 48px}
+.hero .grid{gap:64px}
+.dos-col{gap:88px}
+.conv-grid{gap:80px}
+.cursos{gap:18px}
+#catalogo:has(> .curso:nth-child(2):last-child){grid-template-columns:repeat(2,1fr)}
+.dos-col .intro,.conv-grid .intro,.mf-txt,.acordeon .cuerpo,.fases li>span:last-child,.cp span,.fbanda p{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.dos-col .intro,.conv-grid .intro{max-width:none}
+.cab-sec .intro{max-width:760px}
+.hero .intro{text-align:left}
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+@media (max-width:1024px){.wrap{padding:0 28px}}
+@media (max-width:640px){.wrap{padding:0 18px}.dos-col .intro,.conv-grid .intro,.mf-txt,.acordeon .cuerpo{text-align:left}}
 /* ---------- Responsive ---------- */
 @media (max-width:1100px){
   .cursos{grid-template-columns:repeat(2,1fr)}
