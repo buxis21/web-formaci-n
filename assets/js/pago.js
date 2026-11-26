@@ -1,7 +1,7 @@
-/* Pago con Stripe dentro de la web (Embedded Checkout).
-   Configuración: pon la clave publicable de Stripe (pk_live_... o pk_test_...) en
-   <body data-stripe-pk="..."> de particulares.html. Mientras esté vacía, «Comprar»
-   lleva al formulario de reserva, como hasta ahora. */
+/* Pago con Stripe dentro de la web (Embedded Checkout), en las páginas de curso de particulares/.
+   Configuración: la clave publicable de Stripe (pk_live_... o pk_test_...) va en STRIPE_PK de
+   generador/datos_particulares.py; al generar, se escribe en <body data-stripe-pk="...">.
+   Mientras esté vacía, «Comprar» lleva al formulario de reserva de la misma página. */
 (function () {
   const pk = document.body.dataset.stripePk || '';
   const dlg = document.getElementById('pago');
@@ -73,16 +73,17 @@
     }
     // Sin Stripe configurado: deja el curso y el código en el formulario de reserva.
     const s = document.getElementById('r-pack');
-    [...s.options].forEach(o => { if (o.text.startsWith(a.dataset.pack)) s.value = o.value; });
-    if (cod) document.getElementById('r-codigo').value = cod;
+    if (s && s.options) [...s.options].forEach(o => { if (o.text.startsWith(a.dataset.pack)) s.value = o.value; });
+    const rc = document.getElementById('r-codigo');
+    if (cod && rc) rc.value = cod;
   }));
 
   document.getElementById('pago-cerrar').addEventListener('click', () => dlg.close());
   dlg.addEventListener('close', cerrarCheckout);
   dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
 
-  // Desde las fichas: particulares.html?comprar=claude-avanzado abre directamente el pago.
-  const q = new URLSearchParams(location.search).get('comprar');
-  const btn = q && document.querySelector(`[data-curso="${CSS.escape(q)}"]`);
-  if (btn && pk) btn.click();
+  // ?comprar en la dirección abre directamente el pago del curso de la página.
+  const q = new URLSearchParams(location.search).has('comprar');
+  const btn = document.querySelector('[data-curso]');
+  if (q && btn && pk) btn.click();
 })();

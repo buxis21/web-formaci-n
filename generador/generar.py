@@ -37,7 +37,7 @@ def plazo_pack(P):
     n = float(P['normal'].replace(' €', '').replace(',', '.')) / 3
     return f'{n:.2f}'.replace('.', ',') + ' €'
 
-CODIGO_TXT = '¿Tienes un código de descuento? Lo escribes al pagar y el precio se rebaja al momento.'
+CODIGO_TXT = '¿Tienes un código de descuento? Lo escribes en la página del curso antes de pagar y el precio se rebaja al momento.'
 
 def horas(h):
     return (f'{h:g}'.replace('.', ',')) + ' h'
@@ -150,7 +150,7 @@ def inscripcion(c):
           <div class="precio"><b>{px_pack(P)}</b><span>IVA incluido<br>o 3 plazos de {e(plazo_pack(P))} sin intereses</span></div>
           <p class="cod-nota">{CODIGO_TXT}</p>
           <ul class="pack-lista">{''.join(f'<li>{e(x)}</li>' for x in P['lista'][:4])}</ul>
-          <a href="../particulares.html?comprar={c['slug']}#niveles" class="btn btn-primario full">Comprar {ARROW}</a>
+          <a href="../particulares/{c['slug']}.html" class="btn btn-primario full">Ver el curso y comprar {ARROW}</a>
         </div>'''
     elif c.get('campus') == 'ready':
         part = f'''        <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
@@ -304,7 +304,7 @@ def modalidades(c):
           <p class="mf-desc">{desc}</p>
           <dl class="ficha">{filas}
           </dl>
-          <a href="../particulares.html" class="btn btn-claro btn-sm">{'Ver precio y comprar' if pack(c) else 'Ver cursos para particulares'} {ARROW}</a>
+          <a href="../particulares{'/' + c['slug'] + '.html' if pack(c) else '.html'}" class="btn btn-claro btn-sm">{'Ver el curso y comprar' if pack(c) else 'Ver cursos para particulares'} {ARROW}</a>
         </div>
       </article>''')
     n = len(tarjetas)
@@ -451,7 +451,7 @@ def esc_card(P, slug, actual, raiz='../'):
     clase = 'esc actual' if actual else 'esc e2'
     lis = ''.join(f'<li>{e(x)}</li>' for x in P['lista'])
     marca = ('\n        <span class="aqui">Este curso</span>' if actual else '')
-    boton = f'<a href="{raiz}particulares.html?comprar={slug}#niveles" class="btn {"btn-claro" if actual else "btn-primario"}">Comprar {ARROW}</a>'
+    boton = f'<a href="{raiz}particulares/{slug}.html" class="btn {"btn-claro" if actual else "btn-primario"}">Ver el curso y comprar {ARROW}</a>'
     return f'''      <article class="{clase} reveal">{marca}
         <img class="medalla-e" src="{raiz}assets/3d/medalla-{P['medalla']}.png" alt="">
         <span class="et">{e(P['et'])}</span>
@@ -518,8 +518,9 @@ def faqs(c):
                   ('El certificado de este curso está alineado con ese artículo y sirve como prueba de la formación, con horas y contenidos.' if c['art4'] else 'Este curso renueva cada año esa formación y deja constancia con horas y contenidos.') + ' No es un título oficial ni homologado.'))
     q.append(('¿Cómo se verifica el certificado?', 'Cada certificado lleva un código QR que abre una página de Westlabs con el nombre, el curso, las horas y la fecha. El modelo de certificado y el programa están protocolizados ante notario.'))
     if c['dir'] or c['hc']:
-        q.append(('¿Cómo me apunto?', '<ul><li><b>Empresas:</b> en el formulario de arriba. Te preparamos una propuesta para vuestro equipo o te reservamos plazas en el aula síncrona, con la gestión de FUNDAE.</li>'
-                  '<li><b>Particulares:</b> en la <a href="../particulares.html">página de particulares</a> eliges tu nivel de Claude en teleformación y lo pagas online, de una vez o en 3 plazos.</li></ul>'))
+        q.append(('¿Cómo me apunto?', '<ul><li><b>Empresas:</b> en el formulario de arriba. Te preparamos una propuesta para vuestro equipo o te reservamos plazas en el aula síncrona, con la gestión de FUNDAE.</li>' +
+                  (f'<li><b>Particulares:</b> en la <a href="../particulares/{c["slug"]}.html">página de {e(c["n"])} para particulares</a> lo compras online, de una vez o en 3 plazos.</li></ul>' if pack(c) else
+                   '<li><b>Particulares:</b> en la <a href="../particulares.html">página de particulares</a> eliges tu nivel de Claude en teleformación y lo pagas online, de una vez o en 3 plazos.</li></ul>')))
     else:
         q.append(('¿Cómo lo contratamos?', 'Rellena el formulario de arriba. Hablamos con vosotros, preparamos los casos de vuestra empresa en una consultoría previa y os enviamos la propuesta con fechas, modalidad y la gestión de FUNDAE.'))
     ses = int(c['h'] / 2); jor = c['h'] / 4
@@ -591,7 +592,7 @@ def siguiente(c):
 def cta(c):
     a, b = c['cta']
     dual = c['dir'] or c.get('campus')
-    botones = (f'<a href="#inscripcion" class="btn btn-claro" data-abre="tab-emp">Solicita propuesta {ARROW}</a>\n        <a href="../particulares.html" class="btn btn-borde">Soy particular</a>'
+    botones = (f'<a href="#inscripcion" class="btn btn-claro" data-abre="tab-emp">Solicita propuesta {ARROW}</a>\n        <a href="../particulares{'/' + c['slug'] + '.html' if pack(c) else '.html'}" class="btn btn-borde">Soy particular</a>'
                if dual else f'<a href="#inscripcion" class="btn btn-claro">Solicita propuesta {ARROW}</a>\n        <a href="../#oferta" class="btn btn-borde">Ver más cursos</a>')
     return f'''<section class="cta-final">
   <div class="wrap">
@@ -678,13 +679,22 @@ def mapa():
          '| Aviso legal | [`aviso-legal.html`](aviso-legal.html) | Datos de Westlabs SCP y condiciones de uso |',
          '| Política de privacidad | [`privacidad.html`](privacidad.html) | Datos de los formularios, finalidades y derechos |',
          '| Política de cookies | [`cookies.html`](cookies.html) | Sin cookies de análisis ni publicidad |', '',
+         '## Particulares', '',
+         'Se generan con el mismo comando (`generador/particulares.py`, textos en `generador/datos_particulares.py`). Solo teleformación, sin nada de empresas.', '',
+         '| Página | Archivo | Qué es |', '|---|---|---|',
+         '| Particulares | [`particulares.html`](particulares.html) | Página general (se edita a mano): los tres niveles, cómo funciona y enlaces. Aquí no se compra |',
+         '| Claude Esencial | [`particulares/claude-esencial.html`](particulares/claude-esencial.html) | Página del nivel 1 con temario, recorrido, certificado, comparativa y compra (119 €) |',
+         '| Claude Avanzado | [`particulares/claude-avanzado.html`](particulares/claude-avanzado.html) | Página del nivel 2 con mentoría de 2 h y compra (449 €) |',
+         '| Claude Completo | [`particulares/claude-completo.html`](particulares/claude-completo.html) | Página del nivel 3 con mentoría de 3 h y compra (649 €) |',
+         '| Cómo funciona | [`particulares/como-funciona.html`](particulares/como-funciona.html) | Campus, mentoría, subir de nivel y pago |',
+         '| Certificado | [`particulares/certificado.html`](particulares/certificado.html) | El certificado y el artículo 4 del AI Act |', '',
          '## Fichas de curso', '',
          f'{len(CURSOS)} fichas en `cursos/`, una por cada tarjeta de la portada. Todas tienen el formulario de empresas (Web3Forms); las que tienen directo o campus, también el de particulares.', '']
     for tipo, tit in [('general', 'Formación general'), ('herr', 'Por herramienta')]:
         L += [f'### {tit}', '', '| Curso | Archivo | Horas | Directo | Presencial | Campus | Particulares | Siguiente paso |', '|---|---|---|---|---|---|---|---|']
         for c in [x for x in CURSOS if x['t'] == tipo]:
             hc, _ = campus_info(c)
-            if pack(c): part = f"{pack(c)['normal']} · Stripe pendiente"
+            if pack(c): part = f"[{pack(c)['normal']}](particulares/{c['slug']}.html) · Stripe pendiente"
             elif c['dir'] or c['hc']: part = 'Aviso de fechas o de campus'
             else: part = '—'
             sig = ', '.join(f'[{POR_SLUG[x]["n"]}](cursos/{x}.html)' for x in siguientes(c))
@@ -694,7 +704,7 @@ def mapa():
     L += ['## Conexiones', '', '| Qué | Dónde | Estado |', '|---|---|---|',
           '| Formularios de las fichas → correo | Web3Forms, clave en cada formulario. Asunto: «Propuesta para empresa · [curso]» o «Matrícula de particular · [curso]» | Configurado. Falta probar un envío real en la web publicada |',
           '| Convocatorias de la portada | Hoja de Google «Convocatorias» (copia en `datos/convocatorias-westlabs.xlsx`) | Conectado |',
-          '| Pago de los cursos de Claude para particulares (con códigos de descuento) | Pago con Stripe dentro de la web: funciones en `netlify/functions/`, variables en Netlify y clave publicable en `particulares.html` (ver README) | Pendiente |',
+          '| Pago de los cursos de Claude para particulares (con códigos de descuento) | Pago con Stripe dentro de la página de cada curso: funciones en `netlify/functions/`, variables en Netlify y clave publicable en `generador/datos_particulares.py` (ver README) | Pendiente |',
           '| Campus | https://westlabscampus.es/login | Conectado |',
           '| WhatsApp de Gerard | https://wa.me/34636875779 | Conectado |',
           '| Publicación | Netlify conectado a la rama `main` | Pendiente |', '',
@@ -709,5 +719,7 @@ if __name__ == '__main__':
     os.makedirs(os.path.join(RAIZ, 'cursos'), exist_ok=True)
     for c in CURSOS:
         open(os.path.join(RAIZ, 'cursos', c['slug'] + '.html'), 'w', encoding='utf-8').write(pagina(c))
+    import particulares
+    part = particulares.generar()
     open(os.path.join(RAIZ, 'MAPA-WEB.md'), 'w', encoding='utf-8').write(mapa())
-    print(f'{len(CURSOS)} fichas generadas en cursos/ y MAPA-WEB.md actualizado')
+    print(f'{len(CURSOS)} fichas generadas en cursos/, {len(part)} páginas en particulares/ y MAPA-WEB.md actualizado')

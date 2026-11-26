@@ -12,6 +12,19 @@ Se genera solo con `python3 generador/generar.py`. Lista todas las páginas, qu�
 | Política de privacidad | [`privacidad.html`](privacidad.html) | Datos de los formularios, finalidades y derechos |
 | Política de cookies | [`cookies.html`](cookies.html) | Sin cookies de análisis ni publicidad |
 
+## Particulares
+
+Se generan con el mismo comando (`generador/particulares.py`, textos en `generador/datos_particulares.py`). Solo teleformación, sin nada de empresas.
+
+| Página | Archivo | Qué es |
+|---|---|---|
+| Particulares | [`particulares.html`](particulares.html) | Página general (se edita a mano): los tres niveles, cómo funciona y enlaces. Aquí no se compra |
+| Claude Esencial | [`particulares/claude-esencial.html`](particulares/claude-esencial.html) | Página del nivel 1 con temario, recorrido, certificado, comparativa y compra (119 €) |
+| Claude Avanzado | [`particulares/claude-avanzado.html`](particulares/claude-avanzado.html) | Página del nivel 2 con mentoría de 2 h y compra (449 €) |
+| Claude Completo | [`particulares/claude-completo.html`](particulares/claude-completo.html) | Página del nivel 3 con mentoría de 3 h y compra (649 €) |
+| Cómo funciona | [`particulares/como-funciona.html`](particulares/como-funciona.html) | Campus, mentoría, subir de nivel y pago |
+| Certificado | [`particulares/certificado.html`](particulares/certificado.html) | El certificado y el artículo 4 del AI Act |
+
 ## Fichas de curso
 
 19 fichas en `cursos/`, una por cada tarjeta de la portada. Todas tienen el formulario de empresas (Web3Forms); las que tienen directo o campus, también el de particulares.
@@ -31,9 +44,9 @@ Se genera solo con `python3 generador/generar.py`. Lista todas las páginas, qu�
 
 | Curso | Archivo | Horas | Directo | Presencial | Campus | Particulares | Siguiente paso |
 |---|---|---|---|---|---|---|---|
-| Claude Esencial (Claude, nivel 1) | [`cursos/claude-esencial.html`](cursos/claude-esencial.html) | 8 h | ✓ | ✓ | Dentro de Build · 25 h | 119 € · Stripe pendiente | [Claude Avanzado](cursos/claude-avanzado.html), [Claude Completo](cursos/claude-completo.html), [Prompting eficaz](cursos/prompting-eficaz.html), [Documentos y presentaciones con IA](cursos/documentos-y-presentaciones-con-ia.html) |
-| Claude Avanzado (Claude, nivel 2) | [`cursos/claude-avanzado.html`](cursos/claude-avanzado.html) | 17 h | ✓ | ✓ | Dentro de Build · 25 h | 449 € · Stripe pendiente | [Claude Completo](cursos/claude-completo.html), [Documentos y presentaciones con IA](cursos/documentos-y-presentaciones-con-ia.html), [Investigación y análisis con IA](cursos/investigacion-y-analisis-con-ia.html), [Prompting eficaz](cursos/prompting-eficaz.html) |
-| Claude Completo (Claude, nivel 3) | [`cursos/claude-completo.html`](cursos/claude-completo.html) | 22,5 h | ✓ | ✓ | A tu ritmo | 649 € · Stripe pendiente | [IA para dirección](cursos/ia-para-direccion.html), [IA y cumplimiento normativo](cursos/ia-y-cumplimiento-normativo.html), [Investigación y análisis con IA](cursos/investigacion-y-analisis-con-ia.html), [Documentos y presentaciones con IA](cursos/documentos-y-presentaciones-con-ia.html) |
+| Claude Esencial (Claude, nivel 1) | [`cursos/claude-esencial.html`](cursos/claude-esencial.html) | 8 h | ✓ | ✓ | Dentro de Build · 25 h | [119 €](particulares/claude-esencial.html) · Stripe pendiente | [Claude Avanzado](cursos/claude-avanzado.html), [Claude Completo](cursos/claude-completo.html), [Prompting eficaz](cursos/prompting-eficaz.html), [Documentos y presentaciones con IA](cursos/documentos-y-presentaciones-con-ia.html) |
+| Claude Avanzado (Claude, nivel 2) | [`cursos/claude-avanzado.html`](cursos/claude-avanzado.html) | 17 h | ✓ | ✓ | Dentro de Build · 25 h | [449 €](particulares/claude-avanzado.html) · Stripe pendiente | [Claude Completo](cursos/claude-completo.html), [Documentos y presentaciones con IA](cursos/documentos-y-presentaciones-con-ia.html), [Investigación y análisis con IA](cursos/investigacion-y-analisis-con-ia.html), [Prompting eficaz](cursos/prompting-eficaz.html) |
+| Claude Completo (Claude, nivel 3) | [`cursos/claude-completo.html`](cursos/claude-completo.html) | 22,5 h | ✓ | ✓ | A tu ritmo | [649 €](particulares/claude-completo.html) · Stripe pendiente | [IA para dirección](cursos/ia-para-direccion.html), [IA y cumplimiento normativo](cursos/ia-y-cumplimiento-normativo.html), [Investigación y análisis con IA](cursos/investigacion-y-analisis-con-ia.html), [Documentos y presentaciones con IA](cursos/documentos-y-presentaciones-con-ia.html) |
 | Fundamentos de ChatGPT (ChatGPT, nivel 1) | [`cursos/fundamentos-de-chatgpt.html`](cursos/fundamentos-de-chatgpt.html) | 8 h | ✓ | ✓ | Próximamente | Aviso de fechas o de campus | [ChatGPT en profundidad](cursos/chatgpt-en-profundidad.html), [ChatGPT de cero a experto](cursos/chatgpt-de-cero-a-experto.html), [Prompting eficaz](cursos/prompting-eficaz.html), [Documentos y presentaciones con IA](cursos/documentos-y-presentaciones-con-ia.html) |
 | ChatGPT en profundidad (ChatGPT, nivel 2) | [`cursos/chatgpt-en-profundidad.html`](cursos/chatgpt-en-profundidad.html) | 17 h | ✓ | ✓ | Próximamente | Aviso de fechas o de campus | [ChatGPT de cero a experto](cursos/chatgpt-de-cero-a-experto.html), [Documentos y presentaciones con IA](cursos/documentos-y-presentaciones-con-ia.html), [Investigación y análisis con IA](cursos/investigacion-y-analisis-con-ia.html), [Prompting eficaz](cursos/prompting-eficaz.html) |
 | ChatGPT de cero a experto (ChatGPT, nivel 3) | [`cursos/chatgpt-de-cero-a-experto.html`](cursos/chatgpt-de-cero-a-experto.html) | 22,5 h | ✓ | ✓ | — | Aviso de fechas o de campus | [IA para dirección](cursos/ia-para-direccion.html), [IA y cumplimiento normativo](cursos/ia-y-cumplimiento-normativo.html), [Investigación y análisis con IA](cursos/investigacion-y-analisis-con-ia.html), [Documentos y presentaciones con IA](cursos/documentos-y-presentaciones-con-ia.html) |
@@ -51,7 +64,7 @@ Se genera solo con `python3 generador/generar.py`. Lista todas las páginas, qu�
 |---|---|---|
 | Formularios de las fichas → correo | Web3Forms, clave en cada formulario. Asunto: «Propuesta para empresa · [curso]» o «Matrícula de particular · [curso]» | Configurado. Falta probar un envío real en la web publicada |
 | Convocatorias de la portada | Hoja de Google «Convocatorias» (copia en `datos/convocatorias-westlabs.xlsx`) | Conectado |
-| Pago de los cursos de Claude para particulares (con códigos de descuento) | Pago con Stripe dentro de la web: funciones en `netlify/functions/`, variables en Netlify y clave publicable en `particulares.html` (ver README) | Pendiente |
+| Pago de los cursos de Claude para particulares (con códigos de descuento) | Pago con Stripe dentro de la página de cada curso: funciones en `netlify/functions/`, variables en Netlify y clave publicable en `generador/datos_particulares.py` (ver README) | Pendiente |
 | Campus | https://westlabscampus.es/login | Conectado |
 | WhatsApp de Gerard | https://wa.me/34636875779 | Conectado |
 | Publicación | Netlify conectado a la rama `main` | Pendiente |

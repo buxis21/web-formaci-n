@@ -8,8 +8,9 @@
 <link rel="icon" href="assets/logo/icono-westlabs.png">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/curso.css">
+<link rel="stylesheet" href="assets/css/particulares.css">
 </head>
-<body data-curso="Particulares" data-stripe-pk="">
+<body data-curso="Particulares">
 <!-- ============ ICONOS (sprite) ============ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -59,6 +60,11 @@
   <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
 </svg>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="pg-a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1B3F94"/><stop offset=".6" stop-color="#2563EB"/><stop offset="1" stop-color="#3BA8F5"/></linearGradient>
+  <linearGradient id="pg-b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3B8EF5"/><stop offset="1" stop-color="#5BC8F5"/></linearGradient>
+  <linearGradient id="pg-n" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E1B45"/><stop offset="1" stop-color="#1B3F94"/></linearGradient>
+</defs></svg>
 <div class="progreso" aria-hidden="true"></div>
 <a class="skip" href="#contenido">Ir al contenido</a>
 
@@ -152,7 +158,7 @@
     <div class="cab-sec reveal">
       <div class="pre">Elige tu nivel</div>
       <h2>Tres niveles de Claude, <span class="acento">paso a paso</span></h2>
-      <p class="intro">Cada nivel incluye el anterior. Si empiezas por uno y luego quieres más, pagas solo la diferencia. Los niveles 2 y 3 llevan mentoría 1 a 1.</p>
+      <p class="intro">Cada nivel incluye el anterior. Si empiezas por uno y luego quieres más, pagas solo la diferencia. Los niveles 2 y 3 llevan mentoría 1 a 1. Entra en el curso para ver el temario completo y comprarlo.</p>
     </div>
     <div class="escalones">
       <article class="esc e2 reveal" id="nivel-1">
@@ -164,7 +170,7 @@
         <p>Para empezar a usar Claude en tu trabajo desde el primer día.</p>
         <ul><li>Prompting y configuración</li><li>Proyectos y memoria</li><li>Conectores con tus herramientas</li><li>Certificado verificable</li><li>12 meses de acceso</li></ul>
         <p class="cuenta-nota">Cuenta gratuita de Claude para empezar</p>
-        <div class="esc-btns"><a href="#reserva" class="btn btn-primario" data-pack="Claude Esencial" data-curso="claude-esencial">Comprar <svg class="i fl"><use href="#i-arrow"/></svg></a><a href="cursos/claude-esencial.html" class="ver">Ver qué incluye</a></div>
+        <div class="esc-btns"><a href="particulares/claude-esencial.html" class="btn btn-primario">Ver el curso y comprar <svg class="i fl"><use href="#i-arrow"/></svg></a></div>
       </article>
       <article class="esc e2 reveal" id="nivel-2">
         <img class="medalla-e" src="assets/3d/medalla-2.png" alt="">
@@ -175,7 +181,7 @@
         <p>Para que Claude te haga tareas enteras.</p>
         <ul><li>Todo el nivel 1</li><li>Skills y Claude en Excel, Word y correo</li><li>Automatizaciones en el navegador</li><li><b>2 h de mentoría 1 a 1</b></li><li>Tu proyecto corregido</li></ul>
         <p class="cuenta-nota">Necesitas Claude Pro</p>
-        <div class="esc-btns"><a href="#reserva" class="btn btn-primario" data-pack="Claude Avanzado" data-curso="claude-avanzado">Comprar <svg class="i fl"><use href="#i-arrow"/></svg></a><a href="cursos/claude-avanzado.html" class="ver">Ver qué incluye</a></div>
+        <div class="esc-btns"><a href="particulares/claude-avanzado.html" class="btn btn-primario">Ver el curso y comprar <svg class="i fl"><use href="#i-arrow"/></svg></a></div>
       </article>
       <article class="esc actual reveal" id="nivel-3"><span class="aqui">Curso completo</span>
         <img class="medalla-e" src="assets/3d/medalla-3.png" alt="">
@@ -186,13 +192,8 @@
         <p>Para crear tus propias herramientas y agentes.</p>
         <ul><li>Todo lo de los niveles 1 y 2</li><li>Artefactos y miniaplicaciones</li><li>Agentes y proyecto propio</li><li><b>3 h de mentoría 1 a 1</b></li><li>Dos proyectos corregidos</li></ul>
         <p class="cuenta-nota">Necesitas Claude Pro</p>
-        <div class="esc-btns"><a href="#reserva" class="btn btn-claro" data-pack="Claude Completo" data-curso="claude-completo">Comprar <svg class="i fl"><use href="#i-arrow"/></svg></a><a href="cursos/claude-completo.html" class="ver">Ver qué incluye</a></div>
+        <div class="esc-btns"><a href="particulares/claude-completo.html" class="btn btn-claro">Ver el curso y comprar <svg class="i fl"><use href="#i-arrow"/></svg></a></div>
       </article>
-    </div>
-    <div class="cod-box reveal">
-      <label for="cod-desc">¿Tienes un código de descuento?</label>
-      <div class="cod-fila"><input id="cod-desc" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Escríbelo aquí"><svg class="i"><use href="#i-check"/></svg></div>
-      <small>Escríbelo antes de pulsar «Comprar» y el pago saldrá con el precio rebajado. También puedes añadirlo dentro del formulario de pago.</small>
     </div>
   </div>
 </section>
@@ -204,7 +205,7 @@
       <h2>De la matrícula <span class="acento">al certificado</span></h2>
     </div>
     <ol class="pasos-part reveal">
-      <li><span class="num">01</span><b>Eliges tu nivel</b><span>Lo pagas online, de una vez o en 3 plazos. Si tienes un código de descuento, se aplica al pagar.</span></li>
+      <li><span class="num">01</span><b>Eliges tu nivel</b><span>Lo compras en la página del curso, de una vez o en 3 plazos. Si tienes un código de descuento, lo pones ahí.</span></li>
       <li><span class="num">02</span><b>Entras en el campus</b><span>Te damos acceso y empiezas el mismo día, a tu ritmo.</span></li>
       <li><span class="num">03</span><b>Reservas tu mentoría</b><span>Cuando te encalles o quieras revisar tu caso, eliges hora en la agenda.</span></li>
       <li><span class="num">04</span><b>Te certificas</b><span>Entregas tu proyecto, te lo corregimos y recibes el certificado.</span></li>
@@ -228,6 +229,20 @@
       <div class="pre">Certificado</div>
       <h3>Nominativo y verificable</h3>
       <p>Cada certificado lleva un código QR que abre una página de Westlabs con tu nombre, el curso, las horas y la fecha. Está alineado con el artículo 4 del Reglamento Europeo de IA y lo puedes compartir en LinkedIn.</p>
+      <a href="particulares/certificado.html" class="btn btn-claro btn-sm" style="margin-top:18px">Cómo es el certificado <svg class="i fl"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="mas-sec" id="mas">
+  <div class="wrap">
+    <div class="cab-sec reveal">
+      <div class="pre">Antes de elegir</div>
+      <h2>Todo lo que quieres <span class="acento">saber antes</span></h2>
+    </div>
+    <div class="mas-info">
+      <a href="particulares/como-funciona.html" class="mi reveal"><svg class="ilus" viewBox="0 0 240 150" role="presentation" aria-hidden="true"><rect width="240" height="150" rx="22" fill="#EAF3FC"/><circle cx="214" cy="20" r="44" fill="#DDEBFA"/><circle cx="20" cy="142" r="36" fill="#E0EFFA"/><rect x="40" y="22" width="160" height="96" rx="10" fill="url(#pg-n)"/><rect x="48" y="30" width="144" height="80" rx="4" fill="#1B3F94"/><rect x="48" y="30" width="144" height="80" rx="4" fill="url(#pg-a)" opacity=".7"/><circle cx="120" cy="70" r="16" fill="#fff"/><path d="M115 62l13 8-13 8z" fill="#2563EB"/><rect x="58" y="100" width="124" height="4" rx="2" fill="#fff" opacity=".3"/><rect x="58" y="100" width="70" height="4" rx="2" fill="#5BC8F5"/><path d="M24 118h192l-10 14H34z" fill="#C9D7EC"/><rect x="104" y="118" width="32" height="5" rx="2.5" fill="#9DB6DA"/><path transform="translate(212 34) scale(0.8)" d="M0-9l2.6 6.4L9 0l-6.4 2.6L0 9l-2.6-6.4L-9 0l6.4-2.6z" fill="#5BC8F5"/></svg><div><b>Cómo funciona el campus</b><p>Una lección por dentro, la mentoría 1 a 1, cómo subir de nivel y las formas de pago.</p><em>Ver cómo funciona <svg class="i"><use href="#i-arrow"/></svg></em></div></a>
+      <a href="particulares/certificado.html" class="mi reveal"><svg class="ilus" viewBox="0 0 240 150" role="presentation" aria-hidden="true"><rect width="240" height="150" rx="22" fill="#EAF3FC"/><circle cx="214" cy="20" r="44" fill="#DDEBFA"/><circle cx="20" cy="142" r="36" fill="#E0EFFA"/><rect x="40" y="22" width="150" height="108" rx="8" fill="#fff" stroke="#D6DDE8" transform="rotate(-4 115 76)"/><rect x="46" y="20" width="150" height="108" rx="8" fill="#fff" stroke="#D6DDE8"/><rect x="54" y="28" width="134" height="92" rx="4" fill="none" stroke="#C9D7EC"/><rect x="96" y="40" width="50" height="5" rx="2.5" fill="#9DB6DA"/><rect x="78" y="54" width="86" height="7" rx="3.5" fill="#0E1B45"/><rect x="84" y="70" width="74" height="5" rx="2.5" fill="#C5D4EA"/><rect x="92" y="80" width="58" height="5" rx="2.5" fill="#C5D4EA"/><rect x="61" y="89" width="28.400000000000002" height="28.400000000000002" rx="3" fill="#fff"/><rect x="64.0" y="92.0" width="3.2" height="3.2" fill="#0E1B45"/><rect x="67.2" y="92.0" width="3.2" height="3.2" fill="#0E1B45"/><rect x="70.4" y="92.0" width="3.2" height="3.2" fill="#0E1B45"/><rect x="73.6" y="92.0" width="3.2" height="3.2" fill="#0E1B45"/><rect x="76.8" y="92.0" width="3.2" height="3.2" fill="#0E1B45"/><rect x="83.2" y="92.0" width="3.2" height="3.2" fill="#0E1B45"/><rect x="64.0" y="95.2" width="3.2" height="3.2" fill="#0E1B45"/><rect x="76.8" y="95.2" width="3.2" height="3.2" fill="#0E1B45"/><rect x="83.2" y="95.2" width="3.2" height="3.2" fill="#0E1B45"/><rect x="64.0" y="98.4" width="3.2" height="3.2" fill="#0E1B45"/><rect x="70.4" y="98.4" width="3.2" height="3.2" fill="#0E1B45"/><rect x="73.6" y="98.4" width="3.2" height="3.2" fill="#0E1B45"/><rect x="76.8" y="98.4" width="3.2" height="3.2" fill="#0E1B45"/><rect x="83.2" y="98.4" width="3.2" height="3.2" fill="#0E1B45"/><rect x="70.4" y="101.6" width="3.2" height="3.2" fill="#0E1B45"/><rect x="80.0" y="101.6" width="3.2" height="3.2" fill="#0E1B45"/><rect x="64.0" y="104.8" width="3.2" height="3.2" fill="#0E1B45"/><rect x="67.2" y="104.8" width="3.2" height="3.2" fill="#0E1B45"/><rect x="73.6" y="104.8" width="3.2" height="3.2" fill="#0E1B45"/><rect x="80.0" y="104.8" width="3.2" height="3.2" fill="#0E1B45"/><rect x="83.2" y="104.8" width="3.2" height="3.2" fill="#0E1B45"/><rect x="67.2" y="108.0" width="3.2" height="3.2" fill="#0E1B45"/><rect x="76.8" y="108.0" width="3.2" height="3.2" fill="#0E1B45"/><rect x="80.0" y="108.0" width="3.2" height="3.2" fill="#0E1B45"/><rect x="64.0" y="111.2" width="3.2" height="3.2" fill="#0E1B45"/><rect x="70.4" y="111.2" width="3.2" height="3.2" fill="#0E1B45"/><rect x="73.6" y="111.2" width="3.2" height="3.2" fill="#0E1B45"/><rect x="76.8" y="111.2" width="3.2" height="3.2" fill="#0E1B45"/><rect x="83.2" y="111.2" width="3.2" height="3.2" fill="#0E1B45"/><circle cx="178" cy="108" r="18" fill="url(#pg-b)"/><path d="M170 124l-4 18 12-6 12 6-4-18" fill="#2563EB"/><circle cx="189.0" cy="108.0" r="1.6" fill="#FFD54A"/><circle cx="185.8" cy="115.8" r="1.6" fill="#FFD54A"/><circle cx="178.0" cy="119.0" r="1.6" fill="#FFD54A"/><circle cx="170.2" cy="115.8" r="1.6" fill="#FFD54A"/><circle cx="167.0" cy="108.0" r="1.6" fill="#FFD54A"/><circle cx="170.2" cy="100.2" r="1.6" fill="#FFD54A"/><circle cx="178.0" cy="97.0" r="1.6" fill="#FFD54A"/><circle cx="185.8" cy="100.2" r="1.6" fill="#FFD54A"/><path transform="translate(214 34) scale(0.8)" d="M0-9l2.6 6.4L9 0l-6.4 2.6L0 9l-2.6-6.4L-9 0l6.4-2.6z" fill="#5BC8F5"/></svg><div><b>El certificado y el AI Act</b><p>Qué pide el artículo 4 del Reglamento Europeo de IA y cómo se verifica tu certificado.</p><em>Ver el certificado <svg class="i"><use href="#i-arrow"/></svg></em></div></a>
     </div>
   </div>
 </section>
@@ -242,7 +257,7 @@
     </div>
     <div class="acordeon reveal" id="faq-lista">
       <details><summary>¿Cómo funciona el pago en 3 plazos?</summary><div class="cuerpo">Al pagar eliges la opción de pago en 3 plazos. Pagas una parte en el momento y el resto en los dos meses siguientes, sin intereses. Tienes acceso completo al campus desde el primer día.</div></details>
-      <details><summary>¿Cómo uso un código de descuento?</summary><div class="cuerpo">Escríbelo en el campo «¿Tienes un código de descuento?» antes de pulsar «Comprar», o dentro del formulario de pago, en «Añadir código promocional». El precio se rebaja al momento y ves el total antes de pagar. También sirve si pagas en 3 plazos.</div></details>
+      <details><summary>¿Cómo uso un código de descuento?</summary><div class="cuerpo">Entra en la página de tu curso y escríbelo en el campo «¿Tienes un código de descuento?» antes de pulsar «Comprar», o dentro del formulario de pago, en «Añadir código promocional». El precio se rebaja al momento y ves el total antes de pagar. También sirve si pagas en 3 plazos.</div></details>
       <details><summary>¿Qué cuenta de Claude necesito?</summary><div class="cuerpo">Para Claude Esencial te vale la cuenta gratuita para empezar. Para Claude Avanzado y Claude Completo necesitas Claude Pro (no está incluida en el precio), porque trabajamos con proyectos, conectores y skills.</div></details>
       <details><summary>¿Cómo reservo la mentoría?</summary><div class="cuerpo">Desde el campus tienes un enlace a la agenda: eliges día y hora. Puedes usar tus horas de golpe o en sesiones de 30 minutos o de 1 hora, durante los 12 meses de acceso.</div></details>
       <details><summary>¿Puedo empezar por un nivel y subir después?</summary><div class="cuerpo">Sí. Cada nivel incluye el anterior y, si subes, pagas solo la diferencia.</div></details>
@@ -251,46 +266,6 @@
   </div>
 </section>
 
-<section class="reserva" id="reserva">
-  <div class="wrap">
-    <div class="inscripcion reserva-card reveal">
-      <div class="ins-panel" id="panel-part">
-        <h2>Reserva tu plaza</h2>
-        <p class="ayuda">Déjanos tus datos y te enviamos el enlace de pago y el acceso al campus.</p>
-        <form class="form" data-form="particulares" data-endpoint="https://api.web3forms.com/submit" novalidate>
-          <input type="hidden" name="access_key" value="ab432877-6901-4527-b6b2-86e117e9f28f">
-          <input type="hidden" name="subject" value="Particular · reserva de curso de Claude">
-          <input type="hidden" name="from_name" value="Web Westlabs AI School">
-          <input type="checkbox" name="botcheck" class="sr" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <div class="campo full"><label for="r-pack">Curso</label><select id="r-pack" name="curso_elegido" required><option value="">Elige</option><option>Claude Esencial · 119 €</option><option>Claude Avanzado · 449 €</option><option>Claude Completo · 649 €</option></select></div>
-          <div class="campo full"><label for="r-codigo">Código de descuento <small>(opcional)</small></label><input id="r-codigo" name="codigo_descuento" type="text" autocomplete="off" placeholder="Si tienes uno"></div>
-          <div class="campo full"><span class="grupo-t" id="r-pago-t">Pago</span>
-            <div class="opciones dos" role="radiogroup" aria-labelledby="r-pago-t">
-              <label class="op"><input type="radio" name="pago" value="De una vez" checked><span>De una vez</span></label>
-              <label class="op"><input type="radio" name="pago" value="En 3 plazos"><span>En 3 plazos</span></label>
-            </div></div>
-          <div class="campo"><label for="r-nombre">Nombre</label><input id="r-nombre" name="nombre" autocomplete="given-name" required></div>
-          <div class="campo"><label for="r-apellidos">Apellidos</label><input id="r-apellidos" name="apellidos" autocomplete="family-name" required></div>
-          <div class="campo"><label for="r-email">Email</label><input id="r-email" name="email" type="email" autocomplete="email" required></div>
-          <div class="campo"><label for="r-tel">Teléfono</label><input id="r-tel" name="telefono" type="tel" autocomplete="tel" required></div>
-          <label class="legal full"><input type="checkbox" name="privacidad" value="Aceptada" required><span>He leído y acepto la <a href="privacidad.html">política de privacidad</a>.</span></label>
-          <p class="form-error full" role="alert" hidden></p>
-          <button type="submit" class="btn btn-primario full">Reservar mi plaza <svg class="i fl"><use href="#i-arrow"/></svg></button>
-        </form>
-        <div class="form-ok" role="status"><div class="ok">✓</div><h3>¡Ya casi está!</h3><p>Te escribimos con el enlace de pago y el acceso al campus.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<dialog class="pago" id="pago" aria-labelledby="pago-titulo">
-  <div class="pago-cab">
-    <div><span class="pago-pre">Pago seguro con Stripe</span><h2 id="pago-titulo">Tu curso</h2></div>
-    <button type="button" class="pago-cerrar" id="pago-cerrar" aria-label="Cerrar el pago">&times;</button>
-  </div>
-  <div class="pago-aviso" id="pago-aviso" role="alert" hidden></div>
-  <div id="pago-form"></div>
-</dialog>
 
 </main>
 
@@ -366,7 +341,10 @@
 @media (max-width:640px){.pasos-part{grid-template-columns:1fr}}
 </style>
 
+<script>
+/* Enlaces antiguos (particulares.html?comprar=claude-avanzado): ahora se compra en la página de cada curso */
+(function(){var q=new URLSearchParams(location.search).get('comprar');if(/^claude-(esencial|avanzado|completo)$/.test(q||''))location.replace('particulares/'+q+'.html?comprar=1');})();
+</script>
 <script src="assets/js/curso.js"></script>
-<script src="assets/js/pago.js"></script>
 </body>
 </html>
