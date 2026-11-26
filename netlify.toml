@@ -1,0 +1,7 @@
+# Web estática: se publica la raíz del repositorio.
+# Las funciones de netlify/functions/ crean el pago de Stripe (ver README, «Pago con Stripe dentro de la web»).
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"

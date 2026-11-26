@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/curso.css">
 </head>
-<body data-curso="Particulares">
+<body data-curso="Particulares" data-stripe-pk="">
 <!-- ============ ICONOS (sprite) ============ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -157,7 +157,7 @@
     <div class="cod-box reveal">
       <label for="cod-desc">¿Tienes un código de descuento?</label>
       <div class="cod-fila"><input id="cod-desc" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Escríbelo aquí"><svg class="i"><use href="#i-check"/></svg></div>
-      <small>Se aplica al pagar: en la página de pago verás el precio rebajado antes de confirmar.</small>
+      <small>Escríbelo antes de pulsar «Comprar» y el formulario de pago saldrá con el precio rebajado. También puedes añadirlo dentro del formulario.</small>
     </div>
     <div class="escalones">
       <article class="esc e2 reveal" id="nivel-1">
@@ -169,7 +169,7 @@
         <p>Para empezar a usar Claude en tu trabajo desde el primer día.</p>
         <ul><li>Prompting y configuración</li><li>Proyectos y memoria</li><li>Conectores con tus herramientas</li><li>Certificado verificable</li><li>12 meses de acceso</li></ul>
         <p class="cuenta-nota">Cuenta gratuita de Claude para empezar</p>
-        <div class="esc-btns"><a href="#reserva" class="btn btn-primario" data-pack="Claude Esencial" data-stripe="">Comprar <svg class="i fl"><use href="#i-arrow"/></svg></a><a href="cursos/claude-esencial.html" class="ver">Ver qué incluye</a></div>
+        <div class="esc-btns"><a href="#reserva" class="btn btn-primario" data-pack="Claude Esencial" data-curso="claude-esencial">Comprar <svg class="i fl"><use href="#i-arrow"/></svg></a><a href="cursos/claude-esencial.html" class="ver">Ver qué incluye</a></div>
       </article>
       <article class="esc e2 reveal" id="nivel-2">
         <img class="medalla-e" src="assets/3d/medalla-2.png" alt="">
@@ -180,7 +180,7 @@
         <p>Para que Claude te haga tareas enteras.</p>
         <ul><li>Todo el nivel 1</li><li>Skills y Claude en Excel, Word y correo</li><li>Automatizaciones en el navegador</li><li><b>2 h de mentoría 1 a 1</b></li><li>Tu proyecto corregido</li></ul>
         <p class="cuenta-nota">Necesitas Claude Pro</p>
-        <div class="esc-btns"><a href="#reserva" class="btn btn-primario" data-pack="Claude Avanzado" data-stripe="">Comprar <svg class="i fl"><use href="#i-arrow"/></svg></a><a href="cursos/claude-avanzado.html" class="ver">Ver qué incluye</a></div>
+        <div class="esc-btns"><a href="#reserva" class="btn btn-primario" data-pack="Claude Avanzado" data-curso="claude-avanzado">Comprar <svg class="i fl"><use href="#i-arrow"/></svg></a><a href="cursos/claude-avanzado.html" class="ver">Ver qué incluye</a></div>
       </article>
       <article class="esc actual reveal" id="nivel-3"><span class="aqui">Curso completo</span>
         <img class="medalla-e" src="assets/3d/medalla-3.png" alt="">
@@ -191,7 +191,7 @@
         <p>Para crear tus propias herramientas y agentes.</p>
         <ul><li>Todo lo de los niveles 1 y 2</li><li>Artefactos y miniaplicaciones</li><li>Agentes y proyecto propio</li><li><b>3 h de mentoría 1 a 1</b></li><li>Dos proyectos corregidos</li></ul>
         <p class="cuenta-nota">Necesitas Claude Pro</p>
-        <div class="esc-btns"><a href="#reserva" class="btn btn-claro" data-pack="Claude Completo" data-stripe="">Comprar <svg class="i fl"><use href="#i-arrow"/></svg></a><a href="cursos/claude-completo.html" class="ver">Ver qué incluye</a></div>
+        <div class="esc-btns"><a href="#reserva" class="btn btn-claro" data-pack="Claude Completo" data-curso="claude-completo">Comprar <svg class="i fl"><use href="#i-arrow"/></svg></a><a href="cursos/claude-completo.html" class="ver">Ver qué incluye</a></div>
       </article>
     </div>
   </div>
@@ -242,7 +242,7 @@
     </div>
     <div class="acordeon reveal" id="faq-lista">
       <details><summary>¿Cómo funciona el pago en 3 plazos?</summary><div class="cuerpo">Al pagar eliges la opción de pago en 3 plazos. Pagas una parte en el momento y el resto en los dos meses siguientes, sin intereses. Tienes acceso completo al campus desde el primer día.</div></details>
-      <details><summary>¿Cómo uso un código de descuento?</summary><div class="cuerpo">Escríbelo en el campo «¿Tienes un código de descuento?» antes de pulsar Comprar, o directamente en la página de pago, en «Añadir código promocional». El precio se rebaja al momento y ves el total antes de pagar. También sirve si pagas en 3 plazos.</div></details>
+      <details><summary>¿Cómo uso un código de descuento?</summary><div class="cuerpo">Escríbelo en el campo «¿Tienes un código de descuento?» antes de pulsar «Comprar», o dentro del formulario de pago, en «Añadir código promocional». El precio se rebaja al momento y ves el total antes de pagar. También sirve si pagas en 3 plazos.</div></details>
       <details><summary>¿Qué cuenta de Claude necesito?</summary><div class="cuerpo">Para Claude Esencial te vale la cuenta gratuita para empezar. Para Claude Avanzado y Claude Completo necesitas Claude Pro (no está incluida en el precio), porque trabajamos con proyectos, conectores y skills.</div></details>
       <details><summary>¿Cómo reservo la mentoría?</summary><div class="cuerpo">Desde el campus tienes un enlace a la agenda: eliges día y hora. Puedes usar tus horas de golpe o en sesiones de 30 minutos o de 1 hora, durante los 12 meses de acceso.</div></details>
       <details><summary>¿Puedo empezar por un nivel y subir después?</summary><div class="cuerpo">Sí. Cada nivel incluye el anterior y, si subes, pagas solo la diferencia.</div></details>
@@ -282,6 +282,15 @@
     </div>
   </div>
 </section>
+
+<dialog class="pago" id="pago" aria-labelledby="pago-titulo">
+  <div class="pago-cab">
+    <div><span class="pago-pre">Pago seguro con Stripe</span><h2 id="pago-titulo">Tu curso</h2></div>
+    <button type="button" class="pago-cerrar" id="pago-cerrar" aria-label="Cerrar el pago">&times;</button>
+  </div>
+  <div class="pago-aviso" id="pago-aviso" role="alert" hidden></div>
+  <div id="pago-form"></div>
+</dialog>
 
 </main>
 
@@ -356,15 +365,8 @@
 @media (max-width:1024px){.pasos-part{grid-template-columns:1fr 1fr}.dos-col-part{grid-template-columns:1fr}}
 @media (max-width:640px){.pasos-part{grid-template-columns:1fr}}
 </style>
-<script>
-/* Los botones de cada pack lo dejan elegido en el formulario */
-document.querySelectorAll('[data-pack]').forEach(a=>a.addEventListener('click',ev=>{
-  const cod=(document.getElementById('cod-desc').value||'').trim().toUpperCase();
-  if(a.dataset.stripe){ev.preventDefault();location.href=a.dataset.stripe+(cod?(a.dataset.stripe.includes('?')?'&':'?')+'prefilled_promo_code='+encodeURIComponent(cod):'');return;}
-  const s=document.getElementById('r-pack');[...s.options].forEach(o=>{if(o.text.startsWith(a.dataset.pack))s.value=o.value;});
-  if(cod)document.getElementById('r-codigo').value=cod;
-}));
-</script>
+
 <script src="assets/js/curso.js"></script>
+<script src="assets/js/pago.js"></script>
 </body>
 </html>

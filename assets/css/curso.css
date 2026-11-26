@@ -322,3 +322,19 @@ footer .foot-grid{grid-template-columns:1.6fr 1fr 1fr}
 .cod-box small{font-size:12.5px;color:var(--gris)}
 .cod-nota{font-size:12.5px;color:var(--gris);margin:6px 0 0}
 .cod-nota.centro{text-align:center;margin-top:12px}
+/* ---------- Pago con Stripe dentro de la web ---------- */
+dialog.pago{position:fixed;inset:0;margin:auto;height:fit-content;width:min(720px,calc(100vw - 24px));max-height:calc(100vh - 24px);padding:0;border:0;border-radius:22px;background:#fff;box-shadow:0 40px 100px rgba(7,8,12,.45);overflow:auto}
+dialog.pago::backdrop{background:rgba(7,8,12,.62);backdrop-filter:blur(3px)}
+.pago-cab{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;background:#fff;border-bottom:1px solid var(--linea)}
+.pago-pre{display:block;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--intenso)}
+.pago-cab h2{margin:2px 0 0;font-size:22px;color:var(--titulo)}
+.pago-cerrar{flex:none;width:40px;height:40px;border:1px solid var(--linea);border-radius:50%;background:#fff;font-size:24px;line-height:1;color:var(--titulo);cursor:pointer}
+.pago-cerrar:hover,.pago-cerrar:focus-visible{background:#F2F5FB}
+#pago-form{padding:12px 8px 20px;min-height:120px}
+.pago-cargando{padding:40px 16px;text-align:center;color:var(--gris)}
+.pago-aviso{margin:18px 22px 0;padding:16px 18px;border-radius:14px;background:#FFF5F5;border:1px solid #F3C9C9;color:#7A1F1F;display:grid;gap:12px;justify-items:start}
+.pago-aviso p{margin:0}
+.gracias-hero .wrap{display:flex;justify-content:center}
+.gracias-caja{max-width:640px;text-align:center;padding:40px 0 60px}
+.gracias-caja .botones-hero{justify-content:center}
+.pago-aviso[hidden]{display:none}

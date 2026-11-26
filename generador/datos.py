@@ -68,18 +68,18 @@ CAMPUS = {
     'agents': dict(nombre='Agents', et='Agents · 40 h'),
 }
 # Teleformación para particulares: los tres niveles de Claude (página particulares.html).
-# 'normal' es el precio con IVA. 'stripe' es el enlace de pago (https://buy.stripe.com/...), pendiente.
-# En cada enlace de Stripe activa «Permitir códigos promocionales»: la web le pasa el código que escriba el cliente.
+# 'normal' es el precio con IVA. El pago se hace dentro de la web con Stripe (ver README):
+# el ID de precio de cada curso va en las variables STRIPE_PRICE_* de Netlify.
 PACKS = {
-    'claude-esencial': dict(nombre='Claude Esencial', et='Nivel 1 · Para empezar', normal='119 €', stripe='',
+    'claude-esencial': dict(nombre='Claude Esencial', et='Nivel 1 · Para empezar', normal='119 €',
                             medalla=1, mentoria='', cuenta='Cuenta gratuita de Claude para empezar',
                             txt='Para empezar a usar Claude en tu trabajo desde el primer día.',
                             lista=['Prompting y configuración', 'Proyectos y memoria', 'Conectores con tus herramientas', 'Certificado verificable', '12 meses de acceso']),
-    'claude-avanzado': dict(nombre='Claude Avanzado', et='Nivel 2 · Incluye el nivel 1', normal='449 €', stripe='',
+    'claude-avanzado': dict(nombre='Claude Avanzado', et='Nivel 2 · Incluye el nivel 1', normal='449 €',
                             medalla=2, mentoria='2 h', cuenta='Necesitas Claude Pro',
                             txt='Para que Claude te haga tareas enteras.',
                             lista=['Todo el nivel 1', 'Skills y Claude en Excel, Word y correo', 'Automatizaciones en el navegador', '2 h de mentoría 1 a 1', 'Tu proyecto corregido']),
-    'claude-completo': dict(nombre='Claude Completo', et='Nivel 3 · Incluye el 1 y el 2', normal='649 €', stripe='',
+    'claude-completo': dict(nombre='Claude Completo', et='Nivel 3 · Incluye el 1 y el 2', normal='649 €',
                             medalla=3, mentoria='3 h', cuenta='Necesitas Claude Pro', completo=True,
                             txt='Para crear tus propias herramientas y agentes.',
                             lista=['Todo lo de los niveles 1 y 2', 'Artefactos y miniaplicaciones', 'Agentes y proyecto propio', '3 h de mentoría 1 a 1', 'Dos proyectos corregidos']),

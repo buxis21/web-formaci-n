@@ -51,7 +51,7 @@ Se genera solo con `python3 generador/generar.py`. Lista todas las páginas, qu�
 |---|---|---|
 | Formularios de las fichas → correo | Web3Forms, clave en cada formulario. Asunto: «Propuesta para empresa · [curso]» o «Matrícula de particular · [curso]» | Configurado. Falta probar un envío real en la web publicada |
 | Convocatorias de la portada | Hoja de Google «Convocatorias» (copia en `datos/convocatorias-westlabs.xlsx`) | Conectado |
-| Pago de los cursos de Claude para particulares (con códigos de descuento) | Enlaces de pago de Stripe en `generador/datos.py` (`PACKS[...]["stripe"]`) | Pendiente |
+| Pago de los cursos de Claude para particulares (con códigos de descuento) | Pago con Stripe dentro de la web: funciones en `netlify/functions/`, variables en Netlify y clave publicable en `particulares.html` (ver README) | Pendiente |
 | Campus | https://westlabscampus.es/login | Conectado |
 | WhatsApp de Gerard | https://wa.me/34636875779 | Conectado |
 | Publicación | Netlify conectado a la rama `main` | Pendiente |

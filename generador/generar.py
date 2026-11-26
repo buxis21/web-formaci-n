@@ -150,7 +150,7 @@ def inscripcion(c):
           <div class="precio"><b>{px_pack(P)}</b><span>IVA incluido<br>o 3 plazos de {e(plazo_pack(P))} sin intereses</span></div>
           <p class="cod-nota">{CODIGO_TXT}</p>
           <ul class="pack-lista">{''.join(f'<li>{e(x)}</li>' for x in P['lista'][:4])}</ul>
-          <a href="../particulares.html#niveles" class="btn btn-primario full">Ver precio y comprar {ARROW}</a>
+          <a href="../particulares.html?comprar={c['slug']}#niveles" class="btn btn-primario full">Comprar {ARROW}</a>
         </div>'''
     elif c.get('campus') == 'ready':
         part = f'''        <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
@@ -451,7 +451,7 @@ def esc_card(P, slug, actual, raiz='../'):
     clase = 'esc actual' if actual else 'esc e2'
     lis = ''.join(f'<li>{e(x)}</li>' for x in P['lista'])
     marca = ('\n        <span class="aqui">Este curso</span>' if actual else '')
-    boton = f'<a href="{raiz}particulares.html#niveles" class="btn {"btn-claro" if actual else "btn-primario"}">Comprar {ARROW}</a>'
+    boton = f'<a href="{raiz}particulares.html?comprar={slug}#niveles" class="btn {"btn-claro" if actual else "btn-primario"}">Comprar {ARROW}</a>'
     return f'''      <article class="{clase} reveal">{marca}
         <img class="medalla-e" src="{raiz}assets/3d/medalla-{P['medalla']}.png" alt="">
         <span class="et">{e(P['et'])}</span>
@@ -694,7 +694,7 @@ def mapa():
     L += ['## Conexiones', '', '| Qué | Dónde | Estado |', '|---|---|---|',
           '| Formularios de las fichas → correo | Web3Forms, clave en cada formulario. Asunto: «Propuesta para empresa · [curso]» o «Matrícula de particular · [curso]» | Configurado. Falta probar un envío real en la web publicada |',
           '| Convocatorias de la portada | Hoja de Google «Convocatorias» (copia en `datos/convocatorias-westlabs.xlsx`) | Conectado |',
-          '| Pago de los cursos de Claude para particulares (con códigos de descuento) | Enlaces de pago de Stripe en `generador/datos.py` (`PACKS[...]["stripe"]`) | Pendiente |',
+          '| Pago de los cursos de Claude para particulares (con códigos de descuento) | Pago con Stripe dentro de la web: funciones en `netlify/functions/`, variables en Netlify y clave publicable en `particulares.html` (ver README) | Pendiente |',
           '| Campus | https://westlabscampus.es/login | Conectado |',
           '| WhatsApp de Gerard | https://wa.me/34636875779 | Conectado |',
           '| Publicación | Netlify conectado a la rama `main` | Pendiente |', '',

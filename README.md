@@ -9,6 +9,7 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 | `index.html` | Portada con el catálogo de cursos (estilos y código dentro del propio archivo) |
 | `contacto.html` | Formulario para empresas (propuesta) con el curso preelegido |
 | `particulares.html` | Los tres niveles de Claude en teleformación para particulares (119, 449 y 649 €), con mentoría, pago en 3 plazos y campo para código de descuento |
+| `gracias.html` | Página a la que vuelve el cliente después de pagar con Stripe (no sale en buscadores) |
 | `cursos/` | Una ficha por cada curso de la portada (19). **Se generan solas**: no se editan a mano |
 | `generador/` | Datos de los cursos (`datos.py`), plantilla de la ficha (`generar.py`) y partes comunes de las fichas (`parciales/`) |
 | `MAPA-WEB.md` | Mapa de todas las páginas y sus conexiones (se genera solo) |
@@ -72,13 +73,26 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 - **Empresas:** solo en directo. «Solo tu equipo» (online o presencial, precio por grupo) o «Aula síncrona» (online, alumnos de varias empresas, precio por alumno sin IVA: 190 € nivel 1 y Alfabetización, 390 € nivel 2, 490 € nivel 3). Precios en `generador/datos.py` (`AULA` y `AULA_NIVEL`).
 - **Particulares:** solo teleformación en el campus, con los tres niveles de Claude en `particulares.html`: Claude Esencial 119 € (sin mentoría), Claude Avanzado 449 € (2 h de mentoría) y Claude Completo 649 € (3 h de mentoría), IVA incluido. Mentoría 1 a 1 reservable cuando quieran durante los 12 meses. Alfabetización en IA no está en esta página: en su ficha, el particular nos escribe.
 
-## Pagos (Stripe)
+## Pago con Stripe dentro de la web
 
-- **Pago en 3 plazos:** en Stripe, activa Klarna en Ajustes → Métodos de pago y márcalo en cada enlace de pago. El cliente elige pagar en 3 plazos sin intereses y Westlabs cobra el total de una vez (menos la comisión de Klarna).
-- Para particulares se usa un **enlace de pago de Stripe** (`https://buy.stripe.com/...`) en el botón «Matricúlate». No hay plataforma de pago propia.
-- Cada curso con precio tiene su producto y su enlace en Stripe.
-- Antes de activar los enlaces reales, prueba el pago con el **modo de prueba** de Stripe.
-- Pendiente: confirmar con Santi si los precios llevan el 21 % de IVA.
+En `particulares.html`, el botón «Comprar» abre el formulario de pago de Stripe dentro de la propia página (Stripe Embedded Checkout), sin salir de la web. Acepta tarjeta, Apple Pay, Google Pay y Klarna en 3 plazos. Al pagar, el cliente vuelve a `gracias.html`, que comprueba el pago y le confirma la plaza.
+
+Piezas:
+- `netlify/functions/crear-pago.mjs`: crea la sesión de pago del curso. Si el cliente ha escrito un código de descuento en la web, lo busca en Stripe y lo aplica, y el formulario sale con el precio rebajado; si no, el formulario deja añadir el código dentro.
+- `netlify/functions/estado-pago.mjs`: lo usa `gracias.html` para saber si el pago se ha completado.
+- `assets/js/pago.js`: abre la ventana de pago. Los enlaces de las fichas (`particulares.html?comprar=claude-avanzado`) la abren directamente.
+- Mientras no haya clave publicable, «Comprar» lleva al formulario de reserva (Web3Forms) con el curso y el código rellenados.
+
+Configuración (una vez, primero en modo de prueba de Stripe y luego en real):
+1. En Stripe, crea un producto por curso (Claude Esencial 119 €, Claude Avanzado 449 €, Claude Completo 649 €, IVA incluido) y copia el ID de cada precio (`price_...`).
+2. En Stripe, Ajustes → Métodos de pago: activa Klarna, Apple Pay y Google Pay. En Ajustes → Correos a clientes: activa los recibos de pagos correctos. En tu perfil: activa el aviso por correo de cada pago, para saber a quién dar acceso al campus.
+3. En Netlify, Site configuration → Environment variables, añade:
+   - `STRIPE_SECRET_KEY`: la clave secreta (`sk_test_...` para probar, `sk_live_...` en real). Es secreta: solo va aquí, nunca en el código.
+   - `STRIPE_PRICE_CLAUDE_ESENCIAL`, `STRIPE_PRICE_CLAUDE_AVANZADO`, `STRIPE_PRICE_CLAUDE_COMPLETO`: los ID de precio.
+4. En `particulares.html`, pon la clave publicable en `<body ... data-stripe-pk="pk_test_...">` (esta sí puede ir en el código).
+5. Publica y prueba con la tarjeta de prueba 4242 4242 4242 4242 (cualquier fecha futura y CVC). Prueba también un código de descuento. Cuando todo vaya bien, cambia las dos claves y los ID de precio por los reales.
+
+Las funciones solo funcionan en la web publicada en Netlify o en su enlace de prueba; en la vista previa de claude.ai el pago no se abre.
 
 ## Fichas de curso
 
@@ -130,7 +144,8 @@ Del catálogo, para que todas las páginas digan lo mismo:
 
 - [ ] Crear la rama `main` y conectar Netlify
 - [ ] Probar un envío real de los formularios en la web publicada
-- [ ] Enlaces de pago de Stripe para los tres packs, con «Permitir códigos promocionales» activado y Klarna para los 3 plazos
+- [ ] Configurar Stripe dentro de la web: productos, claves y variables de Netlify (ver «Pago con Stripe dentro de la web»)
+- [ ] Dar el acceso al campus a quien paga (de momento a mano, con el aviso de pago de Stripe)
 - [ ] Precio por persona de la modalidad online en directo (ahora sale «por confirmar»)
 - [ ] Revisar los temarios de los cursos nuevos de formación general (Prompting eficaz, Investigación y análisis, Documentos y presentaciones, IA y cumplimiento normativo): no están en el catálogo en PDF
 - [ ] Campus de ChatGPT, Microsoft y Gemini (niveles 1 y 2): la portada los marca con campus; las fichas dicen «próximamente»
@@ -142,6 +157,5 @@ Del catálogo, para que todas las páginas digan lo mismo:
 
 ## Códigos de descuento
 
-- En `particulares.html`, encima de los cursos, hay un campo «¿Tienes un código de descuento?». Al pulsar «Comprar», la web abre el enlace de pago de Stripe de ese curso con el código ya puesto (`?prefilled_promo_code=CODIGO`) y Stripe enseña el precio rebajado antes de pagar. También lo pueden escribir directamente en la página de pago, en «Añadir código promocional».
-- En Stripe: crea un cupón (Productos → Cupones; por porcentaje o importe, con fecha de caducidad si quieres) y uno o varios códigos promocionales asociados. En cada enlace de pago marca «Permitir códigos promocionales». Funciona también con Klarna en 3 plazos.
-- Para conectar los botones, pega cada enlace (`https://buy.stripe.com/...`) en `generador/datos.py` (`PACKS[...]["stripe"]`) y en el `data-stripe` del botón de ese curso en `particulares.html`. Mientras esté vacío, el botón lleva al formulario de reserva y copia el código al campo «Código de descuento».
+- En `particulares.html`, encima de los cursos, hay un campo «¿Tienes un código de descuento?». Si el cliente lo rellena antes de pulsar «Comprar», el formulario de pago sale ya con el precio rebajado. Si el código no existe o ha caducado, la ventana de pago lo avisa y deja seguir sin código. También se puede añadir dentro del formulario, en «Añadir código promocional».
+- Los códigos se crean en Stripe: Productos → Cupones (por porcentaje o importe, con caducidad o límite de usos si quieres) y, dentro del cupón, uno o varios códigos promocionales (por ejemplo AMIGOS20). No hay que tocar la web para crear o quitar códigos.
