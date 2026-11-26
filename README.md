@@ -8,7 +8,7 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 |---|---|
 | `index.html` | Portada con el catálogo de cursos (estilos y código dentro del propio archivo) |
 | `contacto.html` | Formulario para empresas (propuesta) con el curso preelegido |
-| `particulares.html` | Packs de teleformación para particulares (Esencial 119 €, Profesional 449 €, Completo 649 €) con mentoría y pago en 3 plazos |
+| `particulares.html` | Packs de teleformación para particulares (precio de lanzamiento hasta el 31 de enero: Esencial 79 €, Profesional 299 €, Completo 449 €; precio normal 119, 449 y 649 €) con mentoría y pago en 3 plazos |
 | `cursos/` | Una ficha por cada curso de la portada (19). **Se generan solas**: no se editan a mano |
 | `generador/` | Datos de los cursos (`datos.py`), plantilla de la ficha (`generar.py`) y partes comunes de las fichas (`parciales/`) |
 | `MAPA-WEB.md` | Mapa de todas las páginas y sus conexiones (se genera solo) |
@@ -69,8 +69,8 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 
 ## Oferta: empresas y particulares
 
-- **Empresas:** solo en directo. «Solo tu equipo» (online o presencial, precio por grupo) o «Aula síncrona» (online, alumnos de varias empresas, precio por alumno sin IVA: 190 € Ready o Alfabetización, 490 € Build, 590 € Agents). Precios en `generador/datos.py` (`AULA` y `AULA_NIVEL`).
-- **Particulares:** solo teleformación en el campus, con packs en `particulares.html`: Esencial 119 € (Ready, sin mentoría), Profesional 449 € (Build + 2 h de mentoría) y Completo 649 € (Agents + 3 h de mentoría). Mentoría 1 a 1 reservable cuando quieran durante los 12 meses.
+- **Empresas:** solo en directo. «Solo tu equipo» (online o presencial, precio por grupo) o «Aula síncrona» (online, alumnos de varias empresas, precio por alumno sin IVA: 190 € nivel 1 y Alfabetización, 390 € nivel 2, 490 € nivel 3). Precios en `generador/datos.py` (`AULA` y `AULA_NIVEL`).
+- **Particulares:** solo teleformación en el campus, con packs en `particulares.html`: Esencial 79 € (normal 119 €, Ready, sin mentoría), Profesional 299 € (normal 449 €, Build + 2 h de mentoría) y Completo 449 € (normal 649 €, Agents + 3 h de mentoría). Mentoría 1 a 1 reservable cuando quieran durante los 12 meses.
 
 ## Pagos (Stripe)
 
@@ -130,7 +130,7 @@ Del catálogo, para que todas las páginas digan lo mismo:
 
 - [ ] Crear la rama `main` y conectar Netlify
 - [ ] Probar un envío real de los formularios en la web publicada
-- [ ] Enlaces de pago de Stripe para Ready (119 €) y Build (349 €) en el botón «Matricúlate»
+- [ ] Enlaces de pago de Stripe para los tres packs, con «Permitir códigos promocionales» activado y Klarna para los 3 plazos
 - [ ] Precio por persona de la modalidad online en directo (ahora sale «por confirmar»)
 - [ ] Revisar los temarios de los cursos nuevos de formación general (Prompting eficaz, Investigación y análisis, Documentos y presentaciones, IA y cumplimiento normativo): no están en el catálogo en PDF
 - [ ] Campus de ChatGPT, Microsoft y Gemini (niveles 1 y 2): la portada los marca con campus; las fichas dicen «próximamente»
@@ -139,3 +139,8 @@ Del catálogo, para que todas las páginas digan lo mismo:
 - [ ] Página propia de empresas (ahora el menú lleva a la sección de empresas de la portada)
 - [ ] Compartir o publicar la hoja de convocatorias para que la web pueda leerla
 - [ ] Enlace de la agenda de citas de Google Calendar para «Solicita propuesta»
+
+## Códigos de descuento y fin de la oferta de lanzamiento
+
+- **Códigos:** en Stripe, crea un cupón (Productos → Cupones) y uno o varios códigos promocionales asociados. En cada enlace de pago marca «Permitir códigos promocionales». El cliente escribe el código en la página de pago y ve el total antes de pagar; funciona también con Klarna en 3 plazos.
+- **Fin de la oferta (31 de enero):** cambia el precio de los enlaces de pago en Stripe, y en la web: `generador/datos.py` (`precio` = valor de `antes`, `plazo` = nuevo tercio, `LANZAMIENTO = ''`), `particulares.html` (precios, plazos, banda y desplegable) e `index.html` («Desde 79 €»). Después ejecuta `python3 generador/generar.py`.

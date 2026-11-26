@@ -8,7 +8,7 @@ No edites a mano los HTML de cursos/: se sobrescriben al generar.
 """
 import os, sys, html
 sys.path.insert(0, os.path.dirname(__file__))
-from datos import CURSOS, POR_SLUG, HERR, CAMPUS, CAMPUS_TEMARIO, CONVOCATORIA, siguientes, AULA, AULA_NIVEL
+from datos import CURSOS, POR_SLUG, HERR, CAMPUS, CAMPUS_TEMARIO, CONVOCATORIA, siguientes, AULA, AULA_NIVEL, LANZAMIENTO
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PARC = os.path.join(os.path.dirname(__file__), 'parciales')
@@ -25,6 +25,10 @@ cap = lambda t: t[0].upper() + t[1:]
 def precio_aula(c):
     p = AULA.get(c['slug']) or (AULA_NIVEL.get(c.get('nivel')) if c.get('t') == 'herr' and not c.get('extra') else None)
     return f'{p} € por alumno + IVA' if p else 'Por alumno · consúltanos'
+
+def px_pack(P):
+    """Precio del pack: el de lanzamiento con el normal tachado mientras dure la oferta."""
+    return (f'<s>{e(P["antes"])}</s> ' if LANZAMIENTO and P.get('antes') else '') + e(P['precio'])
 
 def horas(h):
     return (f'{h:g}'.replace('.', ',')) + ' h'
@@ -46,9 +50,9 @@ def tools_txt(c):
 def campus_info(c):
     """Qué ofrece el campus en este curso: (horas o estado, texto del precio). None si no hay campus."""
     if c.get('campus') == 'ready':
-        return '10 h', '<b>119 €</b> con IVA · Pack Esencial'
+        P = CAMPUS['ready']; return '10 h', f'<b>{P["precio"]}</b> con IVA · Pack Esencial' + (f' (antes {P["antes"]})' if LANZAMIENTO else '')
     if c.get('campus') == 'build':
-        return 'Dentro de Build · 25 h', '<b>449 €</b> con IVA · Pack Profesional con 2 h de mentoría · o en 3 plazos'
+        P = CAMPUS['build']; return 'Dentro de Build · 25 h', f'<b>{P["precio"]}</b> con IVA · Pack Profesional con 2 h de mentoría' + (f' (antes {P["antes"]})' if LANZAMIENTO else '') + ' · o en 3 plazos'
     if c['hc'] == 'pronto':
         return 'Próximamente', 'Próximamente'
     if c['hc']:
@@ -133,7 +137,7 @@ def inscripcion(c):
         part = f'''        <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
           <h2>Teleformación con mentoría</h2>
           <p class="ayuda">Haz el curso a tu ritmo en el campus{', con mentoría 1 a 1 cuando la necesites,' if camp != 'ready' else ''} y llévate el certificado verificable.</p>
-          <div class="precio"><b>{e(P['precio'])}</b><span>{e(P['nombre'])} · IVA incluido<br>o en 3 plazos sin intereses</span></div>
+          <div class="precio"><b>{px_pack(P)}</b><span>{e(P['nombre'])} · IVA incluido<br>o 3 plazos de {e(P['plazo'])} sin intereses</span></div>{f'{chr(10)}          <p class="lanz">{e(LANZAMIENTO)}</p>' if LANZAMIENTO else ''}
           <ul class="pack-lista">{''.join(f'<li>{e(x)}</li>' for x in P['lista'])}</ul>
           <a href="../particulares.html" class="btn btn-primario full">Ver los packs y matricularme {ARROW}</a>
         </div>'''
@@ -440,7 +444,8 @@ def escalera(c):
         <img class="medalla-e" src="../assets/3d/medalla-{P['medalla']}.png" alt="">
         <span class="et">{e(P['et'])}</span>
         <h3>{e(P['nombre'])}</h3>
-        <div class="px">{e(P['precio'])}<small>con IVA · o en 3 plazos</small></div>
+        <div class="px">{px_pack(P)}<small>con IVA</small></div>
+        <p class="plazos">o 3 plazos de {e(P['plazo'])}</p>
         <p>{e(P['txt'])}</p>
         <ul>{lis}</ul>{boton}
       </article>''')
@@ -450,7 +455,7 @@ def escalera(c):
     <div class="cab-sec reveal">
       <div class="pre">Para particulares</div>
       <h2>{'Empieza por aquí y' if camp == 'ready' else 'Tres cursos,'} <span class="acento">{'sube cuando quieras' if camp == 'ready' else 'paso a paso'}</span></h2>
-      <p class="intro">En el campus, {nombre_c}. Cada pack incluye el anterior y, si ya tienes uno, pagas solo la diferencia. Profesional y Completo incluyen mentoría 1 a 1.</p>
+      <p class="intro">En el campus, {nombre_c}. Cada pack incluye el anterior y, si ya tienes uno, pagas solo la diferencia. Profesional y Completo incluyen mentoría 1 a 1.{f' {LANZAMIENTO}.' if LANZAMIENTO else ''}</p>
     </div>
     <div class="escalones">
 {chr(10).join(cards)}
@@ -671,7 +676,7 @@ def mapa():
     L += ['## Conexiones', '', '| Qué | Dónde | Estado |', '|---|---|---|',
           '| Formularios de las fichas → correo | Web3Forms, clave en cada formulario. Asunto: «Propuesta para empresa · [curso]» o «Matrícula de particular · [curso]» | Configurado. Falta probar un envío real en la web publicada |',
           '| Convocatorias de la portada | Hoja de Google «Convocatorias» (copia en `datos/convocatorias-westlabs.xlsx`) | Conectado |',
-          '| Pago del campus (Ready 119 €, Build 349 €) | Enlaces de pago de Stripe en `generador/datos.py` (`CAMPUS[...]["stripe"]`) | Pendiente |',
+          '| Pago de los packs (Esencial, Profesional y Completo, con códigos de descuento) | Enlaces de pago de Stripe en `generador/datos.py` (`CAMPUS[...]["stripe"]`) | Pendiente |',
           '| Campus | https://westlabscampus.es/login | Conectado |',
           '| WhatsApp de Gerard | https://wa.me/34636875779 | Conectado |',
           '| Publicación | Netlify conectado a la rama `main` | Pendiente |', '',

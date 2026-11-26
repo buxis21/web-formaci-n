@@ -299,3 +299,10 @@ footer .foot-grid{grid-template-columns:1.6fr 1fr 1fr}
 .pack-lista{list-style:none;display:grid;gap:8px;margin:4px 0 22px}
 .pack-lista li{position:relative;padding-left:24px;font-size:15px;color:var(--tinta)}
 .pack-lista li::before{content:"✓";position:absolute;left:0;top:0;color:var(--intenso);font-weight:700}
+/* Oferta de lanzamiento: precio normal tachado */
+.esc .px s,.ins-panel .precio s{font-size:.55em;font-weight:400;color:var(--gris);text-decoration-thickness:2px;margin-right:4px}
+.esc.actual .px s{color:rgba(255,255,255,.6)}
+.lanz,.lanz-banda{font-size:13px;font-weight:600;color:var(--intenso);margin:6px 0 0}
+.lanz-banda{text-align:center;margin-top:10px}
+.esc.actual .lanz{color:var(--celeste)}
+.ins-panel .lanz{color:var(--intenso)}
