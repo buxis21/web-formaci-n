@@ -8,7 +8,7 @@ No edites a mano los HTML de cursos/: se sobrescriben al generar.
 """
 import os, sys, html
 sys.path.insert(0, os.path.dirname(__file__))
-from datos import CURSOS, POR_SLUG, HERR, CAMPUS, CAMPUS_TEMARIO, CONVOCATORIA, siguientes, AULA, AULA_NIVEL, LANZAMIENTO
+from datos import CURSOS, POR_SLUG, HERR, CAMPUS, CAMPUS_TEMARIO, CONVOCATORIA, siguientes, AULA, AULA_NIVEL, PACKS, NAVIDAD
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PARC = os.path.join(os.path.dirname(__file__), 'parciales')
@@ -26,9 +26,23 @@ def precio_aula(c):
     p = AULA.get(c['slug']) or (AULA_NIVEL.get(c.get('nivel')) if c.get('t') == 'herr' and not c.get('extra') else None)
     return f'{p} € por alumno + IVA' if p else 'Por alumno · consúltanos'
 
+def pack(c):
+    # Teleformación para particulares de este curso (PACKS), o None.
+    return PACKS.get(c['slug'])
+
 def px_pack(P):
-    """Precio del pack: el de lanzamiento con el normal tachado mientras dure la oferta."""
-    return (f'<s>{e(P["antes"])}</s> ' if LANZAMIENTO and P.get('antes') else '') + e(P['precio'])
+    # Precio para particulares: con el descuento de Navidad y el normal tachado mientras dure.
+    return f'<s>{e(P["normal"])}</s> {e(P["precio"])}' if NAVIDAD else e(P['normal'])
+
+def plazo_pack(P):
+    if NAVIDAD: return P['plazo']
+    n = float(P['normal'].replace(' €', '').replace(',', '.')) / 3
+    return f'{n:.2f}'.replace('.', ',') + ' €'
+
+def navidad_txt(corto=False):
+    if not NAVIDAD: return ''
+    if corto: return f'Navidad: {NAVIDAD["pct"]} con el código {NAVIDAD["codigo"]} hasta el {NAVIDAD["fin"]}'
+    return f'Especial Navidad: {NAVIDAD["pct"]} de descuento con el código {NAVIDAD["codigo"]}, hasta el {NAVIDAD["fin"]}'
 
 def horas(h):
     return (f'{h:g}'.replace('.', ',')) + ' h'
@@ -49,10 +63,12 @@ def tools_txt(c):
 
 def campus_info(c):
     """Qué ofrece el campus en este curso: (horas o estado, texto del precio). None si no hay campus."""
+    P = pack(c)
+    if P:
+        precio = f'<b>{px_pack(P)}</b> con IVA · o 3 plazos de {plazo_pack(P)}' + (f' · {navidad_txt(True)}' if NAVIDAD else '')
+        return ('Dentro de Build · 25 h' if c.get('campus') == 'build' else 'A tu ritmo'), precio
     if c.get('campus') == 'ready':
-        P = CAMPUS['ready']; return '10 h', f'<b>{P["precio"]}</b> con IVA · Pack Esencial' + (f' (antes {P["antes"]})' if LANZAMIENTO else '')
-    if c.get('campus') == 'build':
-        P = CAMPUS['build']; return 'Dentro de Build · 25 h', f'<b>{P["precio"]}</b> con IVA · Pack Profesional con 2 h de mentoría' + (f' (antes {P["antes"]})' if LANZAMIENTO else '') + ' · o en 3 plazos'
+        return '10 h', 'Consúltanos'
     if c['hc'] == 'pronto':
         return 'Próximamente', 'Próximamente'
     if c['hc']:
@@ -131,21 +147,27 @@ def inscripcion(c):
           </form>
           <div class="form-ok" role="status"><div class="ok">✓</div><h3>Gracias, lo tenemos</h3><p>Te escribimos para conocer a tu equipo y prepararte la propuesta.</p></div>
         </div>'''
-    camp = c.get('campus')
-    if camp:
-        P = CAMPUS[camp]
+    P = pack(c)
+    if P:
         part = f'''        <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
-          <h2>Teleformación con mentoría</h2>
-          <p class="ayuda">Haz el curso a tu ritmo en el campus{', con mentoría 1 a 1 cuando la necesites,' if camp != 'ready' else ''} y llévate el certificado verificable.</p>
-          <div class="precio"><b>{px_pack(P)}</b><span>{e(P['nombre'])} · IVA incluido<br>o 3 plazos de {e(P['plazo'])} sin intereses</span></div>{f'{chr(10)}          <p class="lanz">{e(LANZAMIENTO)}</p>' if LANZAMIENTO else ''}
-          <ul class="pack-lista">{''.join(f'<li>{e(x)}</li>' for x in P['lista'])}</ul>
-          <a href="../particulares.html" class="btn btn-primario full">Ver los packs y matricularme {ARROW}</a>
+          <h2>Teleformación{' con mentoría' if P['mentoria'] else ''}</h2>
+          <p class="ayuda">Haz el curso a tu ritmo en el campus{', con mentoría 1 a 1 cuando la necesites,' if P['mentoria'] else ''} y llévate el certificado verificable.</p>
+          <div class="precio"><b>{px_pack(P)}</b><span>IVA incluido<br>o 3 plazos de {e(plazo_pack(P))} sin intereses</span></div>{f'{chr(10)}          <p class="lanz">{e(navidad_txt())}</p>' if NAVIDAD else ''}
+          <ul class="pack-lista">{''.join(f'<li>{e(x)}</li>' for x in P['lista'][:4])}</ul>
+          <a href="../particulares.html#niveles" class="btn btn-primario full">Comprar{' con un ' + NAVIDAD['pct'] if NAVIDAD else ''} {ARROW}</a>
+        </div>'''
+    elif c.get('campus') == 'ready':
+        part = f'''        <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
+          <h2>Teleformación a tu ritmo</h2>
+          <p class="ayuda">Este curso también está en el campus: 10 horas a tu ritmo, 12 meses de acceso y certificado verificable. Escríbenos y te pasamos el precio y el acceso.</p>
+          <a href="https://www.westlabs.es/contacte" target="_blank" rel="noopener" class="btn btn-primario full">Escríbenos {ARROW}</a>
+          <p class="ayuda">¿Quieres aprender Claude? <a href="../particulares.html">Mira los cursos de Claude para particulares</a>.</p>
         </div>'''
     else:
         part = f'''        <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
           <h2>¿Eres particular?</h2>
-          <p class="ayuda">Este curso lo damos a equipos de empresa. Para formarte por tu cuenta tenemos packs de teleformación con Claude, con mentoría 1 a 1 y certificado.</p>
-          <a href="../particulares.html" class="btn btn-primario full">Ver los packs para particulares {ARROW}</a>
+          <p class="ayuda">Este curso lo damos a equipos de empresa. Para formarte por tu cuenta tenemos los cursos de Claude en teleformación, con mentoría 1 a 1 y certificado.</p>
+          <a href="../particulares.html" class="btn btn-primario full">Ver los cursos para particulares {ARROW}</a>
         </div>'''
     return f'''      <div class="inscripcion" id="inscripcion">
         <div class="ins-tabs" role="tablist" aria-label="¿Para quién es la formación?">
@@ -158,7 +180,7 @@ def inscripcion(c):
 
 def anclas(c):
     items = [('por-que', 'Por qué este curso'), ('modalidades', 'Fechas y modalidades'), ('temario', 'Temario'), ('certificado', 'Certificado')]
-    if c.get('campus'): items.append(('precio', 'Particulares'))
+    if pack(c): items.append(('precio', 'Particulares'))
     items += [('fundae', 'FUNDAE'), ('faqs', 'Preguntas')]
     return '<nav class="anclas" aria-label="Secciones del curso">\n  <div class="wrap">\n' + ''.join(f'    <a href="#{a}">{t}</a>\n' for a, t in items) + '    <a href="#inscripcion" class="apunta">¡Apúntate!</a>\n  </div>\n</nav>'
 
@@ -259,16 +281,16 @@ def modalidades(c):
     h_campus, precio_campus = campus_info(c)
     if h_campus:
         camp = c.get('campus')
-        if camp == 'ready':
+        if camp == 'ready' and not pack(c):
             fil = [('Duración', '10 h, con más práctica'), ('Fechas', 'Empiezas cuando quieras · 12 meses de acceso'), ('Cuenta', 'Gratuita de Claude, ChatGPT y Gemini'), ('Casos', 'Miniproyecto autoevaluado'), ('Precio', precio_campus)]
             desc = 'Vídeos cortos, ejercicios con tus documentos, guías descargables y un test final.'
             badge = 'Particulares'
-        elif camp in ('build', 'agents'):
-            P = CAMPUS[camp]
-            fil = [('Curso', f'{P["et"].split(" · ")[0]} · {P["nombre"]}'), ('Duración', P['et'].split(' · ')[1] + ' acumuladas'), ('Cuenta', 'Claude Pro (no incluida)'),
-                   ('Casos', 'Proyecto corregido por una formadora' if camp == 'build' else 'Dos proyectos corregidos'), ('Precio', precio_campus)]
-            desc = 'En el campus, este curso va dentro de Build, que junta los niveles 1 y 2 con vídeos, ejercicios con tus documentos y un proyecto corregido.'
-            badge = 'Particulares'
+        elif pack(c):
+            P = pack(c)
+            fil = [('Fechas', 'Empiezas cuando quieras · 12 meses de acceso'), ('Mentoría', f'{P["mentoria"]} 1 a 1, cuando quieras' if P['mentoria'] else 'No incluida'),
+                   ('Cuenta', P['cuenta']), ('Precio', precio_campus)]
+            desc = 'Vídeos cortos, ejercicios con tus documentos y certificado verificable' + (', con una formadora que te acompaña.' if P['mentoria'] else '.')
+            badge = 'Navidad · ' + NAVIDAD['pct'] if NAVIDAD else 'Particulares'
         elif h_campus == 'Próximamente':
             fil = [('Estado', 'Próximamente'), ('Formato', 'Vídeos, ejercicios con tus documentos y test'), ('Acceso', '12 meses'), ('Precio', 'Por confirmar')]
             desc = f'Estamos preparando la versión del campus de este curso. Déjanos tus datos y te avisamos cuando abra.'
@@ -281,12 +303,12 @@ def modalidades(c):
         tarjetas.append(f'''      <article class="mf reveal">
         <div class="mf-media"><img class="mf-3d" src="../assets/3d/portatil.png" alt=""><img src="../assets/fotos/campus.jpg" alt="Pantalla de acceso a WestLabs Campus" loading="lazy"><span class="mf-badge">{badge}</span></div>
         <div class="mf-txt">
-          <span class="mf-et">A tu ritmo · con mentoría</span>
+          <span class="mf-et">{'A tu ritmo · con mentoría' if pack(c) and pack(c)['mentoria'] else 'A tu ritmo'}</span>
           <h3>Teleformación</h3>
           <p class="mf-desc">{desc}</p>
           <dl class="ficha">{filas}
           </dl>
-          <a href="../particulares.html" class="btn btn-claro btn-sm">{'Ver los packs' if camp else 'Ver packs para particulares'} {ARROW}</a>
+          <a href="../particulares.html" class="btn btn-claro btn-sm">{'Ver precio y comprar' if pack(c) else 'Ver cursos para particulares'} {ARROW}</a>
         </div>
       </article>''')
     n = len(tarjetas)
@@ -429,33 +451,33 @@ def certificado(c):
   </div>
 </section>'''
 
-def escalera(c):
-    camp = c.get('campus')
-    if not camp: return ''
-    cards = []
-    for i, k in enumerate(['ready', 'build', 'agents']):
-        P = CAMPUS[k]; actual = (k == camp)
-        clase = 'esc actual' if actual else f'esc e{i + 1}' if i else 'esc e2'
-        if not actual and i == 0: clase = 'esc e3'
-        lis = ''.join(f'<li>{e(x)}</li>' for x in P['lista'])
-        boton = f'\n        <a href="../particulares.html" class="btn btn-claro">Ver el pack {ARROW}</a>' if actual else ''
-        aqui = '\n        <span class="aqui">Este curso</span>' if actual else ''
-        cards.append(f'''      <article class="{clase} reveal">{aqui}
-        <img class="medalla-e" src="../assets/3d/medalla-{P['medalla']}.png" alt="">
+def esc_card(P, slug, actual, raiz='../'):
+    clase = 'esc actual' if actual else 'esc e2'
+    lis = ''.join(f'<li>{e(x)}</li>' for x in P['lista'])
+    marca = ('\n        <span class="aqui">Este curso</span>' if actual else '') + (f'\n        <span class="dto">-{e(NAVIDAD["pct"])}</span>' if NAVIDAD else '')
+    boton = f'<a href="{raiz}particulares.html#niveles" class="btn {"btn-claro" if actual else "btn-primario"}">Comprar{" con un " + NAVIDAD["pct"] if NAVIDAD else ""} {ARROW}</a>'
+    return f'''      <article class="{clase} reveal">{marca}
+        <img class="medalla-e" src="{raiz}assets/3d/medalla-{P['medalla']}.png" alt="">
         <span class="et">{e(P['et'])}</span>
         <h3>{e(P['nombre'])}</h3>
         <div class="px">{px_pack(P)}<small>con IVA</small></div>
-        <p class="plazos">o 3 plazos de {e(P['plazo'])}</p>
+        <p class="plazos">o 3 plazos de {e(plazo_pack(P))}</p>
         <p>{e(P['txt'])}</p>
-        <ul>{lis}</ul>{boton}
-      </article>''')
-    nombre_c = {'ready': 'Alfabetización en IA es Ready', 'build': 'este curso va dentro de Build', 'agents': 'este curso va dentro de Agents'}[camp]
-    return f'''<section class="escalera" id="precio">
+        <ul>{lis}</ul>
+        {boton}
+      </article>'''
+
+def escalera(c):
+    if not pack(c): return ''
+    cards = [esc_card(P, k, k == c['slug']) for k, P in PACKS.items()]
+    nav = f'<p class="lanz-banda">{e(navidad_txt())}</p>' if NAVIDAD else ''
+    return f'''<section class="escalera{' navidad' if NAVIDAD else ''}" id="precio">
   <div class="wrap">
     <div class="cab-sec reveal">
-      <div class="pre">Para particulares</div>
-      <h2>{'Empieza por aquí y' if camp == 'ready' else 'Tres cursos,'} <span class="acento">{'sube cuando quieras' if camp == 'ready' else 'paso a paso'}</span></h2>
-      <p class="intro">En el campus, {nombre_c}. Cada pack incluye el anterior y, si ya tienes uno, pagas solo la diferencia. Profesional y Completo incluyen mentoría 1 a 1.{f' {LANZAMIENTO}.' if LANZAMIENTO else ''}</p>
+      <div class="pre">{'Especial Navidad · particulares' if NAVIDAD else 'Para particulares'}</div>
+      <h2>Tres niveles de Claude, <span class="acento">paso a paso</span></h2>
+      <p class="intro">En teleformación, a tu ritmo y con 12 meses de acceso. Cada nivel incluye el anterior y los niveles 2 y 3 llevan mentoría 1 a 1.</p>
+      {nav}
     </div>
     <div class="escalones">
 {chr(10).join(cards)}
@@ -501,7 +523,7 @@ def faqs(c):
     q.append(('¿Cómo se verifica el certificado?', 'Cada certificado lleva un código QR que abre una página de Westlabs con el nombre, el curso, las horas y la fecha. El modelo de certificado y el programa están protocolizados ante notario.'))
     if c['dir'] or c['hc']:
         q.append(('¿Cómo me apunto?', '<ul><li><b>Empresas:</b> en el formulario de arriba. Te preparamos una propuesta para vuestro equipo o te reservamos plazas en el aula síncrona, con la gestión de FUNDAE.</li>'
-                  '<li><b>Particulares:</b> en la <a href="../particulares.html">página de particulares</a> eliges tu pack de teleformación y lo pagas online, de una vez o en 3 plazos.</li></ul>'))
+                  '<li><b>Particulares:</b> en la <a href="../particulares.html">página de particulares</a> eliges tu nivel de Claude en teleformación y lo pagas online, de una vez o en 3 plazos.</li></ul>'))
     else:
         q.append(('¿Cómo lo contratamos?', 'Rellena el formulario de arriba. Hablamos con vosotros, preparamos los casos de vuestra empresa en una consultoría previa y os enviamos la propuesta con fechas, modalidad y la gestión de FUNDAE.'))
     ses = int(c['h'] / 2); jor = c['h'] / 4
@@ -666,7 +688,7 @@ def mapa():
         L += [f'### {tit}', '', '| Curso | Archivo | Horas | Directo | Presencial | Campus | Particulares | Siguiente paso |', '|---|---|---|---|---|---|---|---|']
         for c in [x for x in CURSOS if x['t'] == tipo]:
             hc, _ = campus_info(c)
-            if c.get('campus'): part = CAMPUS[c['campus']]['nombre'] + ' ' + CAMPUS[c['campus']]['precio'] + ' (Stripe pendiente)'
+            if pack(c): part = f"{pack(c)['normal']} ({pack(c)['precio']} en Navidad) · Stripe pendiente"
             elif c['dir'] or c['hc']: part = 'Aviso de fechas o de campus'
             else: part = '—'
             sig = ', '.join(f'[{POR_SLUG[x]["n"]}](cursos/{x}.html)' for x in siguientes(c))
@@ -676,7 +698,7 @@ def mapa():
     L += ['## Conexiones', '', '| Qué | Dónde | Estado |', '|---|---|---|',
           '| Formularios de las fichas → correo | Web3Forms, clave en cada formulario. Asunto: «Propuesta para empresa · [curso]» o «Matrícula de particular · [curso]» | Configurado. Falta probar un envío real en la web publicada |',
           '| Convocatorias de la portada | Hoja de Google «Convocatorias» (copia en `datos/convocatorias-westlabs.xlsx`) | Conectado |',
-          '| Pago de los packs (Esencial, Profesional y Completo, con códigos de descuento) | Enlaces de pago de Stripe en `generador/datos.py` (`CAMPUS[...]["stripe"]`) | Pendiente |',
+          '| Pago de los cursos de Claude para particulares (con código de Navidad) | Enlaces de pago de Stripe en `generador/datos.py` (`PACKS[...]["stripe"]`) | Pendiente |',
           '| Campus | https://westlabscampus.es/login | Conectado |',
           '| WhatsApp de Gerard | https://wa.me/34636875779 | Conectado |',
           '| Publicación | Netlify conectado a la rama `main` | Pendiente |', '',

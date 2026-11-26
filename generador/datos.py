@@ -61,24 +61,35 @@ HERR = {
 }
 ORDEN_HERR = ['claude', 'chatgpt', 'microsoft', 'gemini']
 
-# Campus para particulares (escalera Ready / Build / Agents). Enlace de Stripe: pendiente.
-CAMPUS = {   # packs para particulares: teleformación en el campus + mentoría (página particulares.html)
-    'ready':  dict(nombre='Pack Esencial', et='Ready · 10 h', precio='79 €', antes='119 €', plazo='26,33 €', stripe='',
-                   txt='El campus de Alfabetización en IA a tu ritmo, para empezar con la IA o acreditar tu formación.',
-                   lista=['Campus Ready · 10 h', 'Certificado verificable', '12 meses de acceso'], medalla=1),
-    'build':  dict(nombre='Pack Profesional', et='Build · 25 h', precio='299 €', antes='449 €', plazo='99,67 €', stripe='',
-                   txt='Conectas Claude a tu correo y tus documentos, creas tus skills y dejas una tarea tuya automatizada.',
-                   lista=['Incluye Ready', '2 h de mentoría 1 a 1', 'Proyecto corregido'], medalla=2),
-    'agents': dict(nombre='Pack Completo', et='Agents · 40 h', precio='449 €', antes='649 €', plazo='149,67 €', stripe='',
-                   txt='Creas miniaplicaciones a partir de un Excel y un agente que hace un proceso tuyo de principio a fin.',
-                   lista=['Incluye Ready y Build', '3 h de mentoría 1 a 1', 'Dos proyectos corregidos'], medalla=3),
+# Estructura interna del campus (temario por bloques Ready / Build / Agents)
+CAMPUS = {
+    'ready':  dict(nombre='Ready', et='Ready · 10 h'),
+    'build':  dict(nombre='Build', et='Build · 25 h'),
+    'agents': dict(nombre='Agents', et='Agents · 40 h'),
 }
+# Teleformación para particulares: los tres niveles de Claude (página particulares.html).
+# 'normal' es el precio de siempre (IVA incluido); 'precio' y 'plazo' son con el descuento de NAVIDAD.
+# Enlaces de pago de Stripe: pendientes ('stripe').
+PACKS = {
+    'claude-esencial': dict(nombre='Claude Esencial', et='Nivel 1 · Para empezar', normal='119 €', precio='83,30 €', plazo='27,77 €', stripe='',
+                            medalla=1, mentoria='', cuenta='Cuenta gratuita de Claude para empezar',
+                            txt='Para empezar a usar Claude en tu trabajo desde el primer día.',
+                            lista=['Prompting y configuración', 'Proyectos y memoria', 'Conectores con tus herramientas', 'Certificado verificable', '12 meses de acceso']),
+    'claude-avanzado': dict(nombre='Claude Avanzado', et='Nivel 2 · Incluye el nivel 1', normal='449 €', precio='314,30 €', plazo='104,77 €', stripe='',
+                            medalla=2, mentoria='2 h', cuenta='Necesitas Claude Pro',
+                            txt='Para que Claude te haga tareas enteras.',
+                            lista=['Todo el nivel 1', 'Skills y Claude en Excel, Word y correo', 'Automatizaciones en el navegador', '2 h de mentoría 1 a 1', 'Tu proyecto corregido']),
+    'claude-completo': dict(nombre='Claude Completo', et='Nivel 3 · Incluye el 1 y el 2', normal='649 €', precio='454,30 €', plazo='151,43 €', stripe='',
+                            medalla=3, mentoria='3 h', cuenta='Necesitas Claude Pro', completo=True,
+                            txt='Para crear tus propias herramientas y agentes.',
+                            lista=['Todo lo de los niveles 1 y 2', 'Artefactos y miniaplicaciones', 'Agentes y proyecto propio', '3 h de mentoría 1 a 1', 'Dos proyectos corregidos']),
+}
+# Descuento de Navidad (código promocional de Stripe). Al acabar, deja NAVIDAD = None:
+# la web mostrará el precio normal sin tachar.
+NAVIDAD = dict(pct='30 %', codigo='NAVIDAD30', fin='31 de enero')
 # Aula síncrona para empresas: online en directo, alumnos de varias empresas, precio por alumno (sin IVA)
 AULA = {'alfabetizacion-en-ia': 190}
 AULA_NIVEL = {1: 190, 2: 390, 3: 490}
-# Oferta de lanzamiento de los packs: 'precio' es el de lanzamiento y 'antes' el normal.
-# Al acabar la oferta, pon en 'precio' el valor de 'antes' y deja LANZAMIENTO = ''.
-LANZAMIENTO = 'Precio de lanzamiento hasta el 31 de enero'
 
 # ---------------------------------------------------------------- módulos
 def M(t, sub, h, puntos, comun=False, llevas=None, grupo=None):
