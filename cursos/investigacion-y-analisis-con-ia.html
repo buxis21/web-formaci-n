@@ -108,6 +108,7 @@
         </div>
       </li>
       <li><a href="../#empresas">Empresas</a></li>
+      <li><a href="../particulares.html">Particulares</a></li>
       <li class="campus"><a href="https://westlabscampus.es/login" target="_blank" rel="noopener"><svg class="i"><use href="#i-laptop-w"/></svg>Campus</a></li>
       <li class="cta"><a href="https://www.westlabs.es/contacte" target="_blank" rel="noopener">Contacto</a></li>
     </ul>
@@ -151,7 +152,7 @@
             <div class="campo"><label for="e-personas">Número de personas</label>
               <select id="e-personas" name="personas" required><option value="">Elige</option><option>1 a 5</option><option>6 a 10</option><option>11 a 25</option><option>26 a 50</option><option>Más de 50</option></select></div>
             <div class="campo"><label for="e-modalidad">Modalidad</label>
-              <select id="e-modalidad" name="modalidad" required><option value="">Elige</option><option>Online en directo</option><option>In company online</option><option>In company presencial</option><option>Aún no lo sé</option></select></div>
+              <select id="e-modalidad" name="modalidad" required><option value="">Elige</option><option>Solo tu equipo · online</option><option>Solo tu equipo · presencial</option><option>Aula síncrona · precio por alumno</option><option>Aún no lo sé</option></select></div>
             <div class="campo full"><span class="grupo-t" id="e-fundae-t">¿Queréis que gestionemos la FUNDAE?</span>
               <div class="opciones dos" role="radiogroup" aria-labelledby="e-fundae-t">
                 <label class="op"><input type="radio" name="fundae" value="Sí" required><span>Sí, gestionadla</span></label>
@@ -165,27 +166,9 @@
           <div class="form-ok" role="status"><div class="ok">✓</div><h3>Gracias, lo tenemos</h3><p>Te escribimos para conocer a tu equipo y prepararte la propuesta.</p></div>
         </div>
         <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
-          <h2>Apúntate al curso</h2>
-          <p class="ayuda">En directo, con un grupo reducido de varias empresas.</p>
-          <div class="precio" id="precio-part"><b>Próximamente</b><span>Te avisamos cuando abramos grupo<br>fechas y precio por confirmar</span></div>
-          <form class="form" data-form="particulares" data-endpoint="https://api.web3forms.com/submit" novalidate>
-            <input type="hidden" name="access_key" value="ab432877-6901-4527-b6b2-86e117e9f28f">
-            <input type="hidden" name="subject" value="Matrícula de particular · Investigación y análisis con IA">
-            <input type="hidden" name="from_name" value="Web Westlabs AI School">
-            <input type="checkbox" name="botcheck" class="sr" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <div class="campo full"><span class="grupo-t" id="p-mod-t">Modalidad</span>
-              <div class="opciones" role="radiogroup" aria-labelledby="p-mod-t">
-                <label class="op"><input type="radio" name="modalidad" value="Online en directo" checked data-precio-op="Próximamente" data-precio-nota="Te avisamos cuando abramos grupo&lt;br&gt;fechas y precio por confirmar"><span>Online en directo<small>2 sesiones de 2 h · fechas por confirmar</small></span></label>
-              </div></div>
-            <div class="campo"><label for="p-nombre">Nombre</label><input id="p-nombre" name="nombre" autocomplete="given-name" required></div>
-            <div class="campo"><label for="p-apellidos">Apellidos</label><input id="p-apellidos" name="apellidos" autocomplete="family-name" required></div>
-            <div class="campo"><label for="p-email">Email</label><input id="p-email" name="email" type="email" autocomplete="email" required></div>
-            <div class="campo"><label for="p-tel">Teléfono</label><input id="p-tel" name="telefono" type="tel" autocomplete="tel" required></div>
-            <label class="legal full"><input type="checkbox" name="privacidad" value="Aceptada" required><span>He leído y acepto la <a href="../privacidad.html">política de privacidad</a>.</span></label>
-            <p class="form-error full" role="alert" hidden></p>
-            <button type="submit" class="btn btn-primario full">Avísame <svg class="i fl"><use href="#i-arrow"/></svg></button>
-          </form>
-          <div class="form-ok" role="status"><div class="ok">✓</div><h3>¡Ya casi está!</h3><p>Te avisamos en cuanto abramos plazas.</p></div>
+          <h2>¿Eres particular?</h2>
+          <p class="ayuda">Este curso lo damos a equipos de empresa. Para formarte por tu cuenta tenemos packs de teleformación con Claude, con mentoría 1 a 1 y certificado.</p>
+          <a href="../particulares.html" class="btn btn-primario full">Ver los packs para particulares <svg class="i fl"><use href="#i-arrow"/></svg></a>
         </div>
       </div>
     </div>
@@ -259,19 +242,19 @@
     </div>
     <div class="modfotos mods-curso n2">
       <article class="mf reveal">
-        <div class="mf-media"><img class="mf-3d" src="../assets/3d/video.png" alt=""><img src="../assets/fotos/online.jpg" alt="Alumna conectada a una clase en directo por videollamada" loading="lazy"><span class="mf-badge">Particulares y empresas</span></div>
+        <div class="mf-media"><img class="mf-3d" src="../assets/3d/video.png" alt=""><img src="../assets/fotos/online.jpg" alt="Alumna conectada a una clase en directo por videollamada" loading="lazy"><span class="mf-badge">Empresas · por alumno</span></div>
         <div class="mf-txt">
           <span class="mf-et">Online en directo</span>
-          <h3>Grupo abierto</h3>
-          <p class="mf-desc">Clases por videollamada con alumnos de varias empresas. Ideal si eres una persona o sois pocas.</p>
+          <h3>Aula síncrona</h3>
+          <p class="mf-desc">Clases en directo por videollamada con alumnos de varias empresas. Pagáis por persona: ideal si formáis a pocas.</p>
           <dl class="ficha">
             <div><dt>Duración</dt><dd>4 h · 2 sesiones de 2 h</dd></div>
             <div><dt>Fechas</dt><dd>Fijas · por confirmar</dd></div>
             <div><dt>Grupo</dt><dd>Reducido, de varias empresas</dd></div>
             <div><dt>Casos</dt><dd>Los tuyos, corregidos en clase</dd></div>
-            <div><dt>Precio</dt><dd>Por persona · por confirmar</dd></div>
+            <div><dt>Precio</dt><dd>Por alumno · consúltanos · bonificable</dd></div>
           </dl>
-          <a href="#inscripcion" class="btn btn-claro btn-sm" data-abre="tab-part">Avísame de las fechas <svg class="i fl"><use href="#i-arrow"/></svg></a>
+          <a href="#inscripcion" class="btn btn-claro btn-sm" data-abre="tab-emp">Reserva plazas <svg class="i fl"><use href="#i-arrow"/></svg></a>
         </div>
       </article>
       <article class="mf mf-dest reveal">
@@ -291,7 +274,7 @@
         </div>
       </article>
     </div>
-    <p class="mods-nota reveal"><svg class="i"><use href="#i-check"/></svg>Todas las modalidades son bonificables por FUNDAE para empresas y dan el mismo certificado.</p>
+    <p class="mods-nota reveal"><svg class="i"><use href="#i-check"/></svg>Las modalidades para empresas son bonificables por FUNDAE. Todas dan el mismo certificado.</p>
   </div>
 </section>
 
@@ -396,9 +379,9 @@
       <details><summary>¿Necesito conocimientos técnicos?</summary><div class="cuerpo">No. El curso no tiene requisitos. Solo necesitas un ordenador con conexión a internet.</div></details>
       <details><summary>¿Qué herramienta o licencia necesito?</summary><div class="cuerpo">Te recomendamos una cuenta de pago de la herramienta que uses, porque la búsqueda y la lectura de documentos largos funcionan mejor. Si solo tienes la gratuita, también puedes seguir el taller.</div></details>
       <details><summary>¿Cómo se verifica el certificado?</summary><div class="cuerpo">Cada certificado lleva un código QR que abre una página de Westlabs con el nombre, el curso, las horas y la fecha. El modelo de certificado y el programa están protocolizados ante notario.</div></details>
-      <details><summary>¿Cómo me apunto?</summary><div class="cuerpo"><ul><li><b>Particulares:</b> en el formulario de arriba, pestaña Particulares. Te avisamos cuando abramos plazas.</li><li><b>Empresas:</b> en la pestaña Empresas. Te preparamos una propuesta con fechas, modalidad y la gestión de FUNDAE.</li></ul></div></details>
+      <details><summary>¿Cómo me apunto?</summary><div class="cuerpo"><ul><li><b>Empresas:</b> en el formulario de arriba. Te preparamos una propuesta para vuestro equipo o te reservamos plazas en el aula síncrona, con la gestión de FUNDAE.</li><li><b>Particulares:</b> en la <a href="../particulares.html">página de particulares</a> eliges tu pack de teleformación y lo pagas online, de una vez o en 3 plazos.</li></ul></div></details>
       <details><summary>¿Cuánto tiempo tengo que dedicarle?</summary><div class="cuerpo">Son 4 horas: 2 sesiones de 2 h online.</div></details>
-      <details><summary>¿Qué diferencia hay entre el grupo abierto y la formación para mi empresa?</summary><div class="cuerpo">En el grupo abierto te apuntas a unas fechas fijas con alumnos de otras empresas: va bien si eres una persona o sois pocas. La formación para tu empresa es un grupo solo vuestro, online o presencial, en las fechas que elijáis y con casos de vuestro trabajo preparados antes.</div></details>
+      <details><summary>¿Qué diferencia hay entre el aula síncrona y la formación solo para mi equipo?</summary><div class="cuerpo">En el aula síncrona reserváis plazas en un grupo en directo con alumnos de otras empresas, en fechas fijas, y pagáis por alumno: va bien si formáis a pocas personas. La formación solo para vuestro equipo es un grupo cerrado, online o presencial, en las fechas que elijáis y con casos de vuestro trabajo preparados en una consultoría previa.</div></details>
       <details><summary>¿Qué hago después?</summary><div class="cuerpo">Puedes seguir con Documentos y presentaciones con IA o con Prompting eficaz. Los tienes al final de esta página.</div></details>
       <details><summary>¿Puedo bonificar el curso por FUNDAE?</summary><div class="cuerpo">Sí, si lo paga tu empresa y tiene crédito de formación. Somos entidad organizadora y hacemos toda la gestión. Los autónomos sin trabajadores no pueden bonificar.</div></details>
       <details><summary>¿En qué idiomas se imparte?</summary><div class="cuerpo">En castellano, catalán o inglés.</div></details>
@@ -433,7 +416,7 @@
       </div>
       <div class="botones">
         <a href="#inscripcion" class="btn btn-claro" data-abre="tab-emp">Solicita propuesta <svg class="i fl"><use href="#i-arrow"/></svg></a>
-        <a href="#inscripcion" class="btn btn-borde" data-abre="tab-part">Apúntate</a>
+        <a href="../particulares.html" class="btn btn-borde">Soy particular</a>
       </div>
     </div>
   </div>
@@ -463,7 +446,8 @@
         <li><a href="introduccion-a-gemini.html">Introducción a Gemini</a></li>
         <li><a href="../#oferta">Ver todos los cursos</a></li></ul></div>
       <div><h5>La escuela</h5><ul>
-        <li><a href="../#convocatorias">Convocatorias abiertas</a></li>
+        <li><a href="../particulares.html">Particulares: teleformación</a></li>
+        <li><a href="../#convocatorias">Aula síncrona: convocatorias</a></li>
         <li><a href="../#ai-act">Certificado AI Act</a></li>
         <li><a href="../#fundae">FUNDAE</a></li>
         <li><a href="https://westlabscampus.es/login" target="_blank" rel="noopener">Campus</a></li>

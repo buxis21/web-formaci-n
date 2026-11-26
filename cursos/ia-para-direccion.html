@@ -108,6 +108,7 @@
         </div>
       </li>
       <li><a href="../#empresas">Empresas</a></li>
+      <li><a href="../particulares.html">Particulares</a></li>
       <li class="campus"><a href="https://westlabscampus.es/login" target="_blank" rel="noopener"><svg class="i"><use href="#i-laptop-w"/></svg>Campus</a></li>
       <li class="cta"><a href="https://www.westlabs.es/contacte" target="_blank" rel="noopener">Contacto</a></li>
     </ul>
@@ -130,8 +131,11 @@
         <div class="chips"><span class="chip-h dest"><svg class="i"><use href="#i-check"/></svg>8 h</span><span class="chip-h"><svg class="i"><use href="#i-check"/></svg>Sin requisitos</span><span class="chip-h"><svg class="i"><use href="#i-check"/></svg>Certificado verificable</span><span class="chip-h"><svg class="i"><use href="#i-check"/></svg>Bonificable FUNDAE</span></div>
         <div class="herr-hero"><small>Herramientas</small><span class="logos"><span class="logo-tile"><img src="../assets/herramientas/claude.svg" alt="Claude"></span><span class="logo-tile"><img src="../assets/herramientas/chatgpt.png" alt="ChatGPT"></span><span class="logo-tile"><img src="../assets/herramientas/copilot.png" alt="Microsoft 365 Copilot"></span><span class="logo-tile"><img src="../assets/herramientas/gemini.png" alt="Gemini"></span></span></div>
       </div>
-      <div class="inscripcion solo-emp" id="inscripcion">
-        <div class="ins-solo"><svg class="i"><use href="#i-building"/></svg>Curso para empresas · in company</div>
+      <div class="inscripcion" id="inscripcion">
+        <div class="ins-tabs" role="tablist" aria-label="¿Para quién es la formación?">
+          <button role="tab" id="tab-emp" aria-controls="panel-emp" aria-selected="true"><svg class="i"><use href="#i-building"/></svg>Empresas</button>
+          <button role="tab" id="tab-part" aria-controls="panel-part" aria-selected="false" tabindex="-1"><svg class="i"><use href="#i-users"/></svg>Particulares</button>
+        </div>
         <div class="ins-panel" role="tabpanel" id="panel-emp" aria-labelledby="tab-emp">
           <h2>Hablemos de la formación de tu equipo</h2>
           <p class="ayuda">Te preparamos una propuesta con fechas, modalidad y gestión de FUNDAE.</p>
@@ -148,7 +152,7 @@
             <div class="campo"><label for="e-personas">Número de personas</label>
               <select id="e-personas" name="personas" required><option value="">Elige</option><option>1 a 5</option><option>6 a 10</option><option>11 a 25</option><option>26 a 50</option><option>Más de 50</option></select></div>
             <div class="campo"><label for="e-modalidad">Modalidad</label>
-              <select id="e-modalidad" name="modalidad" required><option value="">Elige</option><option>In company online</option><option>In company presencial</option><option>Aún no lo sé</option></select></div>
+              <select id="e-modalidad" name="modalidad" required><option value="">Elige</option><option>Solo tu equipo · online</option><option>Solo tu equipo · presencial</option><option>Aún no lo sé</option></select></div>
             <div class="campo full"><span class="grupo-t" id="e-fundae-t">¿Queréis que gestionemos la FUNDAE?</span>
               <div class="opciones dos" role="radiogroup" aria-labelledby="e-fundae-t">
                 <label class="op"><input type="radio" name="fundae" value="Sí" required><span>Sí, gestionadla</span></label>
@@ -160,6 +164,11 @@
             <button type="submit" class="btn btn-primario full">Solicita propuesta <svg class="i fl"><use href="#i-arrow"/></svg></button>
           </form>
           <div class="form-ok" role="status"><div class="ok">✓</div><h3>Gracias, lo tenemos</h3><p>Te escribimos para conocer a tu equipo y prepararte la propuesta.</p></div>
+        </div>
+        <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
+          <h2>¿Eres particular?</h2>
+          <p class="ayuda">Este curso lo damos a equipos de empresa. Para formarte por tu cuenta tenemos packs de teleformación con Claude, con mentoría 1 a 1 y certificado.</p>
+          <a href="../particulares.html" class="btn btn-primario full">Ver los packs para particulares <svg class="i fl"><use href="#i-arrow"/></svg></a>
         </div>
       </div>
     </div>
@@ -422,7 +431,8 @@
         <li><a href="introduccion-a-gemini.html">Introducción a Gemini</a></li>
         <li><a href="../#oferta">Ver todos los cursos</a></li></ul></div>
       <div><h5>La escuela</h5><ul>
-        <li><a href="../#convocatorias">Convocatorias abiertas</a></li>
+        <li><a href="../particulares.html">Particulares: teleformación</a></li>
+        <li><a href="../#convocatorias">Aula síncrona: convocatorias</a></li>
         <li><a href="../#ai-act">Certificado AI Act</a></li>
         <li><a href="../#fundae">FUNDAE</a></li>
         <li><a href="https://westlabscampus.es/login" target="_blank" rel="noopener">Campus</a></li>

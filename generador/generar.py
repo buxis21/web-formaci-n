@@ -8,7 +8,7 @@ No edites a mano los HTML de cursos/: se sobrescriben al generar.
 """
 import os, sys, html
 sys.path.insert(0, os.path.dirname(__file__))
-from datos import CURSOS, POR_SLUG, HERR, CAMPUS, CAMPUS_TEMARIO, CONVOCATORIA, siguientes
+from datos import CURSOS, POR_SLUG, HERR, CAMPUS, CAMPUS_TEMARIO, CONVOCATORIA, siguientes, AULA, AULA_NIVEL
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PARC = os.path.join(os.path.dirname(__file__), 'parciales')
@@ -21,6 +21,10 @@ e = lambda t: html.escape(str(t), quote=True)
 ARROW = '<svg class="i fl"><use href="#i-arrow"/></svg>'
 
 cap = lambda t: t[0].upper() + t[1:]
+
+def precio_aula(c):
+    p = AULA.get(c['slug']) or (AULA_NIVEL.get(c.get('nivel')) if c.get('t') == 'herr' and not c.get('extra') else None)
+    return f'{p} € por alumno + IVA' if p else 'Por alumno · consúltanos'
 
 def horas(h):
     return (f'{h:g}'.replace('.', ',')) + ' h'
@@ -42,13 +46,13 @@ def tools_txt(c):
 def campus_info(c):
     """Qué ofrece el campus en este curso: (horas o estado, texto del precio). None si no hay campus."""
     if c.get('campus') == 'ready':
-        return '10 h', '<b>119 €</b> con IVA · empresas: bonificable'
+        return '10 h', '<b>119 €</b> con IVA · Pack Esencial'
     if c.get('campus') == 'build':
-        return 'Dentro de Build · 25 h', '<b>349 €</b> con IVA (230 € si ya tienes Ready)'
+        return 'Dentro de Build · 25 h', '<b>449 €</b> con IVA · Pack Profesional con 2 h de mentoría · o en 3 plazos'
     if c['hc'] == 'pronto':
         return 'Próximamente', 'Próximamente'
     if c['hc']:
-        return horas(c['hc']), 'Precio por confirmar · empresas: bonificable'
+        return horas(c['hc']), 'Precio por confirmar'
     return None, None
 
 def tiene_campus(c):
@@ -95,9 +99,8 @@ def ocultos(asunto):
 
 def inscripcion(c):
     mods = []
-    if c['dir']: mods.append('Online en directo')
-    if c['ic']: mods += ['In company online', 'In company presencial']
-    if c['hc']: mods.append('Campus')
+    if c['ic']: mods += ['Solo tu equipo · online', 'Solo tu equipo · presencial']
+    if c['dir']: mods.append('Aula síncrona · precio por alumno')
     opts = ''.join(f'<option>{m}</option>' for m in mods + ['Aún no lo sé'])
     emp = f'''        <div class="ins-panel" role="tabpanel" id="panel-emp" aria-labelledby="tab-emp">
           <h2>Hablemos de la formación de tu equipo</h2>
@@ -124,49 +127,21 @@ def inscripcion(c):
           </form>
           <div class="form-ok" role="status"><div class="ok">✓</div><h3>Gracias, lo tenemos</h3><p>Te escribimos para conocer a tu equipo y prepararte la propuesta.</p></div>
         </div>'''
-    part_ops = []
     camp = c.get('campus')
-    anunciada = c['slug'] in CONV_ANUNCIADAS
     if camp:
         P = CAMPUS[camp]
-        nota = 'IVA incluido<br>10 h en campus · 12 meses de acceso' if camp == 'ready' else f'IVA incluido<br>{P["et"]} · 12 meses de acceso'
-        cuenta_txt = 'Cuenta gratuita de Claude, ChatGPT y Gemini' if camp == 'ready' else 'Necesitas Claude Pro (no incluida)'
-        titulo = 'Campus, a tu ritmo' if camp == 'ready' else 'Campus, a tu ritmo · Build'
-        part_ops.append((titulo, f'Empiezas cuando quieras · {cuenta_txt}', 'Campus', P['precio'], nota))
-    elif c['hc']:
-        sub = 'Próximamente en el campus · te avisamos cuando abra' if c['hc'] == 'pronto' else f'{horas(c["hc"])} a tu ritmo · precio por confirmar'
-        part_ops.append(('Campus, a tu ritmo', sub, 'Campus', 'Próximamente', 'Campus<br>te avisamos cuando abra'))
-    if c['dir']:
-        cuando = CONVOCATORIA.lower() if anunciada else 'fechas por confirmar'
-        part_ops.append(('Online en directo', f'{int(c["h"] / 2)} sesiones de 2 h · {cuando}', 'Online en directo', 'Próximamente',
-                         (CONVOCATORIA + '<br>' if anunciada else 'Te avisamos cuando abramos grupo<br>') + 'fechas y precio por confirmar'))
-    if not part_ops:
-        return f'''      <div class="inscripcion solo-emp" id="inscripcion">
-        <div class="ins-solo"><svg class="i"><use href="#i-building"/></svg>Curso para empresas · in company</div>
-{emp}
-      </div>'''
-    radios = ''.join(
-        f'<label class="op"><input type="radio" name="modalidad" value="{e(v)}"{" checked" if i == 0 else ""} data-precio-op="{e(p)}" data-precio-nota="{e(n)}"><span>{e(t)}<small>{e(s)}</small></span></label>'
-        for i, (t, s, v, p, n) in enumerate(part_ops))
-    p0 = part_ops[0]
-    part = f'''        <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
-          <h2>Apúntate al curso</h2>
-          <p class="ayuda">{'Hazlo a tu ritmo en el campus o en directo con un grupo reducido.' if len(part_ops) > 1 else ('Hazlo a tu ritmo en el campus.' if c['hc'] else 'En directo, con un grupo reducido de varias empresas.')}</p>
-          <div class="precio" id="precio-part"><b>{e(p0[3])}</b><span>{p0[4]}</span></div>
-          <form class="form" data-form="particulares" data-endpoint="https://api.web3forms.com/submit" novalidate>{ocultos('Matrícula de particular · ' + c['n'])}
-            <div class="campo full"><span class="grupo-t" id="p-mod-t">Modalidad</span>
-              <div class="opciones" role="radiogroup" aria-labelledby="p-mod-t">
-                {radios}
-              </div></div>
-            <div class="campo"><label for="p-nombre">Nombre</label><input id="p-nombre" name="nombre" autocomplete="given-name" required></div>
-            <div class="campo"><label for="p-apellidos">Apellidos</label><input id="p-apellidos" name="apellidos" autocomplete="family-name" required></div>
-            <div class="campo"><label for="p-email">Email</label><input id="p-email" name="email" type="email" autocomplete="email" required></div>
-            <div class="campo"><label for="p-tel">Teléfono</label><input id="p-tel" name="telefono" type="tel" autocomplete="tel" required></div>
-            <label class="legal full"><input type="checkbox" name="privacidad" value="Aceptada" required><span>He leído y acepto la <a href="../privacidad.html">política de privacidad</a>.</span></label>
-            <p class="form-error full" role="alert" hidden></p>
-            <button type="submit" class="btn btn-primario full">{'Matricúlate' if camp else 'Avísame'} {ARROW}</button>
-          </form>
-          <div class="form-ok" role="status"><div class="ok">✓</div><h3>¡Ya casi está!</h3><p>{'Te escribimos para completar la matrícula y darte acceso.' if camp else 'Te avisamos en cuanto abramos plazas.'}</p></div>
+        part = f'''        <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
+          <h2>Teleformación con mentoría</h2>
+          <p class="ayuda">Haz el curso a tu ritmo en el campus{', con mentoría 1 a 1 cuando la necesites,' if camp != 'ready' else ''} y llévate el certificado verificable.</p>
+          <div class="precio"><b>{e(P['precio'])}</b><span>{e(P['nombre'])} · IVA incluido<br>o en 3 plazos sin intereses</span></div>
+          <ul class="pack-lista">{''.join(f'<li>{e(x)}</li>' for x in P['lista'])}</ul>
+          <a href="../particulares.html" class="btn btn-primario full">Ver los packs y matricularme {ARROW}</a>
+        </div>'''
+    else:
+        part = f'''        <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
+          <h2>¿Eres particular?</h2>
+          <p class="ayuda">Este curso lo damos a equipos de empresa. Para formarte por tu cuenta tenemos packs de teleformación con Claude, con mentoría 1 a 1 y certificado.</p>
+          <a href="../particulares.html" class="btn btn-primario full">Ver los packs para particulares {ARROW}</a>
         </div>'''
     return f'''      <div class="inscripcion" id="inscripcion">
         <div class="ins-tabs" role="tablist" aria-label="¿Para quién es la formación?">
@@ -195,7 +170,7 @@ def info(c):
     if c.get('nivel', 0) > 1:
         dur_small = 'Incluye el nivel 1' if c['nivel'] == 2 else 'Incluye los niveles 1 y 2'
     if c['dir']:
-        conv = (CONVOCATORIA, 'Campus: empieza cuando quieras' if c.get('campus') else 'Grupo abierto en directo') if c['slug'] in CONV_ANUNCIADAS else ('Fechas por confirmar', 'In company: cuando os vaya bien')
+        conv = (CONVOCATORIA, 'Aula síncrona online · particulares: cuando quieras' if c.get('campus') else 'Aula síncrona online') if c['slug'] in CONV_ANUNCIADAS else ('Fechas por confirmar', 'In company: cuando os vaya bien')
     else:
         conv = ('A medida', 'En las fechas que elija tu empresa')
     return f'''<section class="info-curso" aria-label="Información del curso">
@@ -245,19 +220,19 @@ def modalidades(c):
     anunciada = c['slug'] in CONV_ANUNCIADAS
     if c['dir']:
         tarjetas.append(f'''      <article class="mf reveal">
-        <div class="mf-media"><img class="mf-3d" src="../assets/3d/video.png" alt=""><img src="../assets/fotos/online.jpg" alt="Alumna conectada a una clase en directo por videollamada" loading="lazy"><span class="mf-badge">Particulares y empresas</span></div>
+        <div class="mf-media"><img class="mf-3d" src="../assets/3d/video.png" alt=""><img src="../assets/fotos/online.jpg" alt="Alumna conectada a una clase en directo por videollamada" loading="lazy"><span class="mf-badge">Empresas · por alumno</span></div>
         <div class="mf-txt">
           <span class="mf-et">Online en directo</span>
-          <h3>Grupo abierto</h3>
-          <p class="mf-desc">Clases por videollamada con alumnos de varias empresas. Ideal si eres una persona o sois pocas.</p>
+          <h3>Aula síncrona</h3>
+          <p class="mf-desc">Clases en directo por videollamada con alumnos de varias empresas. Pagáis por persona: ideal si formáis a pocas.</p>
           <dl class="ficha">
             <div><dt>Duración</dt><dd>{c.get('dur_dir') or horas(c['h']) + ' · ' + str(ses) + ' sesiones de 2 h'}</dd></div>
             <div><dt>Fechas</dt><dd>{'Fijas · ' + CONVOCATORIA.lower() if anunciada else 'Fijas · por confirmar'}</dd></div>
             <div><dt>Grupo</dt><dd>Reducido, de varias empresas</dd></div>
             <div><dt>Casos</dt><dd>Los tuyos, corregidos en clase</dd></div>
-            <div><dt>Precio</dt><dd>Por persona · por confirmar</dd></div>
+            <div><dt>Precio</dt><dd>{precio_aula(c)} · bonificable</dd></div>
           </dl>
-          <a href="#inscripcion" class="btn btn-claro btn-sm" data-abre="tab-part">Avísame de las fechas {ARROW}</a>
+          <a href="#inscripcion" class="btn btn-claro btn-sm" data-abre="tab-emp">Reserva plazas {ARROW}</a>
         </div>
       </article>''')
     if c['ic']:
@@ -283,13 +258,13 @@ def modalidades(c):
         if camp == 'ready':
             fil = [('Duración', '10 h, con más práctica'), ('Fechas', 'Empiezas cuando quieras · 12 meses de acceso'), ('Cuenta', 'Gratuita de Claude, ChatGPT y Gemini'), ('Casos', 'Miniproyecto autoevaluado'), ('Precio', precio_campus)]
             desc = 'Vídeos cortos, ejercicios con tus documentos, guías descargables y un test final.'
-            badge = 'Particulares y empresas'
+            badge = 'Particulares'
         elif camp in ('build', 'agents'):
             P = CAMPUS[camp]
             fil = [('Curso', f'{P["et"].split(" · ")[0]} · {P["nombre"]}'), ('Duración', P['et'].split(' · ')[1] + ' acumuladas'), ('Cuenta', 'Claude Pro (no incluida)'),
                    ('Casos', 'Proyecto corregido por una formadora' if camp == 'build' else 'Dos proyectos corregidos'), ('Precio', precio_campus)]
             desc = 'En el campus, este curso va dentro de Build, que junta los niveles 1 y 2 con vídeos, ejercicios con tus documentos y un proyecto corregido.'
-            badge = 'Particulares y empresas'
+            badge = 'Particulares'
         elif h_campus == 'Próximamente':
             fil = [('Estado', 'Próximamente'), ('Formato', 'Vídeos, ejercicios con tus documentos y test'), ('Acceso', '12 meses'), ('Precio', 'Por confirmar')]
             desc = f'Estamos preparando la versión del campus de este curso. Déjanos tus datos y te avisamos cuando abra.'
@@ -297,21 +272,21 @@ def modalidades(c):
         else:
             fil = [('Duración', f'{h_campus} a tu ritmo'), ('Fechas', 'Empiezas cuando quieras · 12 meses de acceso'), ('Casos', 'Ejercicios con tu propio caso'), ('Precio', precio_campus)]
             desc = 'Teleformación a tu ritmo, con la teoría en vídeo y ejercicios con tu caso.'
-            badge = 'Particulares y empresas'
+            badge = 'Particulares'
         filas = ''.join(f'\n            <div><dt>{e(a)}</dt><dd>{b}</dd></div>' for a, b in fil)
         tarjetas.append(f'''      <article class="mf reveal">
         <div class="mf-media"><img class="mf-3d" src="../assets/3d/portatil.png" alt=""><img src="../assets/fotos/campus.jpg" alt="Pantalla de acceso a WestLabs Campus" loading="lazy"><span class="mf-badge">{badge}</span></div>
         <div class="mf-txt">
-          <span class="mf-et">A tu ritmo</span>
-          <h3>Campus</h3>
+          <span class="mf-et">A tu ritmo · con mentoría</span>
+          <h3>Teleformación</h3>
           <p class="mf-desc">{desc}</p>
           <dl class="ficha">{filas}
           </dl>
-          <a href="#inscripcion" class="btn btn-claro btn-sm" data-abre="tab-part">{'Matricúlate' if camp else 'Avísame'} {ARROW}</a>
+          <a href="../particulares.html" class="btn btn-claro btn-sm">{'Ver los packs' if camp else 'Ver packs para particulares'} {ARROW}</a>
         </div>
       </article>''')
     n = len(tarjetas)
-    intro = {3: 'El mismo temario y el mismo certificado en tres formatos. Para particulares y para empresas, según cuántas personas sois y cómo preferís aprender.',
+    intro = {3: 'El mismo temario y el mismo certificado. Para empresas, en directo con solo vuestro equipo o en aula síncrona por alumno; para particulares, en teleformación con mentoría.',
              2: 'El mismo temario y el mismo certificado en dos formatos, según cuántas personas sois y cómo preferís aprender.',
              1: 'Un curso para hacer con tu equipo, online o en vuestras oficinas, con los casos de vuestra empresa.'}[n]
     return f'''<section class="modalidades oscuro" id="modalidades">
@@ -324,7 +299,7 @@ def modalidades(c):
     <div class="modfotos mods-curso n{n}">
 {chr(10).join(tarjetas)}
     </div>
-    <p class="mods-nota reveal"><svg class="i"><use href="#i-check"/></svg>{'Todas las modalidades son bonificables por FUNDAE para empresas y dan el mismo certificado.' if n > 1 else 'Bonificable por FUNDAE: nos encargamos de toda la gestión.'}</p>
+    <p class="mods-nota reveal"><svg class="i"><use href="#i-check"/></svg>{'Las modalidades para empresas son bonificables por FUNDAE. Todas dan el mismo certificado.' if n > 1 else 'Bonificable por FUNDAE: nos encargamos de toda la gestión.'}</p>
   </div>
 </section>'''
 
@@ -459,13 +434,13 @@ def escalera(c):
         clase = 'esc actual' if actual else f'esc e{i + 1}' if i else 'esc e2'
         if not actual and i == 0: clase = 'esc e3'
         lis = ''.join(f'<li>{e(x)}</li>' for x in P['lista'])
-        boton = f'\n        <a href="#inscripcion" class="btn btn-claro" data-abre="tab-part">Matricúlate {ARROW}</a>' if actual else ''
+        boton = f'\n        <a href="../particulares.html" class="btn btn-claro">Ver el pack {ARROW}</a>' if actual else ''
         aqui = '\n        <span class="aqui">Este curso</span>' if actual else ''
         cards.append(f'''      <article class="{clase} reveal">{aqui}
         <img class="medalla-e" src="../assets/3d/medalla-{P['medalla']}.png" alt="">
         <span class="et">{e(P['et'])}</span>
         <h3>{e(P['nombre'])}</h3>
-        <div class="px">{e(P['precio'])}<small>con IVA</small></div>
+        <div class="px">{e(P['precio'])}<small>con IVA · o en 3 plazos</small></div>
         <p>{e(P['txt'])}</p>
         <ul>{lis}</ul>{boton}
       </article>''')
@@ -475,12 +450,12 @@ def escalera(c):
     <div class="cab-sec reveal">
       <div class="pre">Para particulares</div>
       <h2>{'Empieza por aquí y' if camp == 'ready' else 'Tres cursos,'} <span class="acento">{'sube cuando quieras' if camp == 'ready' else 'paso a paso'}</span></h2>
-      <p class="intro">En el campus, {nombre_c}. Cada curso incluye el anterior y, si ya tienes uno, pagas solo la diferencia.</p>
+      <p class="intro">En el campus, {nombre_c}. Cada pack incluye el anterior y, si ya tienes uno, pagas solo la diferencia. Profesional y Completo incluyen mentoría 1 a 1.</p>
     </div>
     <div class="escalones">
 {chr(10).join(cards)}
     </div>
-    <p class="empresa-linea reveal">¿Lo paga tu empresa? Tenemos estos cursos en versión bonificable por FUNDAE. <a href="#inscripcion" data-abre="tab-emp">Pide propuesta</a></p>
+    <p class="empresa-linea reveal">¿Lo paga tu empresa? Para empresas lo hacemos en directo, solo con vuestro equipo o en aula síncrona por alumno, bonificable por FUNDAE. <a href="#inscripcion" data-abre="tab-emp">Pide propuesta</a></p>
   </div>
 </section>'''
 
@@ -520,8 +495,8 @@ def faqs(c):
                   ('El certificado de este curso está alineado con ese artículo y sirve como prueba de la formación, con horas y contenidos.' if c['art4'] else 'Este curso renueva cada año esa formación y deja constancia con horas y contenidos.') + ' No es un título oficial ni homologado.'))
     q.append(('¿Cómo se verifica el certificado?', 'Cada certificado lleva un código QR que abre una página de Westlabs con el nombre, el curso, las horas y la fecha. El modelo de certificado y el programa están protocolizados ante notario.'))
     if c['dir'] or c['hc']:
-        q.append(('¿Cómo me apunto?', '<ul><li><b>Particulares:</b> en el formulario de arriba, pestaña Particulares.' + (' Eliges el campus o el próximo grupo abierto en directo.' if c['dir'] and c.get('campus') else (' Te matriculas en el campus.' if c.get('campus') else ' Te avisamos cuando abramos plazas.')) +
-                  '</li><li><b>Empresas:</b> en la pestaña Empresas. Te preparamos una propuesta con fechas, modalidad y la gestión de FUNDAE.</li></ul>'))
+        q.append(('¿Cómo me apunto?', '<ul><li><b>Empresas:</b> en el formulario de arriba. Te preparamos una propuesta para vuestro equipo o te reservamos plazas en el aula síncrona, con la gestión de FUNDAE.</li>'
+                  '<li><b>Particulares:</b> en la <a href="../particulares.html">página de particulares</a> eliges tu pack de teleformación y lo pagas online, de una vez o en 3 plazos.</li></ul>'))
     else:
         q.append(('¿Cómo lo contratamos?', 'Rellena el formulario de arriba. Hablamos con vosotros, preparamos los casos de vuestra empresa en una consultoría previa y os enviamos la propuesta con fechas, modalidad y la gestión de FUNDAE.'))
     ses = int(c['h'] / 2); jor = c['h'] / 4
@@ -536,7 +511,7 @@ def faqs(c):
     elif c['hc']: t += f' En el campus son {int(c["hc"])} horas a tu ritmo.'
     q.append(('¿Cuánto tiempo tengo que dedicarle?', t))
     if c['dir']:
-        q.append(('¿Qué diferencia hay entre el grupo abierto y la formación para mi empresa?', 'En el grupo abierto te apuntas a unas fechas fijas con alumnos de otras empresas: va bien si eres una persona o sois pocas. La formación para tu empresa es un grupo solo vuestro, online o presencial, en las fechas que elijáis y con casos de vuestro trabajo preparados antes.'))
+        q.append(('¿Qué diferencia hay entre el aula síncrona y la formación solo para mi equipo?', 'En el aula síncrona reserváis plazas en un grupo en directo con alumnos de otras empresas, en fechas fijas, y pagáis por alumno: va bien si formáis a pocas personas. La formación solo para vuestro equipo es un grupo cerrado, online o presencial, en las fechas que elijáis y con casos de vuestro trabajo preparados en una consultoría previa.'))
     sig = [POR_SLUG[s]['n'] for s in siguientes(c)[:2] if s in POR_SLUG]
     if sig:
         q.append(('¿Qué hago después?', f'Puedes seguir con {sig[0]}' + (f' o con {sig[1]}' if len(sig) > 1 else '') + '. Los tienes al final de esta página.'))
@@ -593,7 +568,7 @@ def siguiente(c):
 def cta(c):
     a, b = c['cta']
     dual = c['dir'] or c.get('campus')
-    botones = (f'<a href="#inscripcion" class="btn btn-claro" data-abre="tab-emp">Solicita propuesta {ARROW}</a>\n        <a href="#inscripcion" class="btn btn-borde" data-abre="tab-part">{"Matricúlate" if c.get("campus") else "Apúntate"}</a>'
+    botones = (f'<a href="#inscripcion" class="btn btn-claro" data-abre="tab-emp">Solicita propuesta {ARROW}</a>\n        <a href="../particulares.html" class="btn btn-borde">Soy particular</a>'
                if dual else f'<a href="#inscripcion" class="btn btn-claro">Solicita propuesta {ARROW}</a>\n        <a href="../#oferta" class="btn btn-borde">Ver más cursos</a>')
     return f'''<section class="cta-final">
   <div class="wrap">
@@ -686,7 +661,7 @@ def mapa():
         L += [f'### {tit}', '', '| Curso | Archivo | Horas | Directo | Presencial | Campus | Particulares | Siguiente paso |', '|---|---|---|---|---|---|---|---|']
         for c in [x for x in CURSOS if x['t'] == tipo]:
             hc, _ = campus_info(c)
-            if c.get('campus'): part = 'Matrícula campus ' + CAMPUS[c['campus']]['precio'] + ' (Stripe pendiente)'
+            if c.get('campus'): part = CAMPUS[c['campus']]['nombre'] + ' ' + CAMPUS[c['campus']]['precio'] + ' (Stripe pendiente)'
             elif c['dir'] or c['hc']: part = 'Aviso de fechas o de campus'
             else: part = '—'
             sig = ', '.join(f'[{POR_SLUG[x]["n"]}](cursos/{x}.html)' for x in siguientes(c))

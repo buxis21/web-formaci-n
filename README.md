@@ -7,7 +7,8 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 | Archivo o carpeta | Qué es |
 |---|---|
 | `index.html` | Portada con el catálogo de cursos (estilos y código dentro del propio archivo) |
-| `contacto.html` | Página de contacto con los formularios de Empresas y Particulares |
+| `contacto.html` | Formulario para empresas (propuesta) con el curso preelegido |
+| `particulares.html` | Packs de teleformación para particulares (Esencial 119 €, Profesional 449 €, Completo 649 €) con mentoría y pago en 3 plazos |
 | `cursos/` | Una ficha por cada curso de la portada (19). **Se generan solas**: no se editan a mano |
 | `generador/` | Datos de los cursos (`datos.py`), plantilla de la ficha (`generar.py`) y partes comunes de las fichas (`parciales/`) |
 | `MAPA-WEB.md` | Mapa de todas las páginas y sus conexiones (se genera solo) |
@@ -66,8 +67,14 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 - «Empresas» lleva a la sección de empresas de la portada (`index.html#empresas`).
 - Campus: https://westlabscampus.es/login · WhatsApp y teléfono de Gerard: 636 875 779.
 
+## Oferta: empresas y particulares
+
+- **Empresas:** solo en directo. «Solo tu equipo» (online o presencial, precio por grupo) o «Aula síncrona» (online, alumnos de varias empresas, precio por alumno sin IVA: 149 € Ready o Alfabetización, 390 € Build, 490 € Agents). Precios en `generador/datos.py` (`AULA` y `AULA_NIVEL`).
+- **Particulares:** solo teleformación en el campus, con packs en `particulares.html`: Esencial 119 € (Ready, sin mentoría), Profesional 449 € (Build + 2 h de mentoría) y Completo 649 € (Agents + 3 h de mentoría). Mentoría 1 a 1 reservable cuando quieran durante los 12 meses.
+
 ## Pagos (Stripe)
 
+- **Pago en 3 plazos:** en Stripe, activa Klarna en Ajustes → Métodos de pago y márcalo en cada enlace de pago. El cliente elige pagar en 3 plazos sin intereses y Westlabs cobra el total de una vez (menos la comisión de Klarna).
 - Para particulares se usa un **enlace de pago de Stripe** (`https://buy.stripe.com/...`) en el botón «Matricúlate». No hay plataforma de pago propia.
 - Cada curso con precio tiene su producto y su enlace en Stripe.
 - Antes de activar los enlaces reales, prueba el pago con el **modo de prueba** de Stripe.

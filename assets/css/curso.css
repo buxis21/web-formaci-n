@@ -294,3 +294,8 @@ footer .foot-grid{grid-template-columns:1.6fr 1fr 1fr}
 .tem-grupo:first-child{margin-top:0}
 .tem-grupo::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(37,99,235,.35),transparent)}
 .siguiente .curso.completo{margin-top:12px}
+
+/* Panel de particulares en la ficha: resumen del pack */
+.pack-lista{list-style:none;display:grid;gap:8px;margin:4px 0 22px}
+.pack-lista li{position:relative;padding-left:24px;font-size:15px;color:var(--tinta)}
+.pack-lista li::before{content:"✓";position:absolute;left:0;top:0;color:var(--intenso);font-weight:700}

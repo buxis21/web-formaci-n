@@ -62,17 +62,20 @@ HERR = {
 ORDEN_HERR = ['claude', 'chatgpt', 'microsoft', 'gemini']
 
 # Campus para particulares (escalera Ready / Build / Agents). Enlace de Stripe: pendiente.
-CAMPUS = {
-    'ready':  dict(nombre='Alfabetización en IA', et='Ready · 10 h', precio='119 €', stripe='',
-                   txt='Para quien empieza con la IA o necesita acreditar su formación. En empresa, este programa sale a 229 € por persona en un grupo de 10.',
-                   lista=['Cuenta gratuita', 'Certificado verificable', '12 meses de acceso'], medalla=1),
-    'build':  dict(nombre='IA aplicada a tu trabajo', et='Build · 25 h', precio='349 €', stripe='',
+CAMPUS = {   # packs para particulares: teleformación en el campus + mentoría (página particulares.html)
+    'ready':  dict(nombre='Pack Esencial', et='Ready · 10 h', precio='119 €', stripe='',
+                   txt='El campus de Alfabetización en IA a tu ritmo, para empezar con la IA o acreditar tu formación.',
+                   lista=['Campus Ready · 10 h', 'Certificado verificable', '12 meses de acceso'], medalla=1),
+    'build':  dict(nombre='Pack Profesional', et='Build · 25 h', precio='449 €', stripe='',
                    txt='Conectas Claude a tu correo y tus documentos, creas tus skills y dejas una tarea tuya automatizada.',
-                   lista=['Incluye Ready', 'Necesitas Claude Pro', 'Proyecto corregido por una formadora'], medalla=2),
-    'agents': dict(nombre='Herramientas y agentes propios', et='Agents · 40 h', precio='469 €', stripe='',
+                   lista=['Incluye Ready', '2 h de mentoría 1 a 1', 'Proyecto corregido'], medalla=2),
+    'agents': dict(nombre='Pack Completo', et='Agents · 40 h', precio='649 €', stripe='',
                    txt='Creas miniaplicaciones a partir de un Excel y un agente que hace un proceso tuyo de principio a fin.',
-                   lista=['Incluye Ready y Build', 'Necesitas Claude Pro', 'Dos proyectos corregidos'], medalla=3),
+                   lista=['Incluye Ready y Build', '3 h de mentoría 1 a 1', 'Dos proyectos corregidos'], medalla=3),
 }
+# Aula síncrona para empresas: online en directo, alumnos de varias empresas, precio por alumno (sin IVA)
+AULA = {'alfabetizacion-en-ia': 149}
+AULA_NIVEL = {1: 149, 2: 390, 3: 490}
 
 # ---------------------------------------------------------------- módulos
 def M(t, sub, h, puntos, comun=False, llevas=None, grupo=None):
