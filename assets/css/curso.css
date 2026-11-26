@@ -311,15 +311,16 @@ footer .foot-grid{grid-template-columns:1.6fr 1fr 1fr}
 .esc-btns{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:auto}
 .esc-btns .ver{font-size:14px;font-weight:500;color:var(--intenso);text-decoration:underline;text-underline-offset:3px}
 .esc.actual .esc-btns .ver{color:#fff}
-.cod-box{max-width:460px;margin:0 auto 28px;padding:16px 18px;border:1px dashed var(--medio);border-radius:16px;background:#fff;display:grid;gap:8px;text-align:left}
-.cod-box label{font-size:14px;font-weight:600;color:var(--titulo)}
+.cod-box{max-width:620px;margin:32px auto 0;padding:14px 18px;border:1px dashed var(--linea);border-radius:14px;background:transparent;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:6px 14px;text-align:left}
+.cod-box label{font-size:14px;font-weight:500;color:var(--titulo)}
 .cod-fila{position:relative}
 .cod-fila input{width:100%;padding:11px 40px 11px 14px;border:1px solid var(--linea);border-radius:10px;font:600 15px/1.2 "Poppins",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--titulo);background:#fff}
 .cod-fila input::placeholder{letter-spacing:0;text-transform:none;font-weight:400;color:var(--gris)}
 .cod-fila input:focus{outline:2px solid var(--intenso);outline-offset:1px}
 .cod-fila .i{position:absolute;right:12px;top:50%;width:18px;height:18px;margin-top:-9px;color:var(--intenso);opacity:0;transition:opacity .2s}
 .cod-fila input:not(:placeholder-shown)+.i{opacity:1}
-.cod-box small{font-size:12.5px;color:var(--gris)}
+.cod-box small{grid-column:1/-1;font-size:12.5px;color:var(--gris)}
+@media (max-width:600px){.cod-box{grid-template-columns:1fr}}
 .cod-nota{font-size:12.5px;color:var(--gris);margin:6px 0 0}
 .cod-nota.centro{text-align:center;margin-top:12px}
 /* ---------- Pago con Stripe dentro de la web ---------- */
