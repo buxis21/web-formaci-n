@@ -69,7 +69,7 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 
 ## Oferta: empresas y particulares
 
-- **Empresas:** solo en directo. «Solo tu equipo» (online o presencial, precio por grupo) o «Aula síncrona» (online, alumnos de varias empresas, precio por alumno sin IVA: 149 € Ready o Alfabetización, 390 € Build, 490 € Agents). Precios en `generador/datos.py` (`AULA` y `AULA_NIVEL`).
+- **Empresas:** solo en directo. «Solo tu equipo» (online o presencial, precio por grupo) o «Aula síncrona» (online, alumnos de varias empresas, precio por alumno sin IVA: 190 € Ready o Alfabetización, 490 € Build, 590 € Agents). Precios en `generador/datos.py` (`AULA` y `AULA_NIVEL`).
 - **Particulares:** solo teleformación en el campus, con packs en `particulares.html`: Esencial 119 € (Ready, sin mentoría), Profesional 449 € (Build + 2 h de mentoría) y Completo 649 € (Agents + 3 h de mentoría). Mentoría 1 a 1 reservable cuando quieran durante los 12 meses.
 
 ## Pagos (Stripe)

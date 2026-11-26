@@ -74,8 +74,8 @@ CAMPUS = {   # packs para particulares: teleformación en el campus + mentoría 
                    lista=['Incluye Ready y Build', '3 h de mentoría 1 a 1', 'Dos proyectos corregidos'], medalla=3),
 }
 # Aula síncrona para empresas: online en directo, alumnos de varias empresas, precio por alumno (sin IVA)
-AULA = {'alfabetizacion-en-ia': 149}
-AULA_NIVEL = {1: 149, 2: 390, 3: 490}
+AULA = {'alfabetizacion-en-ia': 190}
+AULA_NIVEL = {1: 190, 2: 490, 3: 590}
 
 # ---------------------------------------------------------------- módulos
 def M(t, sub, h, puntos, comun=False, llevas=None, grupo=None):
