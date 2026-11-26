@@ -8,7 +8,7 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 |---|---|
 | `index.html` | Portada con el catálogo de cursos (estilos y código dentro del propio archivo) |
 | `contacto.html` | Formulario para empresas (propuesta) con el curso preelegido |
-| `particulares.html` | Los tres niveles de Claude en teleformación para particulares (Especial Navidad: 30 % con el código NAVIDAD30 hasta el 31 de enero), con mentoría y pago en 3 plazos |
+| `particulares.html` | Los tres niveles de Claude en teleformación para particulares (119, 449 y 649 €), con mentoría, pago en 3 plazos y campo para código de descuento |
 | `cursos/` | Una ficha por cada curso de la portada (19). **Se generan solas**: no se editan a mano |
 | `generador/` | Datos de los cursos (`datos.py`), plantilla de la ficha (`generar.py`) y partes comunes de las fichas (`parciales/`) |
 | `MAPA-WEB.md` | Mapa de todas las páginas y sus conexiones (se genera solo) |
@@ -71,7 +71,6 @@ Web de la escuela de formación en IA de Westlabs: portada con el catálogo, una
 
 - **Empresas:** solo en directo. «Solo tu equipo» (online o presencial, precio por grupo) o «Aula síncrona» (online, alumnos de varias empresas, precio por alumno sin IVA: 190 € nivel 1 y Alfabetización, 390 € nivel 2, 490 € nivel 3). Precios en `generador/datos.py` (`AULA` y `AULA_NIVEL`).
 - **Particulares:** solo teleformación en el campus, con los tres niveles de Claude en `particulares.html`: Claude Esencial 119 € (sin mentoría), Claude Avanzado 449 € (2 h de mentoría) y Claude Completo 649 € (3 h de mentoría), IVA incluido. Mentoría 1 a 1 reservable cuando quieran durante los 12 meses. Alfabetización en IA no está en esta página: en su ficha, el particular nos escribe.
-- **Especial Navidad:** 30 % con el código promocional NAVIDAD30 hasta el 31 de enero: 83,30 €, 314,30 € y 454,30 € (3 plazos de 27,77 €, 104,77 € y 151,43 €). Datos en `generador/datos.py` (`PACKS` y `NAVIDAD`).
 
 ## Pagos (Stripe)
 
@@ -141,7 +140,8 @@ Del catálogo, para que todas las páginas digan lo mismo:
 - [ ] Compartir o publicar la hoja de convocatorias para que la web pueda leerla
 - [ ] Enlace de la agenda de citas de Google Calendar para «Solicita propuesta»
 
-## Códigos de descuento y fin del Especial Navidad
+## Códigos de descuento
 
-- **Código NAVIDAD30:** en Stripe, crea un cupón del 30 % con fecha de caducidad el 31 de enero y un código promocional NAVIDAD30 asociado. En cada enlace de pago marca «Permitir códigos promocionales». El cliente escribe el código en la página de pago y ve el total antes de pagar; funciona también con Klarna en 3 plazos. Los enlaces de pago llevan el precio normal (119, 449 y 649 €).
-- **Fin de la oferta (31 de enero):** en `generador/datos.py` pon `NAVIDAD = None` y ejecuta `python3 generador/generar.py`: las fichas vuelven al precio normal. En `particulares.html` quita el cupón del inicio, la banda, los «-30 %» y el precio tachado, y en `index.html` la línea de Navidad de la tarjeta de teleformación.
+- En `particulares.html`, encima de los cursos, hay un campo «¿Tienes un código de descuento?». Al pulsar «Comprar», la web abre el enlace de pago de Stripe de ese curso con el código ya puesto (`?prefilled_promo_code=CODIGO`) y Stripe enseña el precio rebajado antes de pagar. También lo pueden escribir directamente en la página de pago, en «Añadir código promocional».
+- En Stripe: crea un cupón (Productos → Cupones; por porcentaje o importe, con fecha de caducidad si quieres) y uno o varios códigos promocionales asociados. En cada enlace de pago marca «Permitir códigos promocionales». Funciona también con Klarna en 3 plazos.
+- Para conectar los botones, pega cada enlace (`https://buy.stripe.com/...`) en `generador/datos.py` (`PACKS[...]["stripe"]`) y en el `data-stripe` del botón de ese curso en `particulares.html`. Mientras esté vacío, el botón lleva al formulario de reserva y copia el código al campo «Código de descuento».

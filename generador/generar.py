@@ -8,7 +8,7 @@ No edites a mano los HTML de cursos/: se sobrescriben al generar.
 """
 import os, sys, html
 sys.path.insert(0, os.path.dirname(__file__))
-from datos import CURSOS, POR_SLUG, HERR, CAMPUS, CAMPUS_TEMARIO, CONVOCATORIA, siguientes, AULA, AULA_NIVEL, PACKS, NAVIDAD
+from datos import CURSOS, POR_SLUG, HERR, CAMPUS, CAMPUS_TEMARIO, CONVOCATORIA, siguientes, AULA, AULA_NIVEL, PACKS
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PARC = os.path.join(os.path.dirname(__file__), 'parciales')
@@ -31,18 +31,13 @@ def pack(c):
     return PACKS.get(c['slug'])
 
 def px_pack(P):
-    # Precio para particulares: con el descuento de Navidad y el normal tachado mientras dure.
-    return f'<s>{e(P["normal"])}</s> {e(P["precio"])}' if NAVIDAD else e(P['normal'])
+    return e(P['normal'])
 
 def plazo_pack(P):
-    if NAVIDAD: return P['plazo']
     n = float(P['normal'].replace(' €', '').replace(',', '.')) / 3
     return f'{n:.2f}'.replace('.', ',') + ' €'
 
-def navidad_txt(corto=False):
-    if not NAVIDAD: return ''
-    if corto: return f'Navidad: {NAVIDAD["pct"]} con el código {NAVIDAD["codigo"]} hasta el {NAVIDAD["fin"]}'
-    return f'Especial Navidad: {NAVIDAD["pct"]} de descuento con el código {NAVIDAD["codigo"]}, hasta el {NAVIDAD["fin"]}'
+CODIGO_TXT = '¿Tienes un código de descuento? Lo escribes al pagar y el precio se rebaja al momento.'
 
 def horas(h):
     return (f'{h:g}'.replace('.', ',')) + ' h'
@@ -65,7 +60,7 @@ def campus_info(c):
     """Qué ofrece el campus en este curso: (horas o estado, texto del precio). None si no hay campus."""
     P = pack(c)
     if P:
-        precio = f'<b>{px_pack(P)}</b> con IVA · o 3 plazos de {plazo_pack(P)}' + (f' · {navidad_txt(True)}' if NAVIDAD else '')
+        precio = f'<b>{px_pack(P)}</b> con IVA · o 3 plazos de {plazo_pack(P)}'
         return ('Dentro de Build · 25 h' if c.get('campus') == 'build' else 'A tu ritmo'), precio
     if c.get('campus') == 'ready':
         return '10 h', 'Consúltanos'
@@ -152,9 +147,10 @@ def inscripcion(c):
         part = f'''        <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
           <h2>Teleformación{' con mentoría' if P['mentoria'] else ''}</h2>
           <p class="ayuda">Haz el curso a tu ritmo en el campus{', con mentoría 1 a 1 cuando la necesites,' if P['mentoria'] else ''} y llévate el certificado verificable.</p>
-          <div class="precio"><b>{px_pack(P)}</b><span>IVA incluido<br>o 3 plazos de {e(plazo_pack(P))} sin intereses</span></div>{f'{chr(10)}          <p class="lanz">{e(navidad_txt())}</p>' if NAVIDAD else ''}
+          <div class="precio"><b>{px_pack(P)}</b><span>IVA incluido<br>o 3 plazos de {e(plazo_pack(P))} sin intereses</span></div>
+          <p class="cod-nota">{CODIGO_TXT}</p>
           <ul class="pack-lista">{''.join(f'<li>{e(x)}</li>' for x in P['lista'][:4])}</ul>
-          <a href="../particulares.html#niveles" class="btn btn-primario full">Comprar{' con un ' + NAVIDAD['pct'] if NAVIDAD else ''} {ARROW}</a>
+          <a href="../particulares.html#niveles" class="btn btn-primario full">Ver precio y comprar {ARROW}</a>
         </div>'''
     elif c.get('campus') == 'ready':
         part = f'''        <div class="ins-panel" role="tabpanel" id="panel-part" aria-labelledby="tab-part" hidden>
@@ -290,7 +286,7 @@ def modalidades(c):
             fil = [('Fechas', 'Empiezas cuando quieras · 12 meses de acceso'), ('Mentoría', f'{P["mentoria"]} 1 a 1, cuando quieras' if P['mentoria'] else 'No incluida'),
                    ('Cuenta', P['cuenta']), ('Precio', precio_campus)]
             desc = 'Vídeos cortos, ejercicios con tus documentos y certificado verificable' + (', con una formadora que te acompaña.' if P['mentoria'] else '.')
-            badge = 'Navidad · ' + NAVIDAD['pct'] if NAVIDAD else 'Particulares'
+            badge = 'Particulares'
         elif h_campus == 'Próximamente':
             fil = [('Estado', 'Próximamente'), ('Formato', 'Vídeos, ejercicios con tus documentos y test'), ('Acceso', '12 meses'), ('Precio', 'Por confirmar')]
             desc = f'Estamos preparando la versión del campus de este curso. Déjanos tus datos y te avisamos cuando abra.'
@@ -454,8 +450,8 @@ def certificado(c):
 def esc_card(P, slug, actual, raiz='../'):
     clase = 'esc actual' if actual else 'esc e2'
     lis = ''.join(f'<li>{e(x)}</li>' for x in P['lista'])
-    marca = ('\n        <span class="aqui">Este curso</span>' if actual else '') + (f'\n        <span class="dto">-{e(NAVIDAD["pct"])}</span>' if NAVIDAD else '')
-    boton = f'<a href="{raiz}particulares.html#niveles" class="btn {"btn-claro" if actual else "btn-primario"}">Comprar{" con un " + NAVIDAD["pct"] if NAVIDAD else ""} {ARROW}</a>'
+    marca = ('\n        <span class="aqui">Este curso</span>' if actual else '')
+    boton = f'<a href="{raiz}particulares.html#niveles" class="btn {"btn-claro" if actual else "btn-primario"}">Comprar {ARROW}</a>'
     return f'''      <article class="{clase} reveal">{marca}
         <img class="medalla-e" src="{raiz}assets/3d/medalla-{P['medalla']}.png" alt="">
         <span class="et">{e(P['et'])}</span>
@@ -470,11 +466,11 @@ def esc_card(P, slug, actual, raiz='../'):
 def escalera(c):
     if not pack(c): return ''
     cards = [esc_card(P, k, k == c['slug']) for k, P in PACKS.items()]
-    nav = f'<p class="lanz-banda">{e(navidad_txt())}</p>' if NAVIDAD else ''
-    return f'''<section class="escalera{' navidad' if NAVIDAD else ''}" id="precio">
+    nav = f'<p class="cod-nota centro">{CODIGO_TXT}</p>'
+    return f'''<section class="escalera" id="precio">
   <div class="wrap">
     <div class="cab-sec reveal">
-      <div class="pre">{'Especial Navidad · particulares' if NAVIDAD else 'Para particulares'}</div>
+      <div class="pre">Para particulares</div>
       <h2>Tres niveles de Claude, <span class="acento">paso a paso</span></h2>
       <p class="intro">En teleformación, a tu ritmo y con 12 meses de acceso. Cada nivel incluye el anterior y los niveles 2 y 3 llevan mentoría 1 a 1.</p>
       {nav}
@@ -688,7 +684,7 @@ def mapa():
         L += [f'### {tit}', '', '| Curso | Archivo | Horas | Directo | Presencial | Campus | Particulares | Siguiente paso |', '|---|---|---|---|---|---|---|---|']
         for c in [x for x in CURSOS if x['t'] == tipo]:
             hc, _ = campus_info(c)
-            if pack(c): part = f"{pack(c)['normal']} ({pack(c)['precio']} en Navidad) · Stripe pendiente"
+            if pack(c): part = f"{pack(c)['normal']} · Stripe pendiente"
             elif c['dir'] or c['hc']: part = 'Aviso de fechas o de campus'
             else: part = '—'
             sig = ', '.join(f'[{POR_SLUG[x]["n"]}](cursos/{x}.html)' for x in siguientes(c))
@@ -698,7 +694,7 @@ def mapa():
     L += ['## Conexiones', '', '| Qué | Dónde | Estado |', '|---|---|---|',
           '| Formularios de las fichas → correo | Web3Forms, clave en cada formulario. Asunto: «Propuesta para empresa · [curso]» o «Matrícula de particular · [curso]» | Configurado. Falta probar un envío real en la web publicada |',
           '| Convocatorias de la portada | Hoja de Google «Convocatorias» (copia en `datos/convocatorias-westlabs.xlsx`) | Conectado |',
-          '| Pago de los cursos de Claude para particulares (con código de Navidad) | Enlaces de pago de Stripe en `generador/datos.py` (`PACKS[...]["stripe"]`) | Pendiente |',
+          '| Pago de los cursos de Claude para particulares (con códigos de descuento) | Enlaces de pago de Stripe en `generador/datos.py` (`PACKS[...]["stripe"]`) | Pendiente |',
           '| Campus | https://westlabscampus.es/login | Conectado |',
           '| WhatsApp de Gerard | https://wa.me/34636875779 | Conectado |',
           '| Publicación | Netlify conectado a la rama `main` | Pendiente |', '',
